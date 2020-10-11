@@ -168,7 +168,7 @@ mkdir -p /opt/projects/ubuntu/nginx
 nano  -c /opt/projects/ubuntu/nginx/Dockerfile
 ```
 
-```Dockerfile
+```docker
     FROM ubuntu:18.04
 
     MAINTAINER Admin
