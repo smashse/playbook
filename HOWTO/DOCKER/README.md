@@ -108,8 +108,6 @@ sudo docker attach ubuntu
 
 ## Instalar o Nginx dentro do container
 
-**_//_**
-
 ```bash
 apt update && apt install -y nginx && apt autoremove -y && apt clean -y
 ```
@@ -129,8 +127,6 @@ chmod 777 /etc/rc.local
 **CTRL**+**P**
 
 **CTR**+**Q**
-
-**_//_**
 
 ## Inicializar o Nginx
 
