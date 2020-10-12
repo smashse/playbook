@@ -81,6 +81,7 @@ sudo docker image rm ubuntu
 sudo docker container create -t -i --name=ubuntu ubuntu
 sudo docker container start ubuntu
 sudo docker container attach ubuntu
+sudo docker container remove ubuntu
 ```
 
 OU
@@ -131,7 +132,7 @@ chmod 777 /etc/rc.local
 ## Inicializar o Nginx
 
 ```bash
-sudo docker exec ubuntu-nginx sh /etc/rc.local
+sudo docker exec ubuntu sh /etc/rc.local
 ```
 
 ## Verificar os containers
@@ -149,7 +150,7 @@ sudo docker commit ubuntu ubuntu-nginx
 ## Criar container utilizando a imagem ubuntu-nginx
 
 ```bash
-sudo docker run -d --restart unless-stopped -p 8080:80 --memory=64M --name=ubuntu-web001 -t ubuntu-nginx
+sudo docker run -d --restart unless-stopped -p 8080:80 --name=ubuntu-web001 -t ubuntu-nginx
 ```
 
 ## Remover container de imagem Docker
@@ -189,11 +190,11 @@ cd /opt/projects/ubuntu/nginx/
 ```
 
 ```bash
-docker build -t ubuntu-nginx:latest .
+sudo docker build -t ubuntu-nginx:latest .
 ```
 
 ```bash
-docker run -d --restart unless-stopped -p 8081:80 --memory=64M --name=ubuntu-web001 -t ubuntu-nginx:latest
+sudo docker run -d --restart unless-stopped -p 8081:80 --name=ubuntu-web001 -t ubuntu-nginx:latest
 ```
 
 ## Efetuar login no Registry
@@ -211,11 +212,11 @@ sudo docker registry ls
 ## Criar uma TAG da imagem local para o Registry
 
 ```bash
-sudo docker tag gitops-ubuntu:0.1 seuusuario/gitops-ubuntu:0.1
+sudo docker tag ubuntu-nginx:latest ubuntu-nginx:latest
 ```
 
 ## Efetuar o Push da imagem para o Registry
 
 ```bash
-sudo docker push seuusuario/gitops-ubuntu:0.1
+sudo docker push seuusuario/ubuntu-nginx:latest
 ```
