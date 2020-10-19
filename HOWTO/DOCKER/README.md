@@ -21,6 +21,8 @@ apm install atom-beautify
 
 ## Instalar o Cockpit e Docker
 
+### Instalar Docker
+
 ```bash
 sudo snap install docker --classic
 ```
@@ -28,18 +30,16 @@ sudo snap install docker --classic
 OU
 
 ```bash
-sudo apt-get update
-sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+sudo apt update
+sudo apt -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo apt update
+sudo apt -y install docker-ce docker-ce-cli containerd.io
 ```
 
-```bash
-sudo apt install -y cockpit
-```
+### Dar permissão de execução do Docker para o usuário atual
 
 ```bash
 sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
@@ -49,28 +49,34 @@ newgrp docker
 docker run hello-world
 ```
 
+### Instalar Cockpit
+
+```bash
+sudo apt -y install cockpit
+```
+
 ## Procurar imagens Docker
 
 ```bash
-sudo docker search ubuntu
+docker image search ubuntu
 ```
 
 ## Adicionar imagem Docker
 
 ```bash
-sudo docker pull ubuntu:latest
+docker image pull ubuntu:latest
 ```
 
-## Listar imagem Docker
+## Listar imagens Docker
 
 ```bash
-sudo docker image ls
+docker image ls
 ```
 
 ## Remover imagem Docker
 
 ```bash
-sudo docker image rm ubuntu
+docker image rm ubuntu
 ```
 
 ## Criar container de imagem Docker
@@ -78,10 +84,10 @@ sudo docker image rm ubuntu
 ### Forma convencional
 
 ```bash
-sudo docker container create -t -i --name=ubuntu ubuntu
-sudo docker container start ubuntu
-sudo docker container attach ubuntu
-sudo docker container remove ubuntu
+docker container create -t -i --name=ubuntu ubuntu
+docker container start ubuntu
+docker container attach ubuntu
+docker container remove ubuntu
 ```
 
 OU
@@ -89,8 +95,8 @@ OU
 ### Forma simples
 
 ```bash
-sudo docker create -t -i --name=ubuntu ubuntu
-sudo docker start -a -i ubuntu
+docker container create -t -i --name=ubuntu ubuntu
+docker container start -a -i ubuntu
 ```
 
 OU
@@ -98,19 +104,19 @@ OU
 ### Forma extremamente simples acessando o bash
 
 ```bash
-sudo docker run -i --name=ubuntu -t ubuntu /bin/bash
+docker container run -i --name=ubuntu -t ubuntu /bin/bash
 ```
 
-## Conectar ao container de imagem Docker
+## Conectar ao container Docker
 
 ```bash
-sudo docker attach ubuntu
+docker container attach ubuntu
 ```
 
 ## Instalar o Nginx dentro do container
 
 ```bash
-apt update && apt install -y nginx && apt autoremove -y && apt clean -y
+apt update && apt -y install nginx && apt -y autoremove && apt -y clean
 ```
 
 ```bash
@@ -132,31 +138,31 @@ chmod 777 /etc/rc.local
 ## Inicializar o Nginx
 
 ```bash
-sudo docker exec ubuntu sh /etc/rc.local
+docker container exec ubuntu sh /etc/rc.local
 ```
 
 ## Verificar os containers
 
 ```bash
-sudo docker ps -a
+docker container ps -a
 ```
 
 ## Criar imagem para o Ubuntu com Nginx
 
 ```bash
-sudo docker commit ubuntu ubuntu-nginx
+docker container commit ubuntu ubuntu-nginx
 ```
 
 ## Criar container utilizando a imagem ubuntu-nginx
 
 ```bash
-sudo docker run -d --restart unless-stopped -p 8080:80 --name=ubuntu-web001 -t ubuntu-nginx
+docker container run -d --restart unless-stopped -p 8080:80 --name=ubuntu-web000 -t ubuntu-nginx
 ```
 
 ## Remover container de imagem Docker
 
 ```bash
-sudo docker container rm ubuntu -f
+docker container rm ubuntu -f
 ```
 
 ## Utilizar Dockerfiles
@@ -170,19 +176,19 @@ nano  -c /opt/projects/ubuntu/nginx/Dockerfile
 ```
 
 ```docker
-    FROM ubuntu:18.04
+FROM ubuntu:20.04
 
-    MAINTAINER Admin
+MAINTAINER Admin
 
-    RUN apt update \
-        && apt install -y nginx \
-        && apt autoremove -y \
-        && apt clean -y \
-        && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-        && echo "daemon off;" >> /etc/nginx/nginx.conf
+RUN apt-get update \
+    && apt-get -y install nginx \
+    && apt-get -y autoremove \
+    && apt-get -y clean \
+    && rm -rf /var/lib/apt-get/lists/* /tmp/* /var/tmp/* \
+    && echo "daemon off;" >> /etc/nginx/nginx.conf
 
-    EXPOSE 80
-    CMD ["nginx"]
+EXPOSE 80
+CMD ["nginx"]
 ```
 
 ```bash
@@ -190,33 +196,275 @@ cd /opt/projects/ubuntu/nginx/
 ```
 
 ```bash
-sudo docker build -t ubuntu-nginx:latest .
+docker image build -t ubuntu-nginx:latest .
 ```
 
 ```bash
-sudo docker run -d --restart unless-stopped -p 8081:80 --name=ubuntu-web001 -t ubuntu-nginx:latest
+docker container run -d --restart unless-stopped -p 8081:80 --name=ubuntu-web001 -t ubuntu-nginx:latest
 ```
 
 ## Efetuar login no Registry
 
 ```bash
-sudo docker login
+docker login
+```
+
+## Efetuar logout no Registry
+
+```bash
+docker logout
 ```
 
 ## Listar informações do DOCKER
 
 ```bash
-sudo docker registry ls
+docker info
 ```
 
 ## Criar uma TAG da imagem local para o Registry
 
 ```bash
-sudo docker tag ubuntu-nginx:latest ubuntu-nginx:latest
+docker image tag ubuntu-nginx:latest ubuntu-nginx:latest
 ```
 
 ## Efetuar o Push da imagem para o Registry
 
 ```bash
-sudo docker push seuusuario/ubuntu-nginx:latest
+docker image push seuusuario/ubuntu-nginx:latest
+```
+
+## Remover imagens, containers, volumes e redes não utilizadas
+
+```bash
+docker system prune -a
+```
+
+## Remover todos os containers
+
+```bash
+docker container ps -a
+docker container stop $(docker container ps -a -q)
+docker container rm $(docker container ps -a -q)
+```
+
+## Remover todas as imagens
+
+```bash
+docker image ls -a
+docker image rm $(docker image ls -a -q)
+```
+
+## Trabalhando com Nginx
+
+### Forma convencional
+
+```bash
+docker container run -d --restart unless-stopped -p 10000:80 -i --name=nginx -t ubuntu:latest /bin/bash
+```
+
+```bash
+docker container run -d --restart unless-stopped -p 9091:8000 --name whoami01 -t jwilder/whoami:latest
+docker container run -d --restart unless-stopped -p 9092:8000 --name whoami02 -t jwilder/whoami:latest
+docker container run -d --restart unless-stopped -p 9093:8000 --name whoami03 -t jwilder/whoami:latest
+```
+
+```bash
+docker container inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx whoami01 whoami02 whoami03
+```
+
+```bash
+docker container attach nginx
+```
+
+```bash
+apt update && apt -y install nano nginx
+echo "server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
+        server_name _;
+        location / {
+                proxy_pass http://nginx;
+
+        }
+}
+upstream nginx {
+server 172.17.0.3:8000;
+server 172.17.0.4:8000;
+server 172.17.0.5:8000;
+}" > /etc/nginx/sites-available/nginx
+ln -sf /etc/nginx/sites-available/nginx /etc/nginx/sites-enabled/nginx
+rm -rf /etc/nginx/sites-enabled/default
+echo "daemon off;" >> /etc/nginx/nginx.conf
+service nginx restart
+```
+
+### Forma simples
+
+```bash
+docker network create --subnet=172.18.0.0/16 network_teste
+```
+
+```bash
+docker container run -d --restart unless-stopped --net network_teste --ip 172.18.0.90 -p 10000:80 -i --name=nginx -t ubuntu:latest /bin/bash
+docker container run -d --restart unless-stopped --net network_teste --ip 172.18.0.91 -p 9091:8000 --name whoami01 -t jwilder/whoami:latest
+docker container run -d --restart unless-stopped --net network_teste --ip 172.18.0.92 -p 9092:8000 --name whoami02 -t jwilder/whoami:latest
+docker container run -d --restart unless-stopped --net network_teste --ip 172.18.0.93 -p 9093:8000 --name whoami03 -t jwilder/whoami:latest
+```
+
+```bash
+docker container inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx whoami01 whoami02 whoami03
+```
+
+```bash
+docker container attach nginx
+```
+
+```bash
+apt update && apt -y install nano nginx
+echo "server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
+        server_name _;
+        location / {
+                proxy_pass http://nginx;
+
+        }
+}
+upstream nginx {
+server 172.18.0.91:8000;
+server 172.18.0.92:8000;
+server 172.18.0.93:8000;
+}" > /etc/nginx/sites-available/nginx
+ln -sf /etc/nginx/sites-available/nginx /etc/nginx/sites-enabled/nginx
+rm -rf /etc/nginx/sites-enabled/default
+echo "daemon off;" >> /etc/nginx/nginx.conf
+service nginx restart
+```
+
+### Forma Compose
+
+```bash
+mkdir -p nginx
+cd nginx
+```
+
+### Dockerfile
+
+```bash
+nano -c Dockerfile
+```
+
+```docker
+FROM ubuntu:latest
+
+MAINTAINER Admin
+
+RUN apt-get update \
+    && apt-get -y install nginx \
+    && apt-get -y autoremove \
+    && apt-get -y clean \
+    && rm -rf /var/lib/apt-get/lists/* /tmp/* /var/tmp/* \
+    && echo "server { \
+            listen 80 default_server; \
+            listen [::]:80 default_server; \
+            root /var/www/html; \
+            index index.html index.htm index.nginx-debian.html; \
+            server_name _; \
+            location / { \
+                    proxy_pass http://nginx; \
+            } \
+    } \
+    upstream nginx { \
+    server 172.18.0.91:8000; \
+    server 172.18.0.92:8000; \
+    server 172.18.0.93:8000; \
+    }" > /etc/nginx/sites-available/nginx \
+    && ln -sf /etc/nginx/sites-available/nginx /etc/nginx/sites-enabled/nginx \
+    && rm -rf /etc/nginx/sites-enabled/default \
+    && echo "daemon off;" >> /etc/nginx/nginx.conf
+
+EXPOSE 80
+CMD ["nginx"]
+```
+
+### Compose
+
+```bash
+nano -c docker-compose.yml
+```
+
+```yaml
+version: '3.0'
+
+networks:
+   network_compose:
+     driver: bridge
+     ipam:
+         config:
+           - subnet: 172.18.0.0/16
+
+services:
+   nginx:
+     build: .
+     ports:
+       - "10000:80"
+     restart: always
+     networks:
+         network_compose:
+             ipv4_address: 172.18.0.90
+
+   whoami01:
+     image: jwilder/whoami:latest
+     ports:
+       - "9091:8000"
+     restart: always
+     networks:
+         network_compose:
+             ipv4_address: 172.18.0.91
+
+   whoami02:
+     image: jwilder/whoami:latest
+     ports:
+       - "9092:8000"
+     restart: always
+     networks:
+         network_compose:
+             ipv4_address: 172.18.0.92
+
+   whoami03:
+     image: jwilder/whoami:latest
+     ports:
+       - "9093:8000"
+     restart: always
+     networks:
+         network_compose:
+             ipv4_address: 172.18.0.93
+```
+
+### Crie e execute seu aplicativo com o Compose
+
+```bash
+sudo apt -y install docker-compose
+```
+
+#### Criar e iniciar contêineres
+
+```bash
+docker-compose up -d
+```
+
+#### Analisar logs do Compose
+
+```bash
+docker-compose logs -f
+```
+
+#### Pare e remova contêineres, redes, imagens e volumes
+
+```bash
+docker-compose down
 ```

@@ -1,0 +1,45 @@
+version: '3.0'
+
+networks:
+   network_compose:
+     driver: bridge
+     ipam:
+         config:
+           - subnet: 172.18.0.0/16
+
+services:
+   nginx:
+     build: .
+     ports:
+       - "10000:80"
+     restart: always
+     networks:
+         network_compose:
+             ipv4_address: 172.18.0.90
+
+   whoami01:
+     image: jwilder/whoami:latest
+     ports:
+       - "9091:8000"
+     restart: always
+     networks:
+         network_compose:
+             ipv4_address: 172.18.0.91
+
+   whoami02:
+     image: jwilder/whoami:latest
+     ports:
+       - "9092:8000"
+     restart: always
+     networks:
+         network_compose:
+             ipv4_address: 172.18.0.92
+
+   whoami03:
+     image: jwilder/whoami:latest
+     ports:
+       - "9093:8000"
+     restart: always
+     networks:
+         network_compose:
+             ipv4_address: 172.18.0.93
