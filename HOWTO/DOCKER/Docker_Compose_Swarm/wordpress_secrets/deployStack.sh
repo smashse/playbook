@@ -7,6 +7,8 @@ docker system prune -a -f
 docker volume prune -f
 docker swarm leave -f
 docker swarm init
-docker stack deploy -c docker-compose.yml nginx
-docker stack services nginx
-echo "nginx rodando localhost:10000"
+openssl rand -base64 20 | docker secret create mysql_root_password -
+openssl rand -base64 20 | docker secret create mysql_password -
+docker stack deploy -c docker-compose.yml wordpress
+docker stack services wordpress
+echo "wordpress rodando localhost:10000"
