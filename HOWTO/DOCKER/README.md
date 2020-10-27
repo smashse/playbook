@@ -58,7 +58,7 @@ sudo apt -y install cockpit
 ## Procurar imagens Docker
 
 ```bash
-docker image search ubuntu
+docker search ubuntu
 ```
 
 ## Adicionar imagem Docker
