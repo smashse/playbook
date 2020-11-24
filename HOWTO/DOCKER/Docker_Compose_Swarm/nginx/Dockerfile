@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-MAINTAINER Admin
+LABEL author="Admin"
 
 RUN apt-get update \
     && apt-get install -y nginx \
