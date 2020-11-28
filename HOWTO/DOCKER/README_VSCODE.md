@@ -196,7 +196,7 @@ nano  -c /opt/projects/ubuntu/nginx/Dockerfile
 ```docker
 FROM ubuntu:20.04
 
-MAINTAINER Admin
+LABEL author="Admin"
 
 RUN apt-get update \
     && apt-get -y install nginx \
@@ -379,7 +379,7 @@ nano -c Dockerfile
 ```docker
 FROM ubuntu:latest
 
-MAINTAINER Admin
+LABEL author="Admin"
 
 RUN apt-get update \
     && apt-get -y install nginx \
