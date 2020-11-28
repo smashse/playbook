@@ -1,4 +1,4 @@
-\*Este material utiliza o ATOM como editor padrão, para VSCODE: [ATOM](README.md), [VSCODE](README_VSCODE.md)
+\*Para [ATOM](README.md). \*Para [VSCODE](README_VSCODE.md).
 
 # Instalar o DOCKER
 
