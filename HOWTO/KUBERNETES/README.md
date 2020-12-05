@@ -386,7 +386,7 @@ No resource quota.
 No LimitRange resource.
 ```
 
-### REmover Namespaces
+### Remover Namespaces
 ```shell
 kubectl delete namespace teste
 ```
