@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: teste-deployment
+  name: teste-deployment
+  namespace: teste
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: teste-deployment
+  template:
+    metadata:
+      labels:
+        app: teste-deployment
+    spec:
+      containers:
+      - image: nginx:stable
+        name: nginx
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+          - name: teste-config
+            mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: teste-config
+          configMap:
+            name: teste-config         
+      dnsPolicy: ClusterFirst

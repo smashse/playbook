@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: teste-ingress
+  namespace: teste
+spec:
+  rules:
+  - host: teste.info
+    http:
+      paths:
+      - backend:
+          serviceName: teste-deployment
+          servicePort: 8080
+        path: /
+        pathType: Prefix

@@ -1,0 +1,93 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: teste
+---
+apiVersion: v1
+data:
+  default.conf: |
+    server {
+        listen       8080;
+        listen  [::]:8080;
+        server_name  localhost;
+
+        location / {
+            root   /usr/share/nginx/html;
+            index  index.html index.htm;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+    }
+kind: ConfigMap
+metadata:
+  name: teste-config
+  namespace: teste
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: teste-deployment
+  name: teste-deployment
+  namespace: teste
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: teste-deployment
+  template:
+    metadata:
+      labels:
+        app: teste-deployment
+    spec:
+      containers:
+      - image: nginx:stable
+        name: nginx
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+          - name: teste-config
+            mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: teste-config
+          configMap:
+            name: teste-config         
+      dnsPolicy: ClusterFirst
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: teste-deployment
+  name: teste-deployment
+  namespace: teste
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: teste-deployment
+  type: NodePort
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: teste-ingress
+  namespace: teste
+spec:
+  rules:
+  - host: teste.info
+    http:
+      paths:
+      - backend:
+          serviceName: teste-deployment
+          servicePort: 8080
+        path: /
+        pathType: Prefix
