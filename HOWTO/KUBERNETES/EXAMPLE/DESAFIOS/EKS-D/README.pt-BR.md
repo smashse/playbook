@@ -1,8 +1,10 @@
-# Install KUBERNETES (EKS-D)
+\*Leia isso em outras línguas: [en-US](README.md), [pt-BR](README.pt-BR.md)
+
+# Instalar o KUBERNETES (EKS-D)
 
 **SO BASE:** UBUNTU
 
-## Install VSCode
+## Instalar o VSCode
 
 ```shell
 sudo snap install code --classic
@@ -37,13 +39,13 @@ code --install-extension redhat.vscode-yaml
 code --install-extension vscoss.vscode-ansible
 ```
 
-### Install Kubectl
+### Instalar o Kubectl
 
 ```shell
 sudo snap install kubectl --classic
 ```
 
-### Install Amazon EKS Distro (EKS-D)
+### Instalar o Amazon EKS Distro(EKS-D)
 
 ```shell
 sudo snap install eks --classic --edge
@@ -53,7 +55,7 @@ sudo snap install eks --classic --edge
 eks (1.18/edge) v1.18.9 from Canonical✓ installed
 ```
 
-### Check the status
+### Verifique o status
 
 ```shell
 eks status --wait-ready
@@ -66,21 +68,21 @@ high-availability: no
   datastore standby nodes: none
 ```
 
-### Give execution permission to the current user
+### Dar permissão de execução para o usuário atual
 
 ```shell
 sudo usermod -a -G eks $USER
 sudo chown -f -R $USER ~/.kube
 ```
 
-### Export the current EKS-D configuration information for use with Kubectl
+### Exportar as informações de configuração atuais de EKS-D para uso com o Kubectl
 
 ```shell
 mkdir -p $HOME/.kube
 sudo eks config > .kube/config
 ```
 
-### Inspect the installation
+### Inspecionar a instalação
 
 ```shell
 eks inspect | grep running
@@ -98,7 +100,7 @@ eks inspect | grep running
   Service snap.eks.daemon-controller-manager is running
 ```
 
-### Check the version of Containerd
+### Verificar a versão do Containerd
 
 ```shell
 eks ctr --version
@@ -108,7 +110,7 @@ eks ctr --version
 ctr github.com/containerd/containerd v1.3.7
 ```
 
-### Server / Client version
+### Versão do servidor/cliente
 
 ```shell
 eks ctr version
@@ -125,11 +127,11 @@ Server:
   UUID: 339017b3-570e-43bd-a528-4a08123868ca
 ```
 
-### Access Kubernetes
+### Acessar o Kubernetes
 
 O EKS-D vem com sua própria versão do Kubectl para acessar o Kubernetes. Abaixo iremos abordar 2 formas diferentes de acesso para visualizar os "nodes" e "services":
 
-**Conventional**
+**Convencional**
 
 ```shell
 eks kubectl get nodes
@@ -149,7 +151,7 @@ NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   33m
 ```
 
-**Recommended**
+**Recomendada**
 
 ```shell
 kubectl get nodes
@@ -169,9 +171,9 @@ NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   33m
 ```
 
-_**Note:** As shown, the 2 forms have the same result, but from this point on we will only use the "Recommended" with Kubectl._
+_**Observação:** Como demonstrado, as 2 formas tem o mesmo resultado porem deste ponto em diante iremos utilizar apenas a "Recomendada" com o Kubectl._
 
-### Deploy a test application
+### Implantar um aplicativo de teste
 
 ```shell
 kubectl create deployment nginx --image=nginx
@@ -190,9 +192,9 @@ NAME                    READY   STATUS    RESTARTS   AGE
 nginx-f89759699-2w75l   1/1     Running   0          33s
 ```
 
-## Starting and stopping EKS-D
+## Iniciando e parando EKS-D
 
-EKS-D will continue to run until you decide to stop it. You can stop and start with the commands below:
+O EKS-D continuará em execução até que você decida interrompê-lo. Você pode parar e iniciar com os comandos abaixo:
 
 ```shell
 sudo eks stop
@@ -210,9 +212,9 @@ sudo eks start
 Started.
 ```
 
-## Basic information of your Kubernetes cluster
+## Informaçoes basicas do seu cluster Kubernetes
 
-### Server/Client version
+### Versão do servidor/cliente
 
 ```shell
 kubectl version --short=true
@@ -223,7 +225,7 @@ Client Version: v1.19.4
 Server Version: v1.18.9-1+c787d4d0c397b8
 ```
 
-### Cluster information
+### Informações do cluster
 
 ```shell
 kubectl cluster-info
@@ -235,7 +237,7 @@ CoreDNS is running at https://192.168.254.100:16443/api/v1/namespaces/kube-syste
 Metrics-server is running at https://192.168.254.100:16443/api/v1/namespaces/kube-system/services/https:metrics-server:/proxy
 ```
 
-### Configuration information
+### Informações de configuração
 
 ```shell
 kubectl config view
@@ -262,9 +264,9 @@ users:
     token: REDACTED
 ```
 
-_**Note:** To view the access token, use the "--flatten = true" option ._
+_**Observação:** Para visualizar o token de acesso, utilize a opção "--flatten=true"._
 
-### View the nodes
+### Visualize os nodes
 
 ```shell
 kubectl get nodes -w
@@ -275,13 +277,13 @@ NAME           STATUS   ROLES    AGE   VERSION
 myuser         Ready    <none>   33h   v1.18.9-eks-1-18-1
 ```
 
-### Information about a particular node
+### Informaçòes sobre um node em particular
 
 ```shell
 kubectl describe node myuser
 ```
 
-## Source:
+## Fonte:
 
 <https://microk8s.io/>
 
