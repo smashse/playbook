@@ -2,7 +2,7 @@
 
 # Install KUBERNETES (EKS-D)
 
-**SO BASE:** UBUNTU
+**OS:** UBUNTU
 
 ## Install VSCode
 
@@ -264,7 +264,7 @@ users:
     token: REDACTED
 ```
 
-_**Note:** To view the access token, use the "--flatten = true" option ._
+_**Note:** To view the access token, use the "--flatten=true" option._
 
 ### View the nodes
 

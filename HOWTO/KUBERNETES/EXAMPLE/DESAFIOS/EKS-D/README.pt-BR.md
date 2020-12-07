@@ -2,7 +2,7 @@
 
 # Instalar o KUBERNETES (EKS-D)
 
-**SO BASE:** UBUNTU
+**SO:** UBUNTU
 
 ## Instalar o VSCode
 
