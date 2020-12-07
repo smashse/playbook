@@ -1,4 +1,4 @@
-# Instalar o KUBERNETES
+# Instalar o KUBERNETES (MicroK8s)
 
 **SO BASE:** UBUNTU
 
@@ -84,7 +84,6 @@ O MicroK8s vem com sua própria versão do Kubectl para acessar o Kubernetes. Ab
 ```shell
 microk8s kubectl get nodes
 ```
-
 ```txt
 NAME           STATUS   ROLES    AGE   VERSION
 myuser         Ready    <none>   17m   v1.19.3-34+a56971609ff35a
@@ -93,10 +92,9 @@ myuser         Ready    <none>   17m   v1.19.3-34+a56971609ff35a
 ```shell
 microk8s kubectl get services
 ```
-
 ```txt
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
-kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   18m
+kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   33m
 ```
 
 **Alias**
@@ -104,7 +102,6 @@ kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   18m
 ```shell
 mkctl get nodes
 ```
-
 ```txt
 NAME           STATUS   ROLES    AGE   VERSION
 myuser         Ready    <none>   17m   v1.19.3-34+a56971609ff35a
@@ -113,10 +110,9 @@ myuser         Ready    <none>   17m   v1.19.3-34+a56971609ff35a
 ```shell
 mkctl get services
 ```
-
 ```txt
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
-kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   18m
+kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   33m
 ```
 
 **Recomendada**
@@ -124,7 +120,6 @@ kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   18m
 ```shell
 kubectl get nodes
 ```
-
 ```txt
 NAME           STATUS   ROLES    AGE   VERSION
 myuser         Ready    <none>   17m   v1.19.3-34+a56971609ff35a
@@ -133,20 +128,18 @@ myuser         Ready    <none>   17m   v1.19.3-34+a56971609ff35a
 ```shell
 kubectl get services
 ```
-
 ```txt
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
-kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   18m
+kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   33m
 ```
 
-_**Observação:** Como demonstrado, as 3 formas tem o mesmo resultado porem deste ponto em diante iremos utilizar apenas a "Convencional" com o Kubectl._
+_**Observação:** Como demonstrado, as 3 formas tem o mesmo resultado porem deste ponto em diante iremos utilizar apenas a "Recomendada" com o Kubectl._
 
 ### Implantar um aplicativo de teste
 
 ```shell
 kubectl create deployment nginx --image=nginx
 ```
-
 ```txt
 deployment.apps/nginx created
 ```
@@ -154,10 +147,9 @@ deployment.apps/nginx created
 ```shell
 kubectl get pods
 ```
-
 ```txt
 NAME                     READY   STATUS    RESTARTS   AGE
-nginx-6799fc88d8-t4wlq   1/1     Running   0          22s
+nginx-6799fc88d8-t4wlq   1/1     Running   0          33s
 ```
 
 ### Instalar Add-ons
@@ -353,13 +345,13 @@ kubectl get nodes -w
 
 ```txt
 NAME        STATUS   ROLES    AGE   VERSION
-microk8s    Ready    <none>   22h   v1.19.3-34+a56971609ff35a
+myuser      Ready    <none>   33h   v1.19.3-34+a56971609ff35a
 ```
 
 ### Informaçòes sobre um node em particular
 
 ```shell
-kubectl describe node microk8s
+kubectl describe node myuser
 ```
 
 ## Namespaces
