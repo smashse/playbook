@@ -55,7 +55,7 @@ spec:
       volumes:
         - name: teste-config
           configMap:
-            name: teste-config         
+            name: teste-config
       dnsPolicy: ClusterFirst
 ---
 apiVersion: v1

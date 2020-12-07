@@ -1,7 +1,9 @@
 ## Criar namespace
+
 ```shell
 kubectl create namespace teste
 ```
+
 ```shell
 kubectl create ns teste
 ```
@@ -20,6 +22,7 @@ kubectl apply -f teste_namespace.yaml
 ```
 
 ## Criar configmap
+
 ```shell
 echo 'server {
     listen       8080;
@@ -73,8 +76,8 @@ metadata:
 kubectl apply -f teste_configmap.yaml
 ```
 
-
 ## Criar deployment
+
 ```shell
 kubectl create deployment teste-deployment --image=nginx:stable --port=8080 --replicas=1 --namespace=teste
 ```
@@ -118,8 +121,8 @@ spec:
 kubectl apply -f teste_deployment_volume.yaml
 ```
 
-
 ## Criar service
+
 ```shell
 kubectl expose deployment teste-deployment --type=NodePort --port=8080 --namespace=teste
 ```

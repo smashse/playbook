@@ -44,17 +44,21 @@ sudo snap install kubectl --classic
 ```
 
 ### Instalar o Amazon EKS Distro(EKS-D)
+
 ```shell
 sudo snap install eks --classic --edge
 ```
+
 ```txt
 eks (1.18/edge) v1.18.9 from Canonical✓ installed
 ```
 
 ### Verifique o status
+
 ```shell
 eks status --wait-ready
 ```
+
 ```txt
 eks is running
 high-availability: no
@@ -77,9 +81,11 @@ sudo eks config > .kube/config
 ```
 
 ### Inspecionar a instalação
+
 ```shell
 eks inspect | grep running
 ```
+
 ```txt
   Service snap.eks.daemon-cluster-agent is running
   Service snap.eks.daemon-containerd is running
@@ -93,17 +99,21 @@ eks inspect | grep running
 ```
 
 ### Verificar a versão do Containerd
+
 ```shell
 eks ctr --version
 ```
+
 ```txt
 ctr github.com/containerd/containerd v1.3.7
 ```
 
 ### Versão do servidor/cliente
+
 ```shell
 eks ctr version
 ```
+
 ```txt
 Client:
   Version:  v1.3.7
@@ -124,14 +134,16 @@ O EKS-D vem com sua própria versão do Kubectl para acessar o Kubernetes. Abaix
 ```shell
 eks kubectl get nodes
 ```
+
 ```txt
 NAME           STATUS   ROLES    AGE   VERSION
-myuser   Ready    <none>   33m   v1.18.9-eks-1-18-1
+myuser         Ready    <none>   33m   v1.18.9-eks-1-18-1
 ```
 
 ```shell
 eks kubectl get services
 ```
+
 ```txt
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   33m
@@ -142,6 +154,7 @@ kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   33m
 ```shell
 kubectl get nodes
 ```
+
 ```txt
 NAME           STATUS   ROLES    AGE   VERSION
 myuser         Ready    <none>   33m   v1.18.9-eks-1-18-1
@@ -150,6 +163,7 @@ myuser         Ready    <none>   33m   v1.18.9-eks-1-18-1
 ```shell
 kubectl get services
 ```
+
 ```txt
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   33m
@@ -162,6 +176,7 @@ _**Observação:** Como demonstrado, as 2 formas tem o mesmo resultado porem des
 ```shell
 kubectl create deployment nginx --image=nginx
 ```
+
 ```txt
 deployment.apps/nginx created
 ```
@@ -169,6 +184,7 @@ deployment.apps/nginx created
 ```shell
 kubectl get pods
 ```
+
 ```txt
 NAME                    READY   STATUS    RESTARTS   AGE
 nginx-f89759699-2w75l   1/1     Running   0          33s
@@ -217,7 +233,6 @@ kubectl cluster-info
 Kubernetes master is running at https://192.168.254.100:16443
 CoreDNS is running at https://192.168.254.100:16443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 Metrics-server is running at https://192.168.254.100:16443/api/v1/namespaces/kube-system/services/https:metrics-server:/proxy
-
 ```
 
 ### Informações de configuração
