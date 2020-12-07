@@ -126,7 +126,7 @@ eks kubectl get nodes
 ```
 ```txt
 NAME           STATUS   ROLES    AGE   VERSION
-andersongama   Ready    <none>   33m   v1.18.9-eks-1-18-1
+myuser   Ready    <none>   33m   v1.18.9-eks-1-18-1
 ```
 
 ```shell
