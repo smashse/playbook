@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
       - image: nginx:stable
-        name: nginx
+        name: teste-pod
         ports:
         - containerPort: 8080
         volumeMounts:

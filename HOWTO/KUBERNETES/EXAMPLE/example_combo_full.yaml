@@ -38,6 +38,7 @@ items:
     creationTimestamp: null
     labels:
       app: teste-deployment
+      env: teste
     name: teste-deployment
     namespace: teste
   spec:
@@ -47,6 +48,7 @@ items:
     selector:
       matchLabels:
         app: teste-deployment
+        env: teste
     strategy:
       rollingUpdate:
         maxSurge: 25%
@@ -57,11 +59,12 @@ items:
         creationTimestamp: null
         labels:
           app: teste-deployment
+          env: teste
       spec:
         containers:
         - image: nginx:stable
           imagePullPolicy: IfNotPresent
-          name: nginx
+          name: teste-pod
           ports:
           - containerPort: 8080
             protocol: TCP
@@ -88,6 +91,7 @@ items:
     creationTimestamp: null
     labels:
       app: teste-deployment
+      env: teste
     name: teste-deployment
     namespace: teste
   spec:
