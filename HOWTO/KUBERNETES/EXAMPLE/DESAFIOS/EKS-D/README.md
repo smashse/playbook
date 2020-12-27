@@ -129,7 +129,7 @@ Server:
 
 ### Access Kubernetes
 
-O EKS-D vem com sua própria versão do Kubectl para acessar o Kubernetes. Abaixo iremos abordar 2 formas diferentes de acesso para visualizar os "nodes" e "services":
+EKS-D comes with its own version of Kubectl to access Kubernetes. Below we will cover 2 different forms of access to view the "nodes" and "services":
 
 **Conventional**
 
