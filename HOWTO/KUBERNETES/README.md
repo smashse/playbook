@@ -72,7 +72,7 @@ alias mkctl='microk8s kubectl'
 
 ```shell
 mkdir -p $HOME/.kube
-sudo microk8s config > .kube/config
+sudo microk8s config > $HOME/.kube/config
 ```
 
 ### Acessar o Kubernetes
