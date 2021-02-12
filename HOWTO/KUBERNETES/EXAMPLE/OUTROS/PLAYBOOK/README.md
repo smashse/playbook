@@ -1,3 +1,29 @@
+## Installar Krew
+
+**Krew é o gerenciador de plug-ins para a kubectl.**
+
+```bash
+(
+  set -x; cd "$(mktemp -d)" &&
+  curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz" &&
+  tar zxvf krew.tar.gz &&
+  KREW=./krew-"$(uname | tr '[:upper:]' '[:lower:]')_$(uname -m | sed -e 's/x86_64/amd64/' -e 's/arm.*$/arm/' -e 's/aarch64$/arm64/')" &&
+  "$KREW" install krew
+)
+```
+
+```bash
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+```
+
+## Instalar o Neat
+
+**Neat torna os manifestos do Kubernetes muito mais legíveis ao remover a desordem.**
+
+```bash
+kubectl krew install neat
+```
+
 ## Criar namespace
 
 ```shell
@@ -19,6 +45,26 @@ metadata:
 
 ```shell
 kubectl apply -f teste_namespace.yaml
+```
+
+### Exibir o yaml do namespace
+
+```shell
+kubectl get namespace teste -o yaml
+```
+
+### Exportar o yaml do namespace
+
+**_BRUTO_**
+
+```shell
+kubectl get namespace teste -o yaml > teste_namespace.yaml
+```
+
+**_LIMPO_**
+
+```shell
+kubectl get namespace teste -o yaml | kubectl neat > teste_namespace.yaml
 ```
 
 ## Criar configmap
@@ -76,6 +122,26 @@ metadata:
 kubectl apply -f teste_configmap.yaml
 ```
 
+### Exibir o yaml do configmap
+
+```shell
+kubectl get configmap teste-config --namespace=teste -o yaml
+```
+
+### Eportar o yaml do configmap
+
+**_BRUTO_**
+
+```shell
+kubectl get configmap teste-config --namespace=teste -o yaml > teste_configmap.yaml
+```
+
+**_LIMPO_**
+
+```shell
+kubectl get configmap teste-config --namespace=teste -o yaml | kubectl neat > teste_configmap.yaml
+```
+
 ## Criar deployment
 
 ```shell
@@ -113,7 +179,7 @@ spec:
       volumes:
         - name: teste-config
           configMap:
-            name: teste-config         
+            name: teste-config
       dnsPolicy: ClusterFirst' > teste_deployment_volume.yaml
 ```
 
@@ -121,10 +187,30 @@ spec:
 kubectl apply -f teste_deployment_volume.yaml
 ```
 
+### Exibir o yaml do deployment
+
+```bash
+kubectl get deployment teste-deployment --namespace=teste -o yaml
+```
+
+### Exportar o yaml do deployment
+
+**_BRUTO_**
+
+```bash
+kubectl get deployment teste-deployment --namespace=teste -o yaml > teste_deployment_volume.yaml
+```
+
+**_LIMPO_**
+
+```bash
+kubectl get deployment teste-deployment --namespace=teste -o yaml | kubectl neat > teste_deployment_volume.yaml
+```
+
 ## Criar service
 
 ```shell
-kubectl expose deployment teste-deployment --type=NodePort --port=8080 --namespace=teste
+kubectl expose deployment teste-deployment --name=teste-service --type=NodePort --port=8080 --namespace=teste
 ```
 
 OU
@@ -135,7 +221,7 @@ kind: Service
 metadata:
   labels:
     app: teste-deployment
-  name: teste-deployment
+  name: teste-service
   namespace: teste
 spec:
   ports:
@@ -153,6 +239,26 @@ status:
 kubectl apply -f teste_service.yaml
 ```
 
+### Exibir yaml do service
+
+```bash
+kubectl get service teste-service --namespace=teste -o yaml
+```
+
+### Exportar yaml do service
+
+**_BRUTO_**
+
+```bash
+kubectl get service teste-service --namespace=teste -o yaml > teste_service.yaml
+```
+
+**_LIMPO_**
+
+```bash
+kubectl get service teste-service --namespace=teste -o yaml | kubectl neat > teste_service.yaml
+```
+
 ## Criar ingress
 
 ```shell
@@ -160,20 +266,41 @@ echo 'apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: teste-ingress
+  namespace: teste
 spec:
   rules:
-    - host: teste.info
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: teste-deployment
-                port:
-                  number: 8080' > teste_ingress.yaml
+  - host: teste.info
+    http:
+      paths:
+      - backend:
+          service:
+            name: teste-service
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix' > teste_ingress.yaml
 ```
 
 ```shell
 kubectl apply -f teste_ingress.yaml --namespace=teste
+```
+
+### Exibir yaml do ingress
+
+```shell
+kubectl get ingress teste-ingress --namespace=teste -o yaml
+```
+
+### Exportar yaml do ingress
+
+**_BRUTO_**
+
+```shell
+kubectl get ingress teste-ingress --namespace=teste -o yaml > teste_ingress.yaml
+```
+
+**_LIMPO_**
+
+```shell
+kubectl get ingress teste-ingress --namespace=teste -o yaml | kubectl neat > teste_ingress.yaml
 ```

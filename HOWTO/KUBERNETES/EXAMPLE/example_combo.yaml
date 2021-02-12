@@ -5,27 +5,25 @@ metadata:
   name: teste
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: teste-config
+  namespace: teste
 data:
   default.conf: |
     server {
         listen       8080;
         listen  [::]:8080;
         server_name  localhost;
-
         location / {
             root   /usr/share/nginx/html;
             index  index.html index.htm;
         }
-
         error_page   500 502 503 504  /50x.html;
         location = /50x.html {
             root   /usr/share/nginx/html;
         }
     }
-kind: ConfigMap
-metadata:
-  name: teste-config
-  namespace: teste
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -39,6 +37,11 @@ spec:
   selector:
     matchLabels:
       app: teste-deployment
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -49,13 +52,15 @@ spec:
         name: teste-pod
         ports:
         - containerPort: 8080
+          protocol: TCP
+        resources: {}
         volumeMounts:
           - name: teste-config
             mountPath: /etc/nginx/conf.d
       volumes:
         - name: teste-config
           configMap:
-            name: teste-config
+            name: teste-config         
       dnsPolicy: ClusterFirst
 ---
 apiVersion: v1
@@ -63,7 +68,7 @@ kind: Service
 metadata:
   labels:
     app: teste-deployment
-  name: teste-deployment
+  name: teste-service
   namespace: teste
 spec:
   ports:
@@ -76,7 +81,7 @@ spec:
 status:
   loadBalancer: {}
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: teste-ingress
@@ -87,7 +92,9 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: teste-deployment
-          servicePort: 8080
+          service:
+            name: teste-service
+            port:
+              number: 8080
         path: /
         pathType: Prefix
