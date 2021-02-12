@@ -2,6 +2,8 @@
 
 **Krew é o gerenciador de plug-ins para a kubectl.**
 
+<https://github.com/kubernetes-sigs/krew>
+
 ```bash
 (
   set -x; cd "$(mktemp -d)" &&
@@ -19,6 +21,8 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 ## Instalar o Neat
 
 **Neat torna os manifestos do Kubernetes muito mais legíveis ao remover a desordem.**
+
+<https://github.com/itaysk/kubectl-neat>
 
 ```bash
 kubectl krew install neat
@@ -128,7 +132,7 @@ kubectl apply -f teste_configmap.yaml
 kubectl get configmap teste-config --namespace=teste -o yaml
 ```
 
-### Eportar o yaml do configmap
+### Exportar o yaml do configmap
 
 **_BRUTO_**
 
