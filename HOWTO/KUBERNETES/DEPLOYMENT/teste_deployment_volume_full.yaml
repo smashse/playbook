@@ -1,8 +1,6 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: teste-deployment
   name: teste-deployment
@@ -41,11 +39,9 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-      securityContext: {}
       terminationGracePeriodSeconds: 30
       volumes:
       - configMap:
           defaultMode: 420
           name: teste-config
         name: teste-config
-status: {}

@@ -304,3 +304,106 @@ kubectl get ingress teste-ingress --namespace=teste -o yaml > teste_ingress.yaml
 ```shell
 kubectl get ingress teste-ingress --namespace=teste -o yaml | kubectl neat > teste_ingress.yaml
 ```
+
+# COMBO
+
+```shell
+echo 'apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    name: teste
+- apiVersion: v1
+  data:
+    default.conf: |
+      server {
+          listen       8080;
+          listen  [::]:8080;
+          server_name  localhost;
+          location / {
+              root   /usr/share/nginx/html;
+              index  index.html index.htm;
+          }
+          error_page   500 502 503 504  /50x.html;
+          location = /50x.html {
+              root   /usr/share/nginx/html;
+          }
+      }
+  kind: ConfigMap
+  metadata:
+    name: teste-config
+    namespace: teste
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      app: teste-deployment
+    name: teste-deployment
+    namespace: teste
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: teste-deployment
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: teste-deployment
+      spec:
+        containers:
+        - image: nginx:stable
+          name: teste-pod
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          volumeMounts:
+          - mountPath: /etc/nginx/conf.d
+            name: teste-config
+        dnsPolicy: ClusterFirst
+        volumes:
+        - configMap:
+            name: teste-config
+          name: teste-config
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: teste-deployment
+    name: teste-service
+    namespace: teste
+  spec:
+    ports:
+    - port: 8080
+    selector:
+      app: teste-deployment
+    type: NodePort
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: teste-ingress
+    namespace: teste
+  spec:
+    rules:
+    - host: teste.info
+      http:
+        paths:
+        - backend:
+            service:
+              name: teste-service
+              port:
+                number: 8080
+          path: /
+          pathType: Prefix
+kind: List
+metadata: {}' > teste_combo.yaml
+```
+
+```shell
+kubectl apply -f teste_combo.yaml
+```

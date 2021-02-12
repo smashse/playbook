@@ -1,17 +1,17 @@
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: teste-ingress
+  namespace: teste
 spec:
   rules:
-    - host: teste.info
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: teste-deployment
-                port:
-                  number: 8080
+  - host: teste.info
+    http:
+      paths:
+      - backend:
+          service:
+            name: teste-service
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix

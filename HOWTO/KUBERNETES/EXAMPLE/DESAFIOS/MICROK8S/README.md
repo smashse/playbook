@@ -121,13 +121,13 @@ sudo microk8s kubectl create -f teste-deployment.yaml
 ### Criar serviço
 
 ```shell
-sudo microk8s kubectl expose deployment teste-deployment --type=NodePort --port=8080 --namespace teste
+sudo microk8s kubectl expose deployment teste-deployment --name=teste-service --type=NodePort --port=8080 --namespace teste
 ```
 
 ### Verificar serviço
 
 ```shell
-sudo microk8s kubectl get service teste-deployment --namespace teste
+sudo microk8s kubectl get service teste-service --namespace teste
 ```
 
 ## Criar ingress
@@ -148,7 +148,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: teste-deployment
+                name: teste-service
                 port:
                   number: 8080' > teste-ingress.yaml
 ```
