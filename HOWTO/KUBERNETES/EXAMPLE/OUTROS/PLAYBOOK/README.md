@@ -1,4 +1,4 @@
-## Installar Krew
+## Instalar Krew
 
 **Krew é o gerenciador de plug-ins para a kubectl.**
 
