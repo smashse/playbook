@@ -32,7 +32,7 @@ runcmd:
 multipass launch focal -n teste -c 2 -m 4G -d 10G --cloud-init cloud-config-microk8s.yaml
 ```
 
-## Export the current MicroK8s configuration information for use with Kubectl
+## Export the current MicroK8s configuration for use with Kubectl
 
 ### Create the folder to store the configuration of the Kubernetes cluster in the test instance
 
