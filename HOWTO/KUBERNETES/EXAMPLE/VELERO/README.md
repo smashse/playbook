@@ -186,9 +186,9 @@ Velero is an open source tool to safely backup and restore, you can run with a c
 ## Install Velero
 
 ```bash
-wget -c https://github.com/vmware-tanzu/velero/releases/download/v1.5.3/velero-v1.5.3-linux-amd64.tar.gz
-tar -zxvf velero-v1.5.3-linux-amd64.tar.gz
-cd velero-v1.5.3-linux-amd64/
+wget -c https://github.com/vmware-tanzu/velero/releases/download/v1.5.4/velero-v1.5.4-linux-amd64.tar.gz
+tar -zxvf velero-v1.5.4-linux-amd64.tar.gz
+cd velero-v1.5.4-linux-amd64/
 sudo cp -raf velero /usr/local/sbin/
 ```
 
@@ -231,6 +231,32 @@ velero backup create teste --include-namespaces teste
 
 ```txt
 Backup request "teste" submitted successfully.
+```
+
+## Create schedule template
+
+### Create a backup every 1 hour of the teste namespace
+
+```bash
+velero schedule create teste --schedule="0 */1 * * *" --include-namespaces teste
+```
+
+### Create a hourly backup of the teste namespace with the @every notation
+
+```bash
+velero schedule create teste-hourly --schedule="@every 1h" --include-namespaces teste
+```
+
+### Create a daily backup of the teste namespace with the @every notation
+
+```bash
+velero schedule create teste-daily --schedule="@every 24h" --include-namespaces teste
+```
+
+### Create a weekly backup of the teste namespace with the @every notation, each living for 90 days (2160 hours)
+
+```bash
+velero schedule create teste-weekly --schedule="@every 168h" --include-namespaces teste --ttl 2160h0m0s
 ```
 
 ### View details of the backup created
@@ -365,6 +391,8 @@ kubectl delete crds -l component=velero
 **MinIO**: <https://min.io/>
 
 **Velero**: <https://velero.io/>
+
+**MinIO Client Complete Guide**: <https://github.com/minio/mc/blob/master/docs/minio-client-complete-guide.md>
 
 **Backup and Restore with Velero**: <https://documentation.suse.com/suse-caasp/4.5/html/caasp-admin/backup-and-restore-with-velero.html#_prerequisites_8>
 
