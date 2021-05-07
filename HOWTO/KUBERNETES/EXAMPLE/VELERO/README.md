@@ -299,10 +299,10 @@ Hooks:  <none>
 
 Backup Format Version:  1.1.0
 
-Started:    2021-03-08 15:53:02 -0300 -03
-Completed:  2021-03-08 15:53:03 -0300 -03
+Started:    2021-05-05 15:15:15 -0300 -03
+Completed:  2021-05-05 15:15:15 -0300 -03
 
-Expiration:  2021-04-07 15:53:02 -0300 -03
+Expiration:  2021-05-04 15:15:15 -0300 -03
 
 Total items to be backed up:  25
 Items backed up:              25
@@ -361,14 +361,14 @@ multipass exec minio mc ls /opt/data/velero/backups/teste
 ```
 
 ```txt
-[2021-03-08 15:53:04 -03]    29B teste-csi-volumesnapshotcontents.json.gz
-[2021-03-08 15:53:04 -03]    29B teste-csi-volumesnapshots.json.gz
-[2021-03-08 15:53:03 -03] 3.3KiB teste-logs.gz
-[2021-03-08 15:53:03 -03]    29B teste-podvolumebackups.json.gz
-[2021-03-08 15:53:04 -03]   387B teste-resource-list.json.gz
-[2021-03-08 15:53:04 -03]    29B teste-volumesnapshots.json.gz
-[2021-03-08 15:53:03 -03]  11KiB teste.tar.gz
-[2021-03-08 15:53:03 -03] 2.1KiB velero-backup.json
+[2021-05-05 15:15:15 -03]    29B teste-csi-volumesnapshotcontents.json.gz
+[2021-05-05 15:15:15 -03]    29B teste-csi-volumesnapshots.json.gz
+[2021-05-05 15:15:15 -03] 3.3KiB teste-logs.gz
+[2021-05-05 15:15:15 -03]    29B teste-podvolumebackups.json.gz
+[2021-05-05 15:15:15 -03]   387B teste-resource-list.json.gz
+[2021-05-05 15:15:15 -03]    29B teste-volumesnapshots.json.gz
+[2021-05-05 15:15:15 -03]  11KiB teste.tar.gz
+[2021-05-05 15:15:15 -03] 2.1KiB velero-backup.json
 ```
 
 ## Uninstalling Velero
