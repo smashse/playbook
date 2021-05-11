@@ -233,33 +233,15 @@ velero backup create teste --include-namespaces teste
 Backup request "teste" submitted successfully.
 ```
 
-## Create schedule template
+## View details of the backup created
 
-### Create a backup every 1 hour of the teste namespace
-
-```bash
-velero schedule create teste --schedule="0 */1 * * *" --include-namespaces teste
-```
-
-### Create a hourly backup of the teste namespace with the @every notation
+### List backups
 
 ```bash
-velero schedule create teste-hourly --schedule="@every 1h" --include-namespaces teste
+velero backup get
 ```
 
-### Create a daily backup of the teste namespace with the @every notation
-
-```bash
-velero schedule create teste-daily --schedule="@every 24h" --include-namespaces teste
-```
-
-### Create a weekly backup of the teste namespace with the @every notation, each living for 90 days (2160 hours)
-
-```bash
-velero schedule create teste-weekly --schedule="@every 168h" --include-namespaces teste --ttl 2160h0m0s
-```
-
-### View details of the backup created
+### Describe backup
 
 ```bash
 velero backup describe teste
@@ -310,10 +292,129 @@ Items backed up:              25
 Velero-Native Snapshots: <none included>
 ```
 
-### View created backup logs
+### Retrieve backup logs
 
 ```bash
 velero backup logs teste
+```
+
+## Restore a backup of the test nmespace
+
+```bash
+velero restore create --from-backup teste
+```
+
+## Create schedule template
+
+### Create a backup every 1 hour of the teste namespace
+
+```bash
+velero schedule create teste --schedule="0 */1 * * *" --include-namespaces teste
+```
+
+### Create a hourly backup of the teste namespace with the @every notation
+
+```bash
+velero schedule create teste-hourly --schedule="@every 1h" --include-namespaces teste
+```
+
+### Create a daily backup of the teste namespace with the @every notation
+
+```bash
+velero schedule create teste-daily --schedule="@every 24h" --include-namespaces teste
+```
+
+### Create a weekly backup of the teste namespace with the @every notation, each living for 90 days (2160 hours)
+
+```bash
+velero schedule create teste-weekly --schedule="@every 168h" --include-namespaces teste --ttl 2160h0m0s
+```
+
+## View details of the backup schedule created
+
+### List backup schedule
+
+```bash
+velero schedule get
+```
+
+```text
+NAME             STATUS    CREATED                         SCHEDULE      BACKUP TTL   LAST BACKUP   SELECTOR
+teste-daily      Enabled   2021-05-05 15:15:15 -0300 -03   @every 24h    720h0m0s      1m ago       <none>
+teste-hourly     Enabled   2021-05-05 15:15:15 -0300 -03   @every 1h     720h0m0s      1m ago       <none>
+teste-weekly     Enabled   2021-05-05 15:15:15 -0300 -03   @every 168h   2160h0m0s     1m ago       <none>
+
+```
+
+### Describe backup schedule
+
+#### Hourly
+
+```bash
+velero schedule describe teste-hourly
+```
+
+#### Daily
+
+```bash
+velero schedule describe teste-daily
+```
+
+#### Weekly
+
+```bash
+velero schedule describe teste-weekly
+```
+
+### Retrieve backup schedule logs
+
+#### Hourly
+
+```bash
+velero backup get | grep teste-hourly-<TIMESTAMP>
+velero backp logs teste-hourly-<TIMESTAMP>
+```
+
+#### Daily
+
+```bash
+velero backup get | grep teste-daily-<TIMESTAMP>
+velero backup logs este-daily-<TIMESTAMP>
+```
+
+#### Weekly
+
+```bash
+velero backup get | grep teste-weekly-<TIMESTAMP>
+velero backup logs teste-weekly-<TIMESTAMP>
+```
+
+## Restore a backup schedule of the test nmespace
+
+```bash
+velero restore create --from-schedule <SCHEDULE_NAME>
+velero restore create <RESTORE_NAME> --from-schedule <SCHEDULE_NAME>
+```
+
+#### Hourly
+
+```bash
+velero restore create --from-schedule teste-hourly-<TIMESTAMP>
+velero restore create teste-hourly-<TIMESTAMP> --from-schedule teste-hourly-<TIMESTAMP>
+```
+
+#### Daily
+
+```bash
+velero restore create --from-schedule teste-daily-<TIMESTAMP>
+velero restore create teste-daily-<TIMESTAMP> --from-schedule teste-daily-<TIMESTAMP>
+```
+
+#### Weekly
+
+```bash
+velero restore create --from-schedule teste-weekly-<TIMESTAMP>
+velero restore create teste-weekly-<TIMESTAMP> --from-schedule teste-weekly-<TIMESTAMP>
 ```
 
 ### See the velero bucket tree in the minio instance
