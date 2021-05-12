@@ -95,16 +95,6 @@ aws s3api delete-public-access-block \
   --profile $PROFILE
 ```
 
-## Attach policy to S3 bucket
-
-```bash
-aws s3api put-bucket-policy \
-  --bucket velero-bucket-$ID-eks-$ENVMODE \
-  --policy file://velero-s3-policy.json \
-  --region $REGION \
-  --profile $PROFILE
-```
-
 # Set permissions for Velero
 
 ## Create the IAM user
@@ -169,6 +159,16 @@ aws iam put-user-policy \
   --user-name velero-user \
   --policy-name velero-iam-policy \
   --policy-document file://velero-iam-policy.json \
+  --region $REGION \
+  --profile $PROFILE
+```
+
+## Attach policy to S3 bucket
+
+```bash
+aws s3api put-bucket-policy \
+  --bucket velero-bucket-$ID-eks-$ENVMODE \
+  --policy file://velero-s3-policy.json \
   --region $REGION \
   --profile $PROFILE
 ```
