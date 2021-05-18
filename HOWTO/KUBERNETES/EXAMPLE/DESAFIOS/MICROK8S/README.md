@@ -2,7 +2,7 @@
 
 ## Criar arquivo tar
 
-```shell
+```bash
 mkdir teste
 touch teste/{A.txt,B.txt,C.txt}
 tar -c teste -f teste.tar
@@ -11,7 +11,7 @@ tar -tf teste.tar
 
 ## Criar cluster para o teste
 
-```shell
+```bash
 sudo snap install microk8s --classic
 sudo microk8s status --wait-ready
 sudo microk8s enable ingress dns
@@ -19,7 +19,7 @@ sudo microk8s enable ingress dns
 
 ## Verificar cluster de teste
 
-```shell
+```bash
 sudo microk8s kubectl get nodes
 sudo microk8s kubectl get services
 sudo microk8s kubectl get all --all-namespaces
@@ -28,13 +28,13 @@ sudo microk8s kubectl get pods --all-namespaces
 
 ## Criar namespace de teste
 
-```shell
+```bash
 sudo microk8s kubectl create namespace teste
 ```
 
 ## Armazenar arquivo tar como secret
 
-```shell
+```bash
 sudo microk8s kubectl create secret generic teste-secret --from-file=teste.tar --namespace teste
 sudo microk8s kubectl get secret teste-secret --namespace teste
 sudo microk8s kubectl describe secret teste-secret --namespace teste
@@ -44,7 +44,7 @@ sudo microk8s kubectl describe secret teste-secret --namespace teste
 
 ### Gerar arquivo de configuração para o nginx
 
-```shell
+```bash
 echo 'server {
     listen       8080;
     listen  [::]:8080;
@@ -64,7 +64,7 @@ echo 'server {
 
 ### Criar configmap contendo o arquivo de configuração para o nginx
 
-```shell
+```bash
 sudo microk8s kubectl create configmap teste-config --from-file=default.conf --namespace teste
 ```
 
@@ -72,7 +72,7 @@ sudo microk8s kubectl create configmap teste-config --from-file=default.conf --n
 
 ### Gerar o yaml de deployment para ao nginx
 
-```shell
+```bash
 echo 'apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -114,19 +114,19 @@ spec:
 
 ### Criar o deploymenr
 
-```shell
+```bash
 sudo microk8s kubectl create -f teste-deployment.yaml
 ```
 
 ### Criar serviço
 
-```shell
+```bash
 sudo microk8s kubectl expose deployment teste-deployment --name=teste-service --type=NodePort --port=8080 --namespace teste
 ```
 
 ### Verificar serviço
 
-```shell
+```bash
 sudo microk8s kubectl get service teste-service --namespace teste
 ```
 
@@ -134,7 +134,7 @@ sudo microk8s kubectl get service teste-service --namespace teste
 
 ### Gerar o yaml de ingress para o nginx
 
-```shell
+```bash
 echo 'apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -155,13 +155,13 @@ spec:
 
 ### Criar o ingress
 
-```shell
+```bash
 sudo microk8s kubectl apply -f teste-ingress.yaml --namespace teste
 ```
 
 Para acessar o endereço <http://teste.info>, adicione no "/etc/hosts", por exemplo, se seu IP onde está instalado o MicroK8s for 192.168.1.100:
 
-```shell
+```bash
 nano -c /etc/hosts
 ```
 
@@ -179,7 +179,7 @@ ff02::2    ip6-allrouters
 
 Para verificar se o download do arquivo teste.tar está correto execute:
 
-```shell
+```bash
 curl http://teste.info/teste/teste.tar -o teste.tar
 tar -tf teste.tar
 ```

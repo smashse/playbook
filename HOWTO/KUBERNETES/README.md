@@ -4,11 +4,11 @@
 
 ## Instalar o VSCode
 
-```shell
+```bash
 sudo snap install code --classic
 ```
 
-```shell
+```bash
 code --install-extension AmazonWebServices.aws-toolkit-vscode
 code --install-extension GitHub.github-vscode-theme
 code --install-extension GoogleCloudTools.cloudcode
@@ -39,38 +39,38 @@ code --install-extension vscoss.vscode-ansible
 
 ### Instalar o Kubectl
 
-```shell
+```bash
 sudo snap install kubectl --classic
 ```
 
 ### Instalar o Kubernetes(MicroK8s)
 
-```shell
+```bash
 sudo snap install microk8s --classic
 ```
 
 ### Verifique o status
 
-```shell
+```bash
 sudo microk8s status --wait-ready
 ```
 
 ### Dar permissão de execução para o usuário atual
 
-```shell
+```bash
 sudo usermod -a -G microk8s $USER
 sudo chown -f -R $USER ~/.kube
 ```
 
 ### Criar alias para o MicroK8s(Opcional)
 
-```shell
+```bash
 alias mkctl='microk8s kubectl'
 ```
 
 ### Exportar as informações de configuração atuais de MicroK8s para uso com o Kubectl
 
-```shell
+```bash
 mkdir -p $HOME/.kube
 sudo microk8s config > $HOME/.kube/config
 ```
@@ -81,17 +81,19 @@ O MicroK8s vem com sua própria versão do Kubectl para acessar o Kubernetes. Ab
 
 **Convencional**
 
-```shell
+```bash
 microk8s kubectl get nodes
 ```
+
 ```txt
 NAME           STATUS   ROLES    AGE   VERSION
 myuser         Ready    <none>   17m   v1.19.3-34+a56971609ff35a
 ```
 
-```shell
+```bash
 microk8s kubectl get services
 ```
+
 ```txt
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   33m
@@ -99,17 +101,19 @@ kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   33m
 
 **Alias**
 
-```shell
+```bash
 mkctl get nodes
 ```
+
 ```txt
 NAME           STATUS   ROLES    AGE   VERSION
 myuser         Ready    <none>   17m   v1.19.3-34+a56971609ff35a
 ```
 
-```shell
+```bash
 mkctl get services
 ```
+
 ```txt
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   33m
@@ -117,17 +121,19 @@ kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   33m
 
 **Recomendada**
 
-```shell
+```bash
 kubectl get nodes
 ```
+
 ```txt
 NAME           STATUS   ROLES    AGE   VERSION
 myuser         Ready    <none>   17m   v1.19.3-34+a56971609ff35a
 ```
 
-```shell
+```bash
 kubectl get services
 ```
+
 ```txt
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   33m
@@ -137,16 +143,18 @@ _**Observação:** Como demonstrado, as 3 formas tem o mesmo resultado porem des
 
 ### Implantar um aplicativo de teste
 
-```shell
+```bash
 kubectl create deployment nginx --image=nginx
 ```
+
 ```txt
 deployment.apps/nginx created
 ```
 
-```shell
+```bash
 kubectl get pods
 ```
+
 ```txt
 NAME                     READY   STATUS    RESTARTS   AGE
 nginx-6799fc88d8-t4wlq   1/1     Running   0          33s
@@ -158,7 +166,7 @@ Por uma questão de minimalismo, o MicroK8s instala apenas o necessário para um
 
 **Listar os Add-ons disponiveis**
 
-```shell
+```bash
 sudo microk8s status
 ```
 
@@ -197,7 +205,7 @@ addons:
 
 **Habilitar Add-ons**
 
-```shell
+```bash
 sudo microk8s enable dns ingress
 ```
 
@@ -228,7 +236,7 @@ Ingress is enabled
 
 **Desabilitar Add-ons**
 
-```shell
+```bash
 sudo microk8s disable dns ingress
 ```
 
@@ -268,7 +276,7 @@ Ingress is disabled
 
 O MicroK8s continuará em execução até que você decida interrompê-lo. Você pode parar e iniciar com os comandos abaixo:
 
-```shell
+```bash
 sudo microk8s stop
 ```
 
@@ -276,7 +284,7 @@ sudo microk8s stop
 Stopped.
 ```
 
-```shell
+```bash
 sudo microk8s start
 ```
 
@@ -288,7 +296,7 @@ Started.
 
 ### Versão do servidor/cliente
 
-```shell
+```bash
 kubectl version --short=true
 ```
 
@@ -299,7 +307,7 @@ Server Version: v1.19.3-34+a56971609ff35a
 
 ### Informações do cluster
 
-```shell
+```bash
 kubectl cluster-info
 ```
 
@@ -310,7 +318,7 @@ CoreDNS is running at https://192.168.254.100:16443/api/v1/namespaces/kube-syste
 
 ### Informações de configuração
 
-```shell
+```bash
 kubectl config view
 ```
 
@@ -339,7 +347,7 @@ _**Observação:** Para visualizar o token de acesso, utilize a opção "--flatt
 
 ### Visualize os nodes
 
-```shell
+```bash
 kubectl get nodes -w
 ```
 
@@ -350,7 +358,7 @@ myuser      Ready    <none>   33h   v1.19.3-34+a56971609ff35a
 
 ### Informaçòes sobre um node em particular
 
-```shell
+```bash
 kubectl describe node myuser
 ```
 
@@ -360,13 +368,13 @@ O namespace fornece um escopo para nomes. O uso de vários namespaces é opciona
 
 ### Listar Namespaces
 
-```shell
+```bash
 kubectl get namespaces
 ```
 
 OU
 
-```shell
+```bash
 kubectl get ns
 ```
 
@@ -381,13 +389,13 @@ ingress           Active   146m
 
 ### Criar Namespaces
 
-```shell
+```bash
 kubectl create namespace teste
 ```
 
 OU
 
-```shell
+```bash
 kubectl create ns teste
 ```
 
@@ -395,13 +403,13 @@ kubectl create ns teste
 
 ### Exibir detalhes do Namespace
 
-```shell
+```bash
 kubectl describe namespace teste
 ```
 
 OU
 
-```shell
+```bash
 kubectl describe ns teste
 ```
 
@@ -418,13 +426,13 @@ No LimitRange resource.
 
 ### Remover Namespaces
 
-```shell
+```bash
 kubectl delete namespace teste
 ```
 
 OU
 
-```shell
+```bash
 kubectl delete ns teste
 ```
 

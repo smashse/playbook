@@ -30,30 +30,30 @@ kubectl krew install neat
 
 ## Criar namespace
 
-```shell
+```bash
 kubectl create namespace teste
 ```
 
-```shell
+```bash
 kubectl create ns teste
 ```
 
 OU
 
-```shell
+```bash
 echo 'apiVersion: v1
 kind: Namespace
 metadata:
   name: teste' > teste_namespace.yaml
 ```
 
-```shell
+```bash
 kubectl apply -f teste_namespace.yaml
 ```
 
 ### Exibir o yaml do namespace
 
-```shell
+```bash
 kubectl get namespace teste -o yaml
 ```
 
@@ -61,19 +61,19 @@ kubectl get namespace teste -o yaml
 
 **_BRUTO_**
 
-```shell
+```bash
 kubectl get namespace teste -o yaml > teste_namespace.yaml
 ```
 
 **_LIMPO_**
 
-```shell
+```bash
 kubectl get namespace teste -o yaml | kubectl neat > teste_namespace.yaml
 ```
 
 ## Criar configmap
 
-```shell
+```bash
 echo 'server {
     listen       8080;
     listen  [::]:8080;
@@ -91,13 +91,13 @@ echo 'server {
 }' > default.conf
 ```
 
-```shell
+```bash
 kubectl create configmap teste-config --from-file=default.conf --namespace=teste
 ```
 
 OU
 
-```shell
+```bash
 echo 'apiVersion: v1
 data:
   default.conf: |
@@ -122,13 +122,13 @@ metadata:
   namespace: teste' > teste_configmap.yaml
 ```
 
-```shell
+```bash
 kubectl apply -f teste_configmap.yaml
 ```
 
 ### Exibir o yaml do configmap
 
-```shell
+```bash
 kubectl get configmap teste-config --namespace=teste -o yaml
 ```
 
@@ -136,25 +136,25 @@ kubectl get configmap teste-config --namespace=teste -o yaml
 
 **_BRUTO_**
 
-```shell
+```bash
 kubectl get configmap teste-config --namespace=teste -o yaml > teste_configmap.yaml
 ```
 
 **_LIMPO_**
 
-```shell
+```bash
 kubectl get configmap teste-config --namespace=teste -o yaml | kubectl neat > teste_configmap.yaml
 ```
 
 ## Criar deployment
 
-```shell
+```bash
 kubectl create deployment teste-deployment --image=nginx:stable --port=8080 --replicas=1 --namespace=teste
 ```
 
 OU
 
-```shell
+```bash
 echo 'apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -187,7 +187,7 @@ spec:
       dnsPolicy: ClusterFirst' > teste_deployment_volume.yaml
 ```
 
-```shell
+```bash
 kubectl apply -f teste_deployment_volume.yaml
 ```
 
@@ -213,13 +213,13 @@ kubectl get deployment teste-deployment --namespace=teste -o yaml | kubectl neat
 
 ## Criar service
 
-```shell
+```bash
 kubectl expose deployment teste-deployment --name=teste-service --type=NodePort --port=8080 --namespace=teste
 ```
 
 OU
 
-```shell
+```bash
 echo 'apiVersion: v1
 kind: Service
 metadata:
@@ -239,7 +239,7 @@ status:
   loadBalancer: {}' > teste_service.yaml
 ```
 
-```shell
+```bash
 kubectl apply -f teste_service.yaml
 ```
 
@@ -265,7 +265,13 @@ kubectl get service teste-service --namespace=teste -o yaml | kubectl neat > tes
 
 ## Criar ingress
 
-```shell
+```bash
+kubectl create ingress teste-ingress --namespace teste --rule="teste.info/*=teste-service:8080"
+```
+
+OU
+
+```bash
 echo 'apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -285,13 +291,13 @@ spec:
         pathType: Prefix' > teste_ingress.yaml
 ```
 
-```shell
+```bash
 kubectl apply -f teste_ingress.yaml --namespace=teste
 ```
 
 ### Exibir yaml do ingress
 
-```shell
+```bash
 kubectl get ingress teste-ingress --namespace=teste -o yaml
 ```
 
@@ -299,19 +305,19 @@ kubectl get ingress teste-ingress --namespace=teste -o yaml
 
 **_BRUTO_**
 
-```shell
+```bash
 kubectl get ingress teste-ingress --namespace=teste -o yaml > teste_ingress.yaml
 ```
 
 **_LIMPO_**
 
-```shell
+```bash
 kubectl get ingress teste-ingress --namespace=teste -o yaml | kubectl neat > teste_ingress.yaml
 ```
 
 # COMBO
 
-```shell
+```bash
 echo 'apiVersion: v1
 items:
 - apiVersion: v1
@@ -408,6 +414,6 @@ kind: List
 metadata: {}' > teste_combo.yaml
 ```
 
-```shell
+```bash
 kubectl apply -f teste_combo.yaml
 ```
