@@ -440,6 +440,8 @@ kubectl delete ns teste
 namespace "teste" deleted
 ```
 
+[Para crição de demais recursos de forma manual e por meo de YAML.](./RESOURCES.md)
+
 ## Fonte:
 
 <https://microk8s.io/>
