@@ -2,7 +2,6 @@ This POC (Proof of Concept) will use [EKSCTL](https://eksctl.io/), the official 
 
 ```bash
 cd /tmp
-ssh-keygen -f nomedesejado-access
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip && sudo ./aws/install
 aws configure
@@ -97,15 +96,6 @@ aws s3api delete-public-access-block \
 
 # Set permissions for Velero
 
-## Create the IAM user
-
-```bash
-aws iam create-user \
-  --user-name velero-user \
-  --region $REGION \
-  --profile $PROFILE
-```
-
 ## Create IAM policy
 
 ```bash
@@ -150,6 +140,15 @@ cat > velero-iam-policy.json <<EOF
     ]
 }
 EOF
+```
+
+## Create the IAM user
+
+```bash
+aws iam create-user \
+  --user-name velero-user \
+  --region $REGION \
+  --profile $PROFILE
 ```
 
 ## Attach policies to give velero the necessary permissions
@@ -315,6 +314,7 @@ velero install \
 --bucket velero-bucket-$ID-eks-$ENVMODE \
 --image $ID.dkr.ecr.$REGION.amazonaws.com/velero/velero:latest \
 --plugins $ID.dkr.ecr.$REGION.amazonaws.com/velero/velero-plugin-for-aws:latest \
+--velero-pod-cpu-request=1000m --velero-pod-cpu-limit=5000m --velero-pod-mem-request=512Mi --velero-pod-mem-limit=1024Mi \
 --provider aws \
 --secret-file ./velero-credentials.credential \
 --snapshot-location-config region=$REGION \

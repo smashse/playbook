@@ -5,3 +5,5 @@ Este repositório é um guia simples para aprendizado de alguns conceitos e tecn
 [Docker](./HOWTO/DOCKER/README.md)
 
 [Kubernetes](./HOWTO/KUBERNETES/README.md)
+
+[Velero](./HOWTO/VELERO/README.md)
