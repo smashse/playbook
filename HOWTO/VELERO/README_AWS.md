@@ -271,7 +271,6 @@ eksctl create cluster \
  --name <MY-CLUSTER> \
  --version 1.19 \
  --with-oidc \
- --without-nodegroup \
  --region $REGION \
  --zones $REGION"a",$REGION"b",$REGION"c" \
  --profile $PROFILE

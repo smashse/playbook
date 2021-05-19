@@ -273,7 +273,6 @@ eksctl create cluster \
  --name <MY-CLUSTER> \
  --version 1.19 \
  --with-oidc \
- --without-nodegroup \
  --region $REGION \
  --zones $REGION"a",$REGION"b",$REGION"c" \
  --profile $PROFILE
@@ -584,3 +583,64 @@ eksctl delete cluster --name <MY-CLUSTER> --region $REGION --profile $PROFILE
 **Installing or upgrading eksctl**: <https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html>
 
 **Creating an Amazon EKS cluster**: <https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html>
+
+## Installing the Kubernetes Metrics Server
+
+### Deploy the Metrics Server
+
+```bash
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
+
+```bash
+kubectl get deployment metrics-server -n kube-system
+```
+
+## Control plane metrics with Prometheus
+
+### Viewing the raw metrics
+
+```bash
+kubectl get --raw /metrics
+```
+
+## Deploy Prometheus using Helm
+
+### Create a Prometheus namespace.
+
+```bash
+kubectl create namespace prometheus
+```
+
+### Add the prometheus-community chart repository.
+
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+```
+
+### Deploy Prometheus.
+
+```bash
+helm upgrade -i prometheus prometheus-community/prometheus \
+    --namespace prometheus \
+    --set alertmanager.persistentVolume.storageClass="gp2",server.persistentVolume.storageClass="gp2"
+```
+
+## Install NGINX Ingress Controller
+
+### Network load balancer (NLB) to expose the NGINX Ingress controller
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.46.0/deploy/static/provider/aws/deploy.yaml
+```
+
+
+# HELM install
+
+```bash
+sudo snap install helm --classic
+```
+
+```bash
+helm repo add vmware-tanzu https://vmware-tanzu.github.io/helm-charts
+```
