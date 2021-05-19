@@ -96,46 +96,63 @@ aws s3api delete-public-access-block \
 
 # Set permissions for Velero
 
+## Create IAM role policy
+
+```bash
+cat > velero-iam-role-policy.json <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": {
+    "Effect": "Allow",
+    "Principal": { "AWS": "arn:aws:iam::$ID:root" },
+    "Action": "sts:AssumeRole"
+  }
+}
+EOF
+```
+
 ## Create IAM policy
 
 ```bash
 cat > velero-iam-policy.json <<EOF
 {
-  "Role": {
-    "AssumeRolePolicyDocument": {
-      "Version": "2012-10-17",
-      "Statement": [
+    "Version": "2012-10-17",
+    "Statement": [
         {
-          "Effect": "Allow",
-          "Action": [
-            "ec2:DescribeVolumes",
-            "ec2:DescribeSnapshots",
-            "ec2:CreateTags",
-            "ec2:CreateVolume",
-            "ec2:CreateSnapshot",
-            "ec2:DeleteSnapshot"
-          ],
-          "Resource": "*"
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeVolumes",
+                "ec2:DescribeSnapshots",
+                "ec2:CreateTags",
+                "ec2:CreateVolume",
+                "ec2:CreateSnapshot",
+                "ec2:DeleteSnapshot"
+            ],
+            "Resource": "*"
         },
         {
-          "Effect": "Allow",
-          "Action": [
-            "s3:GetObject",
-            "s3:DeleteObject",
-            "s3:PutObject",
-            "s3:AbortMultipartUpload",
-            "s3:ListMultipartUploadParts"
-          ],
-          "Resource": ["arn:aws:s3:::velero-bucket-$ID-eks-$ENVMODE/*"]
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:DeleteObject",
+                "s3:PutObject",
+                "s3:AbortMultipartUpload",
+                "s3:ListMultipartUploadParts"
+            ],
+            "Resource": [
+                "arn:aws:s3:::velero-bucket-$ID-eks-$ENVMODE/*"
+            ]
         },
         {
-          "Effect": "Allow",
-          "Action": ["s3:ListBucket"],
-          "Resource": ["arn:aws:s3:::velero-bucket-$ID-eks-$ENVMODE"]
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::velero-bucket-$ID-eks-$ENVMODE"
+            ]
         }
-      ]
-    }
-  }
+    ]
 }
 EOF
 ```
@@ -145,7 +162,25 @@ EOF
 ```bash
 aws iam create-role \
   --role-name velero-role \
-  --assume-role-policy-documen file://velero-iam-policy.json \
+  --assume-role-policy-document file://velero-iam-role-policy.json \
+  --region $REGION \
+  --profile $PROFILE
+```
+
+## Create and attach policies to give velero role the necessary permissions
+
+```bash
+aws iam create-policy \
+  --policy-name velero-policy \
+  --policy-document file://velero-iam-policy.json \
+  --region $REGION \
+  --profile $PROFILE
+```
+
+```bash
+aws iam attach-role-policy \
+  --role-name velero-role \
+  --policy-arn arn:aws:iam::$ID:policy/velero-policy \
   --region $REGION \
   --profile $PROFILE
 ```
