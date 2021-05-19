@@ -313,7 +313,6 @@ velero install \
 --bucket velero-bucket-$ID-eks-$ENVMODE \
 --image $ID.dkr.ecr.$REGION.amazonaws.com/velero/velero:latest \
 --plugins $ID.dkr.ecr.$REGION.amazonaws.com/velero/velero-plugin-for-aws:latest \
---velero-pod-cpu-request=1000m --velero-pod-cpu-limit=5000m --velero-pod-mem-request=512Mi --velero-pod-mem-limit=1024Mi \
 --provider aws \
 --secret-file ./velero-credentials.credential \
 --snapshot-location-config region=$REGION \

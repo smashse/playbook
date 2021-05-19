@@ -309,9 +309,9 @@ velero install \
 --bucket velero-bucket-$ID-eks-$ENVMODE \
 --image $ID.dkr.ecr.$REGION.amazonaws.com/velero/velero:latest \
 --plugins $ID.dkr.ecr.$REGION.amazonaws.com/velero/velero-plugin-for-aws:latest \
---velero-pod-cpu-request=1000m --velero-pod-cpu-limit=5000m --velero-pod-mem-request=512Mi --velero-pod-mem-limit=1024Mi \
 --provider aws \
---no-secret --pod-annotations iam.amazonaws.com/role=arn:aws:iam::$ID:role/velero-role \
+--pod-annotations iam.amazonaws.com/role=arn:aws:iam::$ID:role/velero-role \
+--no-secret \
 --snapshot-location-config region=$REGION \
 --add_dir_header \
 --prefix $ENVMODE
@@ -634,7 +634,6 @@ helm upgrade -i prometheus prometheus-community/prometheus \
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.46.0/deploy/static/provider/aws/deploy.yaml
 ```
 
-
 # HELM install
 
 ```bash
@@ -643,4 +642,45 @@ sudo snap install helm --classic
 
 ```bash
 helm repo add vmware-tanzu https://vmware-tanzu.github.io/helm-charts
+```
+
+```bash
+cat > velero-values.yaml <<EOF
+podAnnotations:
+  iam.amazonaws.com/role: arn:aws:iam::$ID:role/velero-role
+
+configuration:
+  provider: aws
+  backupStorageLocation:
+    name: aws
+    bucket: velero-bucket-$ID-eks-$ENVMODE
+    prefix: $ENVMODE
+    config:
+      region: $REGION
+  volumeSnapshotLocation:
+    name: aws
+    config:
+      region: $REGION
+
+image:
+  repository: $ID.dkr.ecr.$REGION.amazonaws.com/velero/velero
+  tag: latest
+  pullPolicy: IfNotPresent
+
+initContainers:
+  - name: velero-plugin-for-aws
+    image: $ID.dkr.ecr.$REGION.amazonaws.com/velero/velero-plugin-for-aws:latest
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+      - mountPath: /target
+        name: plugins
+EOF
+```
+
+```bash
+kubectl create namespace velero
+```
+
+```bash
+helm install vmware-tanzu/velero --namespace velero -f velero-values.yaml --generate-name
 ```
