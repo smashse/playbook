@@ -10,7 +10,7 @@ aws configure
 # Create S3 bucket
 
 ```bash
-export REGION=$REGION
+export REGION=us-east-1
 export PROFILE=<YOUR_PROFILE>
 export ID=`aws sts get-caller-identity --query Account --output text --profile $PROFILE`
 export ENVMODE=dev
