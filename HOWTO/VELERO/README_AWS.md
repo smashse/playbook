@@ -10,7 +10,7 @@ aws configure
 # Create S3 bucket
 
 ```bash
-export REGION=us-east-1
+export REGION=$REGION
 export PROFILE=<YOUR_PROFILE>
 export ID=`aws sts get-caller-identity --query Account --output text --profile $PROFILE`
 export ENVMODE=dev
@@ -238,14 +238,14 @@ sudo docker images
 
 ```text
 REPOSITORY                      TAG         IMAGE ID            CREATED         SIZE
-velero/velero                   latest      2c5fbacc3d05        10 days ago     163MB
+velero/velero                   latest      236bc1f1c145        10 days ago     163MB
 velero/velero-plugin-for-aws    latest      a7ec85c59439        3 weeks ago     105MB
 ```
 
 ## Create a TAG of the local image for the Registry
 
 ```bash
-sudo docker image tag 2c5fbacc3d05 $ID.dkr.ecr.$REGION.amazonaws.com/velero/velero:latest
+sudo docker image tag 236bc1f1c145 $ID.dkr.ecr.$REGION.amazonaws.com/velero/velero:latest
 sudo docker image tag a7ec85c59439 $ID.dkr.ecr.$REGION.amazonaws.com/velero/velero-plugin-for-aws:latest
 ```
 
@@ -264,13 +264,18 @@ sudo mv /tmp/eksctl /usr/local/bin
 eksctl version
 ```
 
+## Checking AWS STS access to get role ARN for current session
+
+```bash
+aws sts get-caller-identity --query Account --output text --profile $PROFILE
+```
+
 ## Creating an Amazon EKS cluster
 
 ```bash
 eksctl create cluster \
  --name <MY-CLUSTER> \
  --version 1.19 \
- --with-oidc \
  --region $REGION \
  --zones $REGION"a",$REGION"b",$REGION"c" \
  --profile $PROFILE
@@ -296,8 +301,11 @@ aws_secret_access_key=<AWS_ACCESS_KEY_ID>' > velero-credentials.credential
 ```
 
 ```bash
+aws eks list-clusters --region $REGION --profile $PROFILE
+aws eks --region $REGION update-kubeconfig --name <MY-CLUSTER> --profile $PROFILE
 kubectl config get-contexts
 kubectl config use-context arn:aws:eks:$REGION:$ID:cluster/<MY-CLUSTER>
+kubectl config current-context
 ```
 
 ```bash
@@ -318,6 +326,84 @@ velero install \
 --snapshot-location-config region=$REGION \
 --add_dir_header \
 --prefix $ENVMODE
+```
+
+OR
+
+```bash
+helm repo add vmware-tanzu https://vmware-tanzu.github.io/helm-charts
+```
+
+```bash
+helm install velero vmware-tanzu/velero \
+--namespace velero \
+--create-namespace \
+--set-file credentials.secretContents.cloud=./velero-credentials.credential \
+--set configuration.provider=aws \
+--set configuration.backupStorageLocation.name=default \
+--set configuration.backupStorageLocation.bucket=velero-bucket-$ID-eks-$ENVMODE \
+--set configuration.backupStorageLocation.prefix=$ENVMODE \
+--set configuration.backupStorageLocation.config.region=$REGION \
+--set configuration.volumeSnapshotLocation.name=default \
+--set configuration.volumeSnapshotLocation.config.region=$REGION \
+--set image.repository=$ID.dkr.ecr.$REGION.amazonaws.com/velero/velero \
+--set image.tag=latest \
+--set image.pullPolicy=IfNotPresent \
+--set initContainers[0].name=velero-plugin-for-aws \
+--set initContainers[0].image=$ID.dkr.ecr.$REGION.amazonaws.com/velero/velero-plugin-for-aws:latest \
+--set initContainers[0].imagePullPolicy=IfNotPresent \
+--set initContainers[0].volumeMounts[0].mountPath=/target \
+--set initContainers[0].volumeMounts[0].name=plugins
+```
+
+OR
+
+```bash
+cat > velero-values.yaml <<EOF
+configuration:
+  backupStorageLocation:
+    bucket: velero-bucket-$ID-eks-$ENVMODE
+    config:
+      region: $REGION
+    name: default
+    prefix: $ENVMODE
+  provider: aws
+  volumeSnapshotLocation:
+    config:
+      region: $REGION
+    name: default
+image:
+  pullPolicy: IfNotPresent
+  repository: $ID.dkr.ecr.$REGION.amazonaws.com/velero/velero
+  tag: latest
+initContainers:
+  - image: $ID.dkr.ecr.$REGION.amazonaws.com/velero/velero-plugin-for-aws:latest
+    imagePullPolicy: IfNotPresent
+    name: velero-plugin-for-aws
+    volumeMounts:
+      - mountPath: /target
+        name: plugins
+EOF
+```
+
+```bash
+helm install velero vmware-tanzu/velero \
+--namespace velero \
+--create-namespace \
+--set-file credentials.secretContents.cloud=./velero-credentials.credential \
+-f velero-values.yaml
+```
+
+## Check that the velero is up and running
+
+```bash
+kubectl get deployment/velero -n velero
+```
+
+## Check that the secret has been created
+
+```bash
+kubectl get secret/velero -n velero
 ```
 
 ## View the status of your Velero deployment
@@ -561,6 +647,14 @@ Total Objects: 32
 ```bash
 kubectl delete namespace/velero clusterrolebinding/velero
 kubectl delete crds -l component=velero
+```
+
+OR
+
+```bash
+helm uninstall velero --namespace velero
+kubectl delete namespace/velero clusterrolebinding/velero
+kubectl delete crds -l app.kubernetes.io/name=velero
 ```
 
 # Delete Amazon EKS cluster
