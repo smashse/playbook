@@ -85,7 +85,7 @@ AWS_PROFILE=$PROFILE eksctl create cluster \
  --dry-run > eksctl_create_"$CLUSTER"_template.yaml
 ```
 
-**Note:** The type of instance and the number of nodes are just to make it more practical to observe the example regarding Auto Scaling, if you want to use the instructions contained here in a close-to-real environment, the values in the **--nodes-min**, **--nodes-max** and **--instance-types** should be changed according to your needs.
+**Note:** The type of instance, node volume size and the number of nodes are just to make it more practical to observe the example regarding Auto Scaling, if you want to use the instructions contained here in a close-to-real environment, the values in the **--nodes-min**, **--nodes-max**, **--node-volume-size** and **--instance-types** should be changed according to your needs.
 
 **Prerequisites:** Auto Scaling Group Tagging
 
