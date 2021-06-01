@@ -293,7 +293,9 @@ kubectl config delete-context arn:aws:eks:$REGION:$ID:cluster/$CLUSTER
 **Source:**
 
 <https://kubernetes.github.io/ingress-nginx/deploy/>
+
 <https://docs.aws.amazon.com/eks/latest/userguide/eks-managing.html>
+
 <https://aws.amazon.com/pt/premiumsupport/knowledge-center/eks-kubernetes-services-cluster/>
-<https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-Prometheus-Sample-Workloads-nginx.html>
+
 <https://github.com/kubenav/kubenav>
