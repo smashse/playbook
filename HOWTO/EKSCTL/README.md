@@ -1,5 +1,7 @@
 # EKS
 
+Create a #EKS cluster with #EKSCTL using Cluster Autoscaling and other cool stuff...
+
 ```bash
 export REGION=us-east-1
 export PROFILE=apex
