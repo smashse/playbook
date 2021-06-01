@@ -205,7 +205,7 @@ echo "User: admin"
 echo "Password: $(kubectl get secret grafana-admin --namespace grafana -o jsonpath="{.data.GF_SECURITY_ADMIN_PASSWORD}" | base64 --decode)"
 ```
 
-**Dashboards:** <https://grafana.com/orgs/itewk/dashboards>
+**Kubernetes Dashboard Examples:** <https://grafana.com/orgs/itewk/dashboards>
 
 ## Deploy Kubenav
 
@@ -241,6 +241,9 @@ kubectl get services --all-namespaces | grep loadbalancer | awk {'print $1" " $2
 ```bash
 wget -c https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml
 ```
+
+On line **157** replace **YOUR CLUSTER NAME** with your cluster name.
+
 
 ```bash
 nano -c cluster-autoscaler-autodiscover.yaml
