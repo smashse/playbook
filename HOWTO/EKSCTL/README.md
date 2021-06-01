@@ -123,7 +123,7 @@ managedNodeGroups:
       - t2.micro
     labels:
       alpha.eksctl.io/cluster-name: myclustername
-      alpha.eksctl.io/nodegroup-name: apex-ng
+      alpha.eksctl.io/nodegroup-name: mynodegroupname-ng
     maxSize: 20
     minSize: 10
     name: mynodegroupname-ng
@@ -220,7 +220,7 @@ managedNodeGroups:
       - t2.micro
     labels:
       alpha.eksctl.io/cluster-name: myclustername
-      alpha.eksctl.io/nodegroup-name: apex-ng
+      alpha.eksctl.io/nodegroup-name: mynodegroupname-ng
     maxSize: 20
     minSize: 10
     name: mynodegroupname-ng
