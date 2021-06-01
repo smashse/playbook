@@ -11,7 +11,7 @@ aws configure
 
 ```bash
 export REGION=us-east-1
-export PROFILE=<YOUR_PROFILE>
+export PROFILE=<YOUR-PROFILE>
 export ID=`aws sts get-caller-identity --query Account --output text --profile $PROFILE`
 export ENVMODE=dev
 ```
@@ -274,7 +274,7 @@ aws sts get-caller-identity --query Account --output text --profile $PROFILE
 
 ```bash
 eksctl create cluster \
- --name <MY-CLUSTER> \
+ --name <YOUR-CLUSTER> \
  --version 1.19 \
  --region $REGION \
  --zones $REGION"a",$REGION"b",$REGION"c" \
@@ -289,7 +289,7 @@ The following command will get the access credentials for your cluster and autom
 configure `kubectl`.
 
 ```bash
-aws eks update-kubeconfig --name <MY-CLUSTER> --region $REGION --profile $PROFILE
+aws eks update-kubeconfig --name <YOUR-CLUSTER> --region $REGION --profile $PROFILE
 ```
 
 # Install Velero
@@ -302,9 +302,9 @@ aws_secret_access_key=<AWS_ACCESS_KEY_ID>' > velero-credentials.credential
 
 ```bash
 aws eks list-clusters --region $REGION --profile $PROFILE
-aws eks --region $REGION update-kubeconfig --name <MY-CLUSTER> --profile $PROFILE
+aws eks --region $REGION update-kubeconfig --name <YOUR-CLUSTER> --profile $PROFILE
 kubectl config get-contexts
-kubectl config use-context arn:aws:eks:$REGION:$ID:cluster/<MY-CLUSTER>
+kubectl config use-context arn:aws:eks:$REGION:$ID:cluster/<YOUR-CLUSTER>
 kubectl config current-context
 ```
 
@@ -660,7 +660,7 @@ kubectl delete crds -l app.kubernetes.io/name=velero
 # Delete Amazon EKS cluster
 
 ```bash
-eksctl delete cluster --name <MY-CLUSTER> --region $REGION --profile $PROFILE
+eksctl delete cluster --name <YOUR-CLUSTER> --region $REGION --profile $PROFILE
 ```
 
 # Source:
