@@ -7,3 +7,5 @@ Este repositório é um guia simples para aprendizado de alguns conceitos e tecn
 [Kubernetes](./HOWTO/KUBERNETES/README.md)
 
 [Velero](./HOWTO/VELERO/README.md)
+
+[EKSCTL](./HOWTO/EKSCTL/README.md)
