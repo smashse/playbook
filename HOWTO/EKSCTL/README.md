@@ -3,11 +3,18 @@
 Create a **EKS** cluster with **EKSCTL** using Cluster Autoscaling and other cool stuff...
 
 ```bash
+cd /tmp
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip && sudo ./aws/install
+aws configure
+```
+
+```bash
 export REGION=us-east-1
-export PROFILE=apex
+export PROFILE=<MY-PROFILE>
 export ID=`aws sts get-caller-identity --query Account --output text --profile $PROFILE`
 export ENVMODE=test
-export CLUSTER=test
+export CLUSTER=<MY-CLUSTER>
 ```
 
 ```bash
