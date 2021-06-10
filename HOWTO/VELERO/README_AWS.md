@@ -185,9 +185,9 @@ aws iam create-access-key \
 {
     "AccessKey": {
         "UserName": "velero-user",
-        "AccessKeyId": "<AWS_SECRET_ACCESS_KEY>",
+        "AccessKeyId": "<AWS_ACCESS_KEY_ID>",
         "Status": "Active",
-        "SecretAccessKey": "<AWS_ACCESS_KEY_ID>",
+        "SecretAccessKey": "<AWS_SECRET_ACCESS_KEY>",
         "CreateDate": "2021-04-10T14:39:14+00:00"
     }
 }
