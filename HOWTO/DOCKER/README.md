@@ -2,6 +2,39 @@
 
 **SO BASE:** UBUNTU
 
+## Criar lista de extensões para VSCODE/Codium
+
+```bash
+echo "AmazonWebServices.aws-toolkit-vscode
+GitHub.github-vscode-theme
+GoogleCloudTools.cloudcode
+HashiCorp.terraform
+MS-CEINTL.vscode-language-pack-pt-BR
+Pivotal.vscode-boot-dev-pack
+Pivotal.vscode-spring-boot
+eamodio.gitlens
+emroussel.atomize-atom-one-dark-theme
+esbenp.prettier-vscode
+formulahendry.docker-extension-pack
+kde.breeze
+ms-azuretools.vscode-azureterraform
+ms-azuretools.vscode-docker
+ms-kubernetes-tools.vscode-aks-tools
+ms-kubernetes-tools.vscode-kubernetes-tools
+ms-python.python
+ms-vscode-remote.vscode-remote-extensionpack
+ms-vscode.Theme-PredawnKit
+ms-vscode.node-debug2
+ms-vscode.vscode-typescript-next
+ms-vscode.vscode-typescript-tslint-plugin
+redhat.fabric8-analytics
+redhat.java
+redhat.vscode-knative
+redhat.vscode-yaml
+vscoss.vscode-ansible
+zhuangtongfa.Material-theme" > vscode.list
+```
+
 ## Instalar o VSCode
 
 ```bash
@@ -9,32 +42,19 @@ sudo snap install code --classic
 ```
 
 ```bash
-code --install-extension AmazonWebServices.aws-toolkit-vscode
-code --install-extension GitHub.github-vscode-theme
-code --install-extension GoogleCloudTools.cloudcode
-code --install-extension HashiCorp.terraform
-code --install-extension MS-CEINTL.vscode-language-pack-pt-BR
-code --install-extension Pivotal.vscode-boot-dev-pack
-code --install-extension Pivotal.vscode-spring-boot
-code --install-extension eamodio.gitlens
-code --install-extension esbenp.prettier-vscode
-code --install-extension formulahendry.docker-extension-pack
-code --install-extension kde.breeze
-code --install-extension ms-azuretools.vscode-azureterraform
-code --install-extension ms-azuretools.vscode-docker
-code --install-extension ms-kubernetes-tools.vscode-aks-tools
-code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
-code --install-extension ms-python.python
-code --install-extension ms-vscode-remote.vscode-remote-extensionpack
-code --install-extension ms-vscode.Theme-PredawnKit
-code --install-extension ms-vscode.node-debug2
-code --install-extension ms-vscode.vscode-typescript-next
-code --install-extension ms-vscode.vscode-typescript-tslint-plugin
-code --install-extension redhat.fabric8-analytics
-code --install-extension redhat.java
-code --install-extension redhat.vscode-knative
-code --install-extension redhat.vscode-yaml
-code --install-extension vscoss.vscode-ansible
+for i in 'cat vscode.list' ; do code --install-extension $i --force ; done
+```
+
+OU
+
+## Instalar o Codium
+
+```bash
+sudo snap install codium --classic
+```
+
+```bash
+for i in 'cat vscode.list' ; do codium --install-extension $i --force ; done
 ```
 
 ## Instalar o Cockpit e Docker
