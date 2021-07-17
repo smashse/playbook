@@ -42,7 +42,7 @@ sudo snap install code --classic
 ```
 
 ```bash
-for i in 'cat vscode.list' ; do code --install-extension $i --force ; done
+for i in `cat vscode.list` ; do code --install-extension $i --force ; done
 ```
 
 OU
@@ -54,7 +54,7 @@ sudo snap install codium --classic
 ```
 
 ```bash
-for i in 'cat vscode.list' ; do codium --install-extension $i --force ; done
+for i in `cat vscode.list` ; do codium --install-extension $i --force ; done
 ```
 
 ## Instalar o Cockpit e Docker
