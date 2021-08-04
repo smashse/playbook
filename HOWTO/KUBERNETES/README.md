@@ -82,6 +82,12 @@ sudo usermod -a -G microk8s $USER
 sudo chown -f -R $USER ~/.kube
 ```
 
+### Recarregar os grupos de usuários
+
+```bash
+newgrp microk8s
+```
+
 ### Criar alias para o MicroK8s(Opcional)
 
 ```bash
