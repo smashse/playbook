@@ -442,7 +442,7 @@ velero backup describe teste
 velero backup logs teste
 ```
 
-## Restore a backup of the test nmespace
+## Restore a backup of the test namespace
 
 ```bash
 velero restore create --from-backup teste
@@ -533,7 +533,7 @@ velero backup get | grep teste-weekly-<TIMESTAMP>
 velero backup logs teste-weekly-<TIMESTAMP>
 ```
 
-## Restore a backup schedule of the test nmespace
+## Restore a backup schedule of the test namespace
 
 ```bash
 velero restore create --from-schedule <SCHEDULE_NAME>
