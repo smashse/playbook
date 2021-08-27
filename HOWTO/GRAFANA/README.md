@@ -243,3 +243,9 @@ https://github.com/kubernetes/kube-state-metrics
 https://github.com/helm/charts/tree/master/stable/prometheus-operator/templates/grafana/dashboards-1.14
 
 https://grafana.com/grafana/dashboards/10000
+
+https://grafana.com/grafana/dashboards/10856
+
+https://grafana.com/grafana/dashboards/10858
+
+https://grafana.com/grafana/dashboards/8588
