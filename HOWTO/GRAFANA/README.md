@@ -233,11 +233,19 @@ for i in `cat lista.txt` ; do multipass info microk8s | grep IPv4 | cut -f 2 -d 
 ```
 
 Sources:
+
 https://istio.io/latest/docs/ops/integrations/prometheus/
+
 https://github.com/kubernetes-sigs/metrics-server
+
 https://github.com/kubernetes/kube-state-metrics
+
 https://github.com/helm/charts/tree/master/stable/prometheus-operator/templates/grafana/dashboards-1.14
+
 https://grafana.com/grafana/dashboards/10000
+
 https://grafana.com/grafana/dashboards/10856
+
 https://grafana.com/grafana/dashboards/10858
+
 https://grafana.com/grafana/dashboards/8588
