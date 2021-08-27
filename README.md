@@ -9,3 +9,5 @@ Este repositório é um guia simples para aprendizado de alguns conceitos e tecn
 [Velero](./HOWTO/VELERO/README.md)
 
 [EKSCTL](./HOWTO/EKSCTL/README.md)
+
+[GRAFANA](./HOWTO/GRAFANA/README.md)
