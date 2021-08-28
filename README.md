@@ -10,4 +10,6 @@ Este repositório é um guia simples para aprendizado de alguns conceitos e tecn
 
 [EKSCTL](./HOWTO/EKSCTL/README.md)
 
-[GRAFANA](./HOWTO/GRAFANA/README.md)
+[Grafana](./HOWTO/GRAFANA/README.md)
+
+[Vault](./HOWTO/VAULT/README.md)

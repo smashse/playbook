@@ -1,3 +1,7 @@
+# Requirements for this POC
+
+This POC will use Multipass to create instances to install Grafana, Prometheus and Microk8s, we will install Metrics Server, Kube-State-Metrics and Istio + Basic Prometheus and then we will make metrics used by our main instance with Prometheus.
+
 ## Install Multipass
 
 ```bash
@@ -119,9 +123,9 @@ runcmd:
  - apt update --fix-missing
  - apt -y install prometheus
  - systemctl daemon-reload
- - systemctl start prometheus-server
- - systemctl status prometheus-server
- - systemctl enable prometheus-server.service' > cloud-config-prometheus.yaml
+ - systemctl start prometheus
+ - systemctl status prometheus
+ - systemctl enable prometheus.service' > cloud-config-prometheus.yaml
 ```
 
 ## Create a Prometheus instance
@@ -210,6 +214,39 @@ kubectl apply -f prometheus_ingress.yaml
 multipass info microk8s | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:] | sed 's/$/     prometheus.istio.info/' | sudo tee -a /etc/hosts
 ```
 
+## Allow a Prometheus server(prometheus.info) to scrape selected time series from Prometheus server running in Microk8s(prometheus.istio.info).
+
+### Access the Prometheus instance
+
+```bash
+multipass exec prometheus bash
+```
+
+### Configuring federation
+
+```bash
+sudo echo "  - job_name: 'federate'
+    scrape_interval: 15s
+
+    honor_labels: true
+    metrics_path: '/federate'
+
+    params:
+      'match[]':
+        - '{job="prometheus"}'
+        - '{__name__=~"job:.*"}'
+
+    static_configs:
+      - targets:
+        - 'prometheus.istio.info'" | sudo tee -a /etc/prometheus/prometheus.yml
+```
+
+### Restart Prometheus
+
+```bash
+sudo systemctl restart prometheus
+```
+
 # Create test deployments
 
 ```bash
@@ -241,6 +278,8 @@ https://github.com/kubernetes-sigs/metrics-server
 https://github.com/kubernetes/kube-state-metrics
 
 https://github.com/helm/charts/tree/master/stable/prometheus-operator/templates/grafana/dashboards-1.14
+
+https://prometheus.io/docs/prometheus/latest/federation/
 
 https://grafana.com/grafana/dashboards/10000
 
