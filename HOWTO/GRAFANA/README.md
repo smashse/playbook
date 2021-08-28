@@ -87,7 +87,7 @@ echo '#cloud-config
 runcmd:
  - echo "deb https://packages.grafana.com/oss/deb stable main" > /etc/apt/sources.list.d/grafana.list
  - wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
- - cho "DEBIAN_FRONTEND=noninteractive" >> /etc/environment
+ - echo "DEBIAN_FRONTEND=noninteractive" >> /etc/environment
  - source /etc/environment && source /etc/environment
  - apt update --fix-missing
  - apt -y install grafana
@@ -118,7 +118,7 @@ echo '#cloud-config
 runcmd:
  - echo "deb https://packages.grafana.com/oss/deb stable main" > /etc/apt/sources.list.d/grafana.list
  - wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
- - cho "DEBIAN_FRONTEND=noninteractive" >> /etc/environment
+ - echo "DEBIAN_FRONTEND=noninteractive" >> /etc/environment
  - source /etc/environment && source /etc/environment
  - apt update --fix-missing
  - apt -y install prometheus
