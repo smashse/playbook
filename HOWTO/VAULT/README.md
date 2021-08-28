@@ -564,46 +564,42 @@ devwebapp   1/1     Running   0          60s
 echo 'apiVersion: v1
 items:
 - apiVersion: v1
-  kind: Namespace
-  metadata:
-    name: vault
-- apiVersion: v1
   kind: Service
   metadata:
-    name: vault
-    namespace: vault
+    name: external-vault-service
+    namespace: default
   spec:
     clusterIP: None
     ports:
-    - name: vault
+    - name: external-vault-service
       port: 8200
       targetPort: 8200
 - apiVersion: v1
   kind: Endpoints
   metadata:
-    name: vault
-    namespace: vault
+    name: external-vault-endpoint
+    namespace: default
   subsets:
   - addresses:
     - ip: VaultIP
     ports:
-    - name: vault
+    - name: external-vault-service
       port: 8200
       protocol: TCP
 kind: List
-metadata: {}' > vault_endpoint.yaml
+metadata: {}' > external_vault_endpoint.yaml
 ```
 
-### Add IP of the minio instance to the endpoint yaml
+### Add IP of the Vault instance to the endpoint yaml
 
 ```bash
-for i in `multipass info vault | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:]` ; do sed -i s/VaultIP/$i/ vault_endpoint.yaml ; done
+for i in `multipass info vault | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:]` ; do sed -i s/VaultIP/$i/ external_vault_endpoint.yaml ; done
 ```
 
-### Create the endpoint pointing to the minio instance
+### Create the endpoint pointing to the Vault instance
 
 ```bash
-kubectl apply -f vault_endpoint.yaml
+kubectl apply -f external_vault_endpoint.yaml
 ```
 
 Sources:
