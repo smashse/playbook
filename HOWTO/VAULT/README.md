@@ -609,13 +609,15 @@ kubectl apply -f vault_endpoint.yaml
 Sources:
 
 https://learn.hashicorp.com/tutorials/vault/getting-started-deploy
+
 https://learn.hashicorp.com/tutorials/vault/getting-started-deploy?in=vault/getting-started
+
 https://learn.hashicorp.com/tutorials/vault/getting-started-first-secret
+
 https://learn.hashicorp.com/tutorials/vault/getting-started-secrets-engines?in=vault/getting-started
+
 https://learn.hashicorp.com/tutorials/vault/kubernetes-external-vault?in=vault/kubernetes
+
 https://www.vaultproject.io/docs/secrets/kv/kv-v2
+
 https://www.vaultproject.io/docs/commands/auth/enable
-
-```
-
-```
