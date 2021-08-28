@@ -392,6 +392,220 @@ token/       token       auth_token_1e18c48a       system         system     def
 userpass/    userpass    auth_userpass_06b8862c    system         system     default-service    replicated     false        false                      map[]      n/a                        c0b32e87-6016-97a6-20a4-018c8e2dd98a
 ```
 
+# MicroK8s
+
+MicroK8s is the smallest, fastest, fully-conformant Kubernetes that tracks upstream releases and makes clustering trivial. MicroK8s is great for offline development, prototyping, and testing.
+
+## Create a MicroK8s template
+
+```bash
+echo '#cloud-config
+runcmd:
+ - apt update --fix-missing
+ - snap refresh
+ - snap install microk8s --classic
+ - microk8s status --wait-ready
+ - microk8s enable dns ingress' > cloud-config-microk8s.yaml
+```
+
+## Create a MicroK8s instance
+
+```bash
+multipass launch focal -n microk8s -c 2 -m 2G -d 10G --cloud-init cloud-config-microk8s.yaml
+```
+
+## Export the current MicroK8s configuration for use with Kubectl
+
+### Create the folder to store the configuration of the Kubernetes cluster in the test instance
+
+```bash
+sudo mkdir -p $HOME/.kube/configs
+```
+
+### Export the MicroK8s configuration in the test instance to the created folder
+
+```bash
+multipass exec microk8s sudo microk8s config > $HOME/.kube/configs/config-microk8s
+```
+
+### Use in your session the configuration exported as default for use with Kubectl
+
+```bash
+export KUBECONFIG=$HOME/.kube/configs/config-microk8s
+```
+
+### Install Kubectl
+
+```bash
+sudo snap install kubectl --classic
+```
+
+```bash
+kubectl get no
+```
+
+```txt
+NAME       STATUS   ROLES    AGE   VERSION
+microk8s   Ready    <none>   1m    v1.21.3-3+90fd5f3d2aea0a
+```
+
+### Add an IP alias of the test instance to microk8s.info
+
+```bash
+multipass info microk8s | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:] | sed 's/$/     microk8s.info/' | sudo tee -a /etc/hosts
+```
+
+### Export variable for connection to Vault
+
+```bash
+unset VAULT_IPADDR
+unset VAULT_ADDR
+unset VAULT_TOKEN
+export VAULT_IPADDR=`multipass info vault | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:]`
+export VAULT_ADDR="http://$VAULT_IPADDR:8200"
+export VAULT_TOKEN="s.RxcP2G26ulCiCH5232SXuYut"
+echo $VAULT_IPADDR
+echo $VAULT_ADDR
+echo $VAULT_TOKEN
+```
+
+### Unseal Vault
+
+```bash
+vault status
+```
+
+```bash
+vault operator unseal
+```
+
+### Enable a Secrets Engine
+
+```bash
+vault secrets enable kv
+```
+
+```text
+Success! Enabled the kv secrets engine at: kv/
+```
+
+### Create a secret
+
+```bash
+vault kv put kv/devwebapp/config username='giraffe' password='salsa'
+```
+
+```text
+Success! Data written to: kv/devwebapp/config
+```
+
+### Verify that the secret is stored at the path kv/devwebapp/config
+
+```bash
+vault kv get -format=json kv/devwebapp/config | jq ".data"
+```
+
+```text
+{
+  "password": "salsa",
+  "username": "giraffe"
+}
+```
+
+### Create a Kubernetes service account named internal-app
+
+```bash
+kubectl create sa internal-app
+```
+
+### Define a pod named devwebapp with the web application that sets the VAULT_ADDR to EXTERNAL_VAULT_ADDR
+
+```bash
+cat > devwebapp.yaml <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: devwebapp
+  labels:
+    app: devwebapp
+spec:
+  serviceAccountName: internal-app
+  containers:
+    - name: app
+      image: burtlo/devwebapp-ruby:k8s
+      env:
+      - name: VAULT_ADDR
+        value: "$VAULT_ADDR"
+      - name: VAULT_TOKEN
+        value: $VAULT_TOKEN
+EOF
+```
+
+### Create the devwebapp pod.
+
+```bash
+kubectl apply -f devwebapp.yaml
+```
+
+### Get all the pods in the default namespace
+
+```bash
+kubectl get pods
+```
+
+```text
+NAME        READY   STATUS    RESTARTS   AGE
+devwebapp   1/1     Running   0          60s
+```
+
+### Create yaml for endpoint pointing to instance vault.info
+
+```bash
+echo 'apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    name: vault
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: vault
+    namespace: vault
+  spec:
+    clusterIP: None
+    ports:
+    - name: vault
+      port: 8200
+      targetPort: 8200
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    name: vault
+    namespace: vault
+  subsets:
+  - addresses:
+    - ip: VaultIP
+    ports:
+    - name: vault
+      port: 8200
+      protocol: TCP
+kind: List
+metadata: {}' > vault_endpoint.yaml
+```
+
+### Add IP of the minio instance to the endpoint yaml
+
+```bash
+for i in `multipass info vault | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:]` ; do sed -i s/VaultIP/$i/ vault_endpoint.yaml ; done
+```
+
+### Create the endpoint pointing to the minio instance
+
+```bash
+kubectl apply -f vault_endpoint.yaml
+```
+
 Sources:
 
 https://learn.hashicorp.com/tutorials/vault/getting-started-deploy
@@ -401,3 +615,7 @@ https://learn.hashicorp.com/tutorials/vault/getting-started-secrets-engines?in=v
 https://learn.hashicorp.com/tutorials/vault/kubernetes-external-vault?in=vault/kubernetes
 https://www.vaultproject.io/docs/secrets/kv/kv-v2
 https://www.vaultproject.io/docs/commands/auth/enable
+
+```
+
+```
