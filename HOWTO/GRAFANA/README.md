@@ -109,6 +109,12 @@ multipass launch focal -n grafana -c 2 -m 1G -d 10G --cloud-init cloud-config-gr
 multipass info grafana | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:] | sed 's/$/     grafana.info/' | sudo tee -a /etc/hosts
 ```
 
+### Add a Data Source
+
+To add the Data Source to Prometheus with the URL "http://prometheus.info:9090", just follow the steps as per the documentation below:
+
+https://grafana.com/docs/grafana/latest/datasources/add-a-data-source/
+
 # Prometheus
 
 ## Create a Prometheus template
