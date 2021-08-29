@@ -275,7 +275,7 @@ for i in `cat lista.txt` ; do sed "s/teste/$i/" example_combo_full.yaml > app-$i
 for i in `cat lista.txt` ; do multipass info microk8s | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:] | sed "s/$/     $i.info/" | sudo tee -a /etc/hosts ; done
 ```
 
-Sources:
+**Sources:**
 
 https://istio.io/latest/docs/ops/integrations/prometheus/
 
