@@ -189,6 +189,10 @@ helm install kube-state-metrics prometheus-community/kube-state-metrics --namesp
 Istio provides a basic sample installation to quickly get Prometheus up and running:
 
 ```bash
+kubectl create ns istio-system
+```
+
+```bash
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.11/samples/addons/prometheus.yaml
 ```
 
