@@ -264,7 +264,7 @@ echo 'africa
 america
 asia
 europa
-oceania' > lista
+oceania' > lista.txt
 ```
 
 ```bash
