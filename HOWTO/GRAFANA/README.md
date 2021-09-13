@@ -171,7 +171,7 @@ OR
 ```bash
 helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
 helm repo update
-helm install --set 'args={--kubelet-insecure-tls}' --namespace kube-system metrics stable/metrics-server
+helm install metrics-server stable/metrics-server --set 'args={--kubelet-insecure-tls}' --namespace kube-system --create-namespace
 ```
 
 ```bash
