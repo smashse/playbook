@@ -166,6 +166,14 @@ sed -i '/- --secure-port=443/a\        - --kubelet-insecure-tls' components.yaml
 kubectl apply -f components.yaml
 ```
 
+OR
+
+```bash
+helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
+helm repo update
+helm install --set 'args={--kubelet-insecure-tls}' --namespace kube-system metrics stable/metrics-server
+```
+
 ```bash
 kubectl get deployment metrics-server -n kube-system
 ```
