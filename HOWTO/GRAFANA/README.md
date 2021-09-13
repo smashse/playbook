@@ -243,7 +243,8 @@ multipass exec prometheus bash
 ### Configuring federation
 
 ```bash
-sudo echo "  - job_name: 'federate'
+sudo tee -a /etc/prometheus/prometheus.yml <<EOF
+  - job_name: 'federate'
     scrape_interval: 15s
 
     honor_labels: true
@@ -256,7 +257,8 @@ sudo echo "  - job_name: 'federate'
 
     static_configs:
       - targets:
-        - 'prometheus.istio.info'" | sudo tee -a /etc/prometheus/prometheus.yml
+        - 'prometheus.istio.info'
+EOF
 ```
 
 ### Restart Prometheus
