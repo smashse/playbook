@@ -5,7 +5,7 @@ In this POC we will use Multipass to create instances to install the Vault and M
 ## Intall Multipass
 
 ```bash
-sudo snap install mulipass --classic
+sudo snap install multipass --classic
 ```
 
 ## Install Vault for client connection
