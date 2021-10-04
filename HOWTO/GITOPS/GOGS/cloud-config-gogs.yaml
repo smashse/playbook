@@ -1,0 +1,72 @@
+#cloud-config
+write_files:
+  - path: /etc/rc.local
+    owner: root:root
+    permissions: 0777
+    content: |
+      #!/bin/bash
+      exec sudo /opt/gogs/gogs web &
+      exit 0
+    append: true
+  - path: /opt/gogs/custom/conf/app.ini
+    owner: root:root
+    permissions: 0777
+    content: |
+      BRAND_NAME = Gogs
+      RUN_USER   = root
+      RUN_MODE   = prod
+
+      [database]
+      TYPE     = sqlite3
+      HOST     = 127.0.0.1:5432
+      NAME     = gogs
+      USER     = gogs
+      PASSWORD =
+      SSL_MODE = disable
+      PATH     = data/gogs.db
+
+      [repository]
+      ROOT = /opt/gogs/gogs-repositories
+
+      [server]
+      DOMAIN           = gogs.local
+      HTTP_PORT        = 3000
+      EXTERNAL_URL     = http://gogs.local:3000/
+      DISABLE_SSH      = false
+      SSH_PORT         = 2222
+      START_SSH_SERVER = true
+      OFFLINE_MODE     = false
+
+      [mailer]
+      ENABLED = false
+
+      [service]
+      REGISTER_EMAIL_CONFIRM = false
+      ENABLE_NOTIFY_MAIL     = false
+      DISABLE_REGISTRATION   = false
+      ENABLE_CAPTCHA         = true
+      REQUIRE_SIGNIN_VIEW    = false
+
+      [picture]
+      DISABLE_GRAVATAR        = false
+      ENABLE_FEDERATED_AVATAR = false
+
+      [session]
+      PROVIDER = file
+
+      [log]
+      MODE      = console, file
+      LEVEL     = Info
+      ROOT_PATH = /opt/gogs/log
+    append: true
+runcmd:
+  - apt update --fix-missing
+  - apt -y remove snapd --purge
+  - cd /tmp
+  - wget -c https://dl.gogs.io/0.12.3/gogs_0.12.3_linux_amd64.tar.gz
+  - tar -zxvf gogs_0.12.3_linux_amd64.tar.gz
+  - mkdir -p /opt/gogs/
+  - chmod u+rxw /opt/gogs
+  - cp -raf /tmp/gogs/gogs /opt/gogs/
+  - chown -R root:root /opt/gogs
+  - /opt/gogs/gogs web &

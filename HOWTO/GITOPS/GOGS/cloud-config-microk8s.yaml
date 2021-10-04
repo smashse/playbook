@@ -1,0 +1,7 @@
+#cloud-config
+runcmd:
+  - apt update --fix-missing
+  - snap refresh
+  - snap install microk8s --classic
+  - microk8s status --wait-ready
+  - microk8s enable dns ingress
