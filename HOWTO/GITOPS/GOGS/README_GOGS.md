@@ -135,7 +135,7 @@ echo $ARGO_PWD
 <http://argocd.local>
 
 [Argo CD](./img/argo_000.png)
-<img src="img/argocd_000.png" width="200" />
+<img src="./img/argo_000.png" width="200" />
 
 ## Install Gogs
 
