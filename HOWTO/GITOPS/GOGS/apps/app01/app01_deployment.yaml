@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app01-deployment
+  name: app01-deployment
+  namespace: app01
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app01-deployment
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: app01-deployment
+    spec:
+      containers:
+        - image: nginx:stable
+          name: app01-pod
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: app01-config
+              mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: app01-config
+          configMap:
+            name: app01-config
+      dnsPolicy: ClusterFirst
