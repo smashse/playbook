@@ -69,10 +69,16 @@ NAME       STATUS   ROLES    AGE   VERSION
 microk8s   Ready    <none>   59m   v1.21.5-3+83e2bb7ee39726
 ```
 
-### Add an IP alias of the test instance to microk8s.local
+### Add an IP alias of the microk8s instance to microk8s.local
 
 ```bash
 multipass info microk8s | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:] | sed 's/$/     microk8s.local/' | sudo tee -a /etc/hosts
+```
+
+### Add an IP alias of the microk8s instance to app01.local, app02.local and app03.local
+
+```bash
+multipass info microk8s | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:] | sed 's/$/     app01.local app02.local app03.local/' | sudo tee -a /etc/hosts
 ```
 
 ### URL for microk8s.local
@@ -134,8 +140,7 @@ echo $ARGO_PWD
 
 <http://argocd.local>
 
-![Argo CD](./img/argo_000.png)
-<img src="./img/argo_000.png" width="200" />
+![Argo CD](./img/argo_000.png "Argo CD")
 
 ## Install Gogs
 
@@ -236,9 +241,9 @@ multipass info gogs | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:] | sed 's/$/ 
 
 <http://argocd.local>
 
-![Finish installing Gogs](./img/gogs_000.png)
+![Finish installing Gogs](./img/gogs_000.png "Finish installing Gogs")
 
-## Create administrator user
+## Create **administrator** and **k8s** users
 
 ```bash
 multipass exec gogs -- sudo /opt/gogs/gogs admin create-user --name administrator --password administrator --admin --email administrator@example.com
@@ -248,12 +253,377 @@ multipass exec gogs -- sudo /opt/gogs/gogs admin create-user --name administrato
 multipass exec gogs -- sudo /opt/gogs/gogs admin create-user --name k8s --password k8s --email k8s@example.com
 ```
 
+## Reboot Gogs
+
 ```bash
 multipass exec gogs -- sudo reboot
 ```
+
+## Access Gogs
+
+![Gogs login page](./img/gogs_001.png "Gogs login page")
+
+![Gogs login page with Admin user](./img/gogs_002.png "Gogs login page with Admin user")
+
+## Create a **apps** repository
+
+![Create a repository step 1](./img/gogs_003.png "Create a repository step 1")
+
+![Create a repository step 2](./img/gogs_004.png "Create a repository step 2")
+
+## Add **k8s** user to **apps** repository
+
+![Add k8s user to repository step 1](./img/gogs_005.png "Add k8s user to repository step 1")
+
+![Add k8s user to repository step 2](./img/gogs_006.png "Add k8s user to repository step 2")
+
+![Add k8s user to repository step 3](./img/gogs_007.png "Add k8s user to repository step 3")
 
 ## Create a SSH key (Optional)
 
 ```bash
 ssh-keygen -t ed25519 -C "administrator@example.com" -f ssh-key-gogs
+```
+
+## Clone **apps** repository
+
+```bash
+git clone http://gogs.local:3000/administrator/apps.git
+```
+
+```text
+Cloning into 'apps'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), 217 bytes | 217.00 KiB/s, done.
+```
+
+## Create sample apps
+
+```bash
+cd apps
+mkdir -p apps/{app01,app02,app03}
+echo 'apiVersion: v1
+items:
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: app03
+  - apiVersion: v1
+    data:
+      default.conf: |
+        server {
+            listen       8080;
+            listen  [::]:8080;
+            server_name  localhost;
+            location / {
+                root   /usr/share/nginx/html;
+                index  index.html index.htm;
+            }
+            error_page   500 502 503 504  /50x.html;
+            location = /50x.html {
+                root   /usr/share/nginx/html;
+            }
+        }
+    kind: ConfigMap
+    metadata:
+      name: app03-config
+      namespace: app03
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        app: app03-deployment
+      name: app03-deployment
+      namespace: app03
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: app03-deployment
+      strategy:
+        rollingUpdate:
+          maxSurge: 25%
+          maxUnavailable: 25%
+        type: RollingUpdate
+      template:
+        metadata:
+          labels:
+            app: app03-deployment
+        spec:
+          containers:
+            - image: nginx:stable
+              name: app03-pod
+              ports:
+                - containerPort: 8080
+                  protocol: TCP
+              volumeMounts:
+                - mountPath: /etc/nginx/conf.d
+                  name: app03-config
+          dnsPolicy: ClusterFirst
+          volumes:
+            - configMap:
+                name: app03-config
+              name: app03-config
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        app: app03-deployment
+      name: app03-service
+      namespace: app03
+    spec:
+      ports:
+        - port: 8080
+      selector:
+        app: app03-deployment
+      type: NodePort
+  - apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: app03-ingress
+      namespace: app03
+    spec:
+      rules:
+        - host: app03.local
+          http:
+            paths:
+              - backend:
+                  service:
+                    name: app03-service
+                    port:
+                      number: 8080
+                path: /
+                pathType: Prefix
+kind: List
+metadata: {}' > apps/app03/app03_list.yaml
+echo '---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app02
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app02-config
+  namespace: app02
+data:
+  default.conf: |
+    server {
+        listen       8080;
+        listen  [::]:8080;
+        server_name  localhost;
+        location / {
+            root   /usr/share/nginx/html;
+            index  index.html index.htm;
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app02-deployment
+  name: app02-deployment
+  namespace: app02
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app02-deployment
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: app02-deployment
+    spec:
+      containers:
+        - image: nginx:stable
+          name: app02-pod
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: app02-config
+              mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: app02-config
+          configMap:
+            name: app02-config
+      dnsPolicy: ClusterFirst
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: app02-deployment
+  name: app02-service
+  namespace: app02
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: app02-deployment
+  type: NodePort
+status:
+  loadBalancer: {}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app02-ingress
+  namespace: app02
+spec:
+  rules:
+    - host: app02.local
+      http:
+        paths:
+          - backend:
+              service:
+                name: app02-service
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix' > apps/app02/app02_concat.yaml
+echo 'apiVersion: v1
+kind: Namespace
+metadata:
+  name: app01' > apps/app01/app01_namespace.yaml
+echo 'apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app01-config
+  namespace: app01
+data:
+  default.conf: |
+    server {
+        listen       8080;
+        listen  [::]:8080;
+        server_name  localhost;
+        location / {
+            root   /usr/share/nginx/html;
+            index  index.html index.htm;
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+    }' > apps/app01/app01_configmap.yaml
+echo 'apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app01-deployment
+  name: app01-deployment
+  namespace: app01
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app01-deployment
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: app01-deployment
+    spec:
+      containers:
+        - image: nginx:stable
+          name: app01-pod
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: app01-config
+              mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: app01-config
+          configMap:
+            name: app01-config
+      dnsPolicy: ClusterFirst' > apps/app01/app01_deployment.yaml
+echo 'apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: app01-deployment
+  name: app01-service
+  namespace: app01
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: app01-deployment
+  type: NodePort
+status:
+  loadBalancer: {}' > apps/app01/app01_service.yaml
+echo 'apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app01-ingress
+  namespace: app01
+spec:
+  rules:
+    - host: app01.local
+      http:
+        paths:
+          - backend:
+              service:
+                name: app01-service
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix' > apps/app01/app01_ingress.yaml
+```
+
+```bash
+git config --local user.name k8s
+git config --local user.email k8s@example.com
+git add -A
+git commit -m "apps"
+```
+
+```text
+[master ae43412] apps
+ 7 files changed, 288 insertions(+)
+ create mode 100644 apps/app01/app01_configmap.yaml
+ create mode 100644 apps/app01/app01_deployment.yaml
+ create mode 100644 apps/app01/app01_ingress.yaml
+ create mode 100644 apps/app01/app01_namespace.yaml
+ create mode 100644 apps/app01/app01_service.yaml
+ create mode 100644 apps/app02/app02_concat.yaml
+ create mode 100644 apps/app03/app03_list.yaml
+```
+
+```bash
+git push
+```
+
+```text
+Enumerating objects: 14, done.
+Counting objects: 100% (14/14), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (11/11), done.
+Writing objects: 100% (13/13), 2.58 KiB | 2.58 MiB/s, done.
+Total 13 (delta 2), reused 0 (delta 0)
+To http://gogs.local:3000/administrator/apps.git
+   7f4326d..ae43412  master -> master
 ```
