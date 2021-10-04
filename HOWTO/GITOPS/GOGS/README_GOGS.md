@@ -134,7 +134,7 @@ echo $ARGO_PWD
 
 <http://argocd.local>
 
-[Argo CD](./img/argo_000.png)
+![Argo CD](./img/argo_000.png)
 <img src="./img/argo_000.png" width="200" />
 
 ## Install Gogs
@@ -236,7 +236,7 @@ multipass info gogs | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:] | sed 's/$/ 
 
 <http://argocd.local>
 
-[Finish installing Gogs](./img/gogs_000.png)
+![Finish installing Gogs](./img/gogs_000.png)
 
 ## Create administrator user
 
