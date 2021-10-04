@@ -680,44 +680,12 @@ To http://gogs.local:3000/administrator/apps.git
 
 ### Add repository to Argo CD
 
-**The original repository URL:**
+#### The repository URL
 
 <http://gogs.local:3000/administrator/apps.git>
-
-**Using endpoint:**
-
-<http://gogs.default.svc.cluster.local:3000/administrator/apps.git>
 
 ![Add repository to Argo CD step 1](./img/argo_001.png "Add repository to Argo CD step 1")
 ![Add repository to Argo CD step 2](./img/argo_002.png "Add repository to Argo CD step 2")
 ![Add repository to Argo CD step 3](./img/argo_003.png "Add repository to Argo CD step 3")
 ![Add repository to Argo CD step 4](./img/argo_004.png "Add repository to Argo CD step 4")
 ![Add repository to Argo CD step 5](./img/argo_005.png "Add repository to Argo CD step 5")
-
-### Create application to Argo CD
-
-![Create application to Argo CD step 1](./img/argo_006.png "Create application to Argo CD step 1")
-![Create application to Argo CD step 2](./img/argo_007.png "Create application to Argo CD step 2")
-![Create application to Argo CD step 3](./img/argo_008.png "Create application to Argo CD step 3")
-![Create application to Argo CD step 4](./img/argo_009.png "Create application to Argo CD step 4")
-![Create application to Argo CD step 5](./img/argo_010.png "Create application to Argo CD step 5")
-![Create application to Argo CD step 6](./img/argo_011.png "Create application to Argo CD step 6")
-
-```bash
-kubectl get all --namespace app01
-```
-
-```text
-NAME                                    READY   STATUS    RESTARTS   AGE
-pod/app01-deployment-6c8c4979fd-zdbbj   1/1     Running   0          1m50s
-
-NAME                    TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-service/app01-service   NodePort   10.152.183.148   <none>        8080:31104/TCP   1m50s
-
-NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/app01-deployment   1/1     1            1           1m50s
-
-NAME                                          DESIRED   CURRENT   READY   AGE
-replicaset.apps/app01-deployment-6c8c4979fd   1         1         1       1m50s
-
-```
