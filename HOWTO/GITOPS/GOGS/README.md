@@ -32,13 +32,13 @@ multipass launch focal -n microk8s -c 2 -m 2G -d 10G --cloud-init cloud-config-m
 
 ## Export the current MicroK8s configuration for use with Kubectl
 
-### Create the folder to store the configuration of the Kubernetes cluster in the test instance
+### Create the folder to store the configuration of the Kubernetes cluster in the instance
 
 ```bash
 sudo mkdir -p $HOME/.kube/configs
 ```
 
-### Export the MicroK8s configuration in the test instance to the created folder
+### Export the MicroK8s configuration in the instance to the created folder
 
 ```bash
 multipass exec microk8s -- sudo microk8s config > $HOME/.kube/configs/config-microk8s
