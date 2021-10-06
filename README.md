@@ -13,3 +13,5 @@ Este repositório é um guia simples para aprendizado de alguns conceitos e tecn
 [Grafana](./HOWTO/GRAFANA/README.md)
 
 [Vault](./HOWTO/VAULT/README.md)
+
+[GitOps](./HOWTO/GITOPS/README.md)
