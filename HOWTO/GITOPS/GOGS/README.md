@@ -81,56 +81,6 @@ multipass info microk8s | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:] | sed 's
 multipass info microk8s | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:] | sed 's/$/     app01.local app02.local app03.local/' | sudo tee -a /etc/hosts
 ```
 
-### Create yaml for endpoint pointing to instance gogs
-
-```bash
-echo 'apiVersion: v1
-items:
-  - apiVersion: v1
-    kind: Service
-    metadata:
-      name: gogs
-      namespace: default
-    spec:
-      clusterIP: None
-      ports:
-        - name: gogs
-          port: 3000
-          targetPort: 3000
-  - apiVersion: v1
-    kind: Endpoints
-    metadata:
-      name: gogs
-      namespace: default
-    subsets:
-      - addresses:
-          - ip: GogsIP
-        ports:
-          - name: gogs
-            port: 3000
-            protocol: TCP
-kind: List
-metadata: {}' > gogs_endpoint.yaml
-```
-
-### Add IP of the gogs instance to the endpoint yaml
-
-```bash
-for i in `multipass info gogs | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:]` ; do sed -i s/GogsIP/$i/ gogs_endpoint.yaml ; done
-```
-
-### Create the endpoint pointing to the gogs instance
-
-```bash
-kubectl apply -f gogs_endpoint.yaml
-```
-
-### The endpoint to gogs instance
-
-```text
-http://gogs.default.svc.cluster.local:3000/
-```
-
 ### URL for microk8s.local
 
 <http://microk8s.local>
@@ -307,6 +257,56 @@ multipass exec gogs -- sudo /opt/gogs/gogs admin create-user --name k8s --passwo
 
 ```bash
 multipass exec gogs -- sudo reboot
+```
+
+## Create yaml for endpoint pointing to instance gogs
+
+```bash
+echo 'apiVersion: v1
+items:
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: gogs
+      namespace: default
+    spec:
+      clusterIP: None
+      ports:
+        - name: gogs
+          port: 3000
+          targetPort: 3000
+  - apiVersion: v1
+    kind: Endpoints
+    metadata:
+      name: gogs
+      namespace: default
+    subsets:
+      - addresses:
+          - ip: GogsIP
+        ports:
+          - name: gogs
+            port: 3000
+            protocol: TCP
+kind: List
+metadata: {}' > gogs_endpoint.yaml
+```
+
+## Add IP of the gogs instance to the endpoint yaml
+
+```bash
+for i in `multipass info gogs | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:]` ; do sed -i s/GogsIP/$i/ gogs_endpoint.yaml ; done
+```
+
+## Create the endpoint pointing to the gogs instance
+
+```bash
+kubectl apply -f gogs_endpoint.yaml
+```
+
+### The endpoint to gogs instance
+
+```text
+http://gogs.default.svc.cluster.local:3000/
 ```
 
 ## Access Gogs
