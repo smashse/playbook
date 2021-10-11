@@ -1,0 +1,22 @@
+#cloud-config
+write_files:
+  - path: /var/lib/jenkins/.kube/config
+    owner: jenkins:jenkins
+    permissions: 0600
+    content: |
+      #KUBECONFIG
+    append: true
+runcmd:
+  - apt update --fix-missing
+  - apt -y remove snapd --purge
+  - sudo echo "deb http://pkg.jenkins.io/debian-stable binary/" > /etc/apt/sources.list.d/jenkins.list
+  - wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+  - sudo echo "DEBIAN_FRONTEND=noninteractive" >> /etc/environment
+  - sudo source /etc/environment && source /etc/environment
+  - sudo apt update --fix-missing
+  - sudo apt -y install openjdk-11-jre-headless sshfs
+  - sudo apt -y install jenkins
+  - sudo systemctl daemon-reload
+  - sudo systemctl start jenkins
+  - sudo systemctl status jenkins
+  - sudo systemctl enable jenkins.service
