@@ -723,6 +723,9 @@ replicaset.apps/app01-deployment-6c8c4979fd   1         1         1       1m50s
 
 Sources:
 <https://microk8s.io/>
+
 <https://gogs.io/>
+
 <https://argoproj.github.io/>
+
 <https://argoproj.github.io/cd/>
