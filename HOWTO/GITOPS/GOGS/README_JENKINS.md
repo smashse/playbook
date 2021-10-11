@@ -1,6 +1,6 @@
 # Requirements for this POC
 
-In this POC we will use Multipass to create instances to install the Gogs and Microk8s, then establishing the Git server as a GitOps for the Kubernetes cluster provisioned with Microk8s.
+In this POC we will use Multipass to create instances to install the Gogs, Microk8s and Jenkins, then establishing the Git server as a GitOps for the Kubernetes cluster provisioned with Microk8s.
 
 ## Install Multipass
 
