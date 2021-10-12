@@ -603,15 +603,15 @@ runcmd:
   - apt -y remove snapd --purge
   - sudo echo "deb http://pkg.jenkins.io/debian-stable binary/" > /etc/apt/sources.list.d/jenkins.list
   - wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
-  - sudo echo "DEBIAN_FRONTEND=noninteractive" >> /etc/environment
-  - sudo source /etc/environment && source /etc/environment
-  - sudo apt update --fix-missing
-  - sudo apt -y install openjdk-11-jre-headless sshfs
-  - sudo apt -y install jenkins
-  - sudo systemctl daemon-reload
-  - sudo systemctl start jenkins
-  - sudo systemctl status jenkins
-  - sudo systemctl enable jenkins.service' > cloud-config-jenkins.yaml
+  - echo "DEBIAN_FRONTEND=noninteractive" >> /etc/environment
+  - source /etc/environment && source /etc/environment
+  - apt update --fix-missing
+  - apt -y install openjdk-11-jre-headless sshfs
+  - apt -y install jenkins
+  - systemctl daemon-reload
+  - systemctl start jenkins
+  - systemctl status jenkins
+  - systemctl enable jenkins.service' > cloud-config-jenkins.yaml
 ```
 
 ## Create Jenkins instance with Multipass
@@ -1071,7 +1071,7 @@ app02
 app03
 ```
 
-Sources:
+**Sources:**
 
 <https://microk8s.io/>
 

@@ -721,7 +721,7 @@ NAME                                          DESIRED   CURRENT   READY   AGE
 replicaset.apps/app01-deployment-6c8c4979fd   1         1         1       1m50s
 ```
 
-Sources:
+**Sources:**
 
 <https://microk8s.io/>
 
