@@ -192,6 +192,10 @@ helm repo update
 helm install kube-state-metrics prometheus-community/kube-state-metrics --namespace monitoring --create-namespace
 ```
 
+```bash
+kubectl get deployment kube-state-metrics -n monitoring
+```
+
 # Istio + Basic Prometheus
 
 Istio provides a basic sample installation to quickly get Prometheus up and running:
