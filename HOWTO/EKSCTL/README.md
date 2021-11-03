@@ -372,6 +372,19 @@ kubectl apply --kustomize github.com/kubenav/deploy/kustomize
 kubectl port-forward --namespace kubenav svc/kubenav 14122
 ```
 
+OR
+
+```bash
+helm repo add kubenav https://kubenav.github.io/helm-repository
+helm repo update
+```
+
+```bash
+helm install kubenav kubenav/kubenav \
+--namespace kubenav \
+--create-namespace
+```
+
 ## Expose Services
 
 ```bash
@@ -459,3 +472,5 @@ kubectl config delete-context arn:aws:eks:$REGION:$ID:cluster/$CLUSTER
 <https://aws.amazon.com/pt/premiumsupport/knowledge-center/eks-kubernetes-services-cluster/>
 
 <https://github.com/kubenav/kubenav>
+
+<https://docs.kubenav.io/web/helm/>
