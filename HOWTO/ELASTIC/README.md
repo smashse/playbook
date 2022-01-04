@@ -85,6 +85,12 @@ microk8s   Ready    <none>   33m   v1.22.4-3+adc4115d990346
 
 <http://microk8s.multipass>
 
+# Install Helm
+
+```bash
+sudo snap install helm --classic
+```
+
 # Deploy the Metrics Server
 
 ```bash
@@ -109,7 +115,7 @@ helm install kube-state-metrics prometheus-community/kube-state-metrics --namesp
 kubectl get deployment kube-state-metrics -n monitoring
 ```
 
-## Create a ELK templates
+## Create a E?K template
 
 ### Elasticsearch and Kibana
 
@@ -176,7 +182,7 @@ runcmd:
   - update-rc.d kibana defaults 95 10' > cloud-config-kibana.yaml
 ```
 
-## Create ELK instance
+## Create E?K instance
 
 ### Kibana
 
