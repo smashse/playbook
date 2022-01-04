@@ -1,6 +1,6 @@
 # Multipass + Microk8s + Elasticsearch, Kibana, Filebeat and Metricbeat
 
-This POC demonstrates the process of deploying an observability stack focused on Elastcsearch, Kibana and Beats deployed in a Kubernetes cluster using Microk8s and in instances created with Multipass.
+This POC demonstrates the process of deploying an observability stack focused on Elasticsearch, Kibana and Beats deployed in a Kubernetes cluster using Microk8s and instances created with Multipass.
 
 ## Install Multipass
 
