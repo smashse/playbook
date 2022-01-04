@@ -972,11 +972,19 @@ systemctl status metricbeat -l
 ```
 
 **Sources:**
+
 <https://www.elastic.co/guide/en/elastic-stack-get-started/current/get-started-elastic-stack.html#install-elasticsearch>
+
 <https://www.elastic.co/guide/en/elastic-stack-get-started/current/get-started-elastic-stack.html#install-kibana>
+
 <https://www.elastic.co/guide/en/elastic-stack-get-started/current/get-started-elastic-stack.html#install-beats>
+
 <https://www.elastic.co/guide/en/beats/filebeat/current/running-on-kubernetes.html>
+
 <https://www.docker.elastic.co/r/beats/filebeat-oss>
+
 <https://www.elastic.co/guide/en/beats/metricbeat/current/running-on-kubernetes.html>
+
 <https://www.docker.elastic.co/r/beats/metricbeat-oss>
+
 <https://github.com/elastic/helm-charts>
