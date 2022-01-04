@@ -176,7 +176,7 @@ runcmd:
   - update-rc.d kibana defaults 95 10' > cloud-config-kibana.yaml
 ```
 
-## Create ELK instances
+## Create ELK instance
 
 ### Kibana
 
@@ -884,7 +884,7 @@ setup.template.pattern: "teste_filebeat-*"
 setup.dashboards.index: "teste_filebeat-*"' > /etc/filebeat/filebeat.yml
 ```
 
-### Disable and configure the kibana module
+### Enable and configure the kibana module
 
 ```bash
 filebeat modules disable kibana
@@ -953,7 +953,7 @@ echo '- module: kibana
   hosts: ["kibana.multipass:5601"]' > /etc/metricbeat/modules.d/kibana.yml.disabled
 ```
 
-### Disable and configure the kibana module
+### Enable and configure the kibana module
 
 ```bash
 metricbeat modules disable kibana
