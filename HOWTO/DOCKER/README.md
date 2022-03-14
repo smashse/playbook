@@ -12,6 +12,7 @@ HashiCorp.terraform
 MS-CEINTL.vscode-language-pack-pt-BR
 Pivotal.vscode-boot-dev-pack
 Pivotal.vscode-spring-boot
+betajob.modulestf
 eamodio.gitlens
 emroussel.atomize-atom-one-dark-theme
 esbenp.prettier-vscode
