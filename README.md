@@ -17,3 +17,10 @@ Este repositório é um guia simples para aprendizado de alguns conceitos e tecn
 [Vault](./HOWTO/VAULT/README.md)
 
 [GitOps](./HOWTO/GITOPS/README.md)
+
+[Ebooks, Cursos e Bootcamps](./HOWTO/SOURCES/SOURCES.md)
+
+### AMBIENTE DE TRABALHO
+
+- [LINUX](https://github.com/smashse/USI/blob/master/local/local_small_install_focal.sh)
+- [MAC](./HOWTO/ENV/MACENV.md)
