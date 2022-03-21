@@ -12,6 +12,8 @@
 
 - [Operating Kubernetes Clusters and Applications Safely](https://info.aquasec.com/kubernetes-security)
 
+- [Container Security](https://info.aquasec.com/container-security-book)
+
 ## Aurélie Vache
 
 - [Understanding Docker in a visual way](https://gumroad.com/aurelievache#YTLzM)
