@@ -144,3 +144,7 @@
 ## Kubetools
 
 - [Curated List of Kubernetes Tools](https://dockerlabs.collabnix.com/kubernetes/kubetools/)
+
+# DOCUMENTÁRIOS
+
+- Kubernetes: The Documentary [PART 1](https://www.youtube.com/watch?v=BE77h7dmoQU) + [PART 2](https://www.youtube.com/watch?v=318elIq37PE)
