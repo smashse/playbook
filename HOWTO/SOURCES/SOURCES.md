@@ -113,9 +113,15 @@
 
 - [Red Hat Developer cheat sheets](https://developers.redhat.com/cheatsheets)
 
+- [Virtualização](https://www.redhat.com/pt-br/topics/virtualization)
+
+- [Cloud Computing](https://www.redhat.com/pt-br/topics/cloud)
+
 - [Introdução ao DevOps](https://www.redhat.com/pt-br/topics/devops)
 
 - [SRE (Site Reliability Engineering) | Engenharia de Confiabilidade de Sites](https://www.redhat.com/pt-br/topics/devops/what-is-sre)
+
+- [Como ensinar um elefante a dançar](https://www.redhat.com/pt-br/engage/teaching-an-elephant-to-dance)
 
 ## SUSE
 
