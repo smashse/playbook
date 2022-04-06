@@ -22,5 +22,5 @@ Este repositório é um guia simples para aprendizado de alguns conceitos e tecn
 
 ### AMBIENTE DE TRABALHO
 
-- [LINUX](https://github.com/smashse/USI/blob/master/local/local_small_install_focal.sh)
+- [LINUX](./HOWTO/ENV/LINUXENV.md)
 - [MAC](./HOWTO/ENV/MACENV.md)
