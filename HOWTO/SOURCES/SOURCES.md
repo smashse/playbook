@@ -99,6 +99,8 @@
 
 - [Introdução à SRE (Engenharia de Confiabilidade do Site)](https://docs.microsoft.com/pt-br/learn/modules/intro-to-site-reliability-engineering/)
 
+- [Azure DevOps Explained](https://azure.microsoft.com/en-us/resources/azure-devops-explained/)
+
 ## NGINX
 
 - [Cloud Native DevOps With Kubernetes](https://www.nginx.com/resources/library/cloud-native-devops-with-kubernetes/)
