@@ -153,7 +153,7 @@
 
 - [Curated List of Kubernetes Tools](https://dockerlabs.collabnix.com/kubernetes/kubetools/)
 
-# Best Practices
+# BEST PRACTICES
 
 ## Kubernetes
 
