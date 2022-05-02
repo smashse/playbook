@@ -196,7 +196,7 @@ Terrascan is a static code analyzer for Terraform, detect compliance and securit
 <https://formulae.brew.sh/formula/terrascan>
 
 ```bash
-brew install terraform-docs/tap/terraform-docs
+brew install terrascan
 ```
 
 ## Install AWScli
