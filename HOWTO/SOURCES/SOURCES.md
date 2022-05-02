@@ -182,6 +182,11 @@
 
 - [Infrastructure as Code Examples](https://github.com/hashicorp/terraform-guides/tree/master/infrastructure-as-code)
 - [Terraform Examples](https://github.com/ContainerSolutions/terraform-examples)
+- [Amazon EKS Blueprints for Terraform](https://aws-ia.github.io/terraform-aws-eks-blueprints/)
+- [Terraform blueprints available for Google Cloud](https://cloud.google.com/docs/terraform/blueprints/terraform-blueprints)
+
+### SMASHSE
+
 - [AWS](https://github.com/smashse/iac-public/tree/master/IAC/AWS)
 - [AZURE](https://github.com/smashse/iac-public/tree/master/IAC/AZURE)
 - [GCP](https://github.com/smashse/iac-public/tree/master/IAC/GCP)
@@ -195,6 +200,9 @@
 
 - [Pulumi Examples](https://github.com/pulumi/examples)
 - [EKS Blueprints for Pulumi](https://github.com/pulumi/eks-blueprint)
+
+### SMASHSE
+
 - [Pythoh: AWS/AZURE/GCP](https://github.com/smashse/iac-public/tree/master/IAC/PULUMI/python)
 
 ## Kubernetes
