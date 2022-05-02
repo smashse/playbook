@@ -187,6 +187,18 @@ brew tap terraform-docs/tap
 brew install terraform-docs/tap/terraform-docs
 ```
 
+## Install Terrascan
+
+Terrascan is a static code analyzer for Terraform, detect compliance and security violations across Infrastructure as Code.
+
+<https://runterrascan.io/>
+
+<https://formulae.brew.sh/formula/terrascan>
+
+```bash
+brew install terraform-docs/tap/terraform-docs
+```
+
 ## Install AWScli
 
 Official Amazon AWS command-line interface.

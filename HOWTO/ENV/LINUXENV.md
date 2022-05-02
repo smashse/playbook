@@ -203,6 +203,22 @@ chmod a+x terraform-docs
 sudo mv terraform-docs /usr/local/sbin/
 ```
 
+## Install Terrascan
+
+Terrascan is a static code analyzer for Terraform, detect compliance and security violations across Infrastructure as Code.
+
+<https://runterrascan.io/>
+
+<https://runterrascan.io/docs/getting-started/>
+
+```bash
+cd /tmp
+LATEST=`curl -s https://api.github.com/repos/accurics/terrascan/releases/latest | jq '.assets | .[] | .browser_download_url' | grep "Linux_x86_64" | sed 's/"//g'`
+wget -c $LATEST -O "terrascan.tar.gz"
+tar -xzf terrascan.tar.gz
+sudo install terrascan /usr/local/bin && rm terrascan
+```
+
 ## Install AWScli
 
 Official Amazon AWS command-line interface.
