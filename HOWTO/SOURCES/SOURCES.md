@@ -155,13 +155,26 @@
 
 # BEST PRACTICES
 
+## Docker
+
+- [Docker development best practices](https://docs.docker.com/develop/dev-best-practices/)
+- [Best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+
 ## Kubernetes
 
-- [Top 10 Kubernetes Production Best Practices](https://thenjdevopsguy.gumroad.com/l/top-10-kubernetes-best-practices)
+- [Kubernetes Best Practices](https://kubernetes.io/docs/setup/best-practices/)
+  - [EKS Best Practices](https://aws.github.io/aws-eks-best-practices/)
+  - [AKS Best Practices](https://docs.microsoft.com/en-us/azure/aks/best-practices)
+  - [GKE Best Practices](https://cloud.google.com/kubernetes-engine/docs/best-practices)
+  - [Top 10 Kubernetes Production Best Practices](https://thenjdevopsguy.gumroad.com/l/top-10-kubernetes-best-practices)
 
 ## Terraform
 
 - [Terraform Best Practices](https://www.terraform-best-practices.com/)
+
+## Ansible
+
+- [Playbooks Best Practices](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html)
 
 # DOCUMENTÁRIOS
 
