@@ -153,6 +153,16 @@
 
 - [Curated List of Kubernetes Tools](https://dockerlabs.collabnix.com/kubernetes/kubetools/)
 
+# Best Practices
+
+## Kubernetes
+
+- [Top 10 Kubernetes Production Best Practices](https://thenjdevopsguy.gumroad.com/l/top-10-kubernetes-best-practices)
+
+## Terraform
+
+- [Terraform Best Practices](https://www.terraform-best-practices.com/)
+
 # DOCUMENTÁRIOS
 
 - Kubernetes: The Documentary [PART 1](https://www.youtube.com/watch?v=BE77h7dmoQU) + [PART 2](https://www.youtube.com/watch?v=318elIq37PE)
