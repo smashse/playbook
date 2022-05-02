@@ -176,6 +176,31 @@
 
 - [Playbooks Best Practices](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html)
 
+# EXAMPLES
+
+## Terraform
+
+- [Infrastructure as Code Examples](https://github.com/hashicorp/terraform-guides/tree/master/infrastructure-as-code)
+- [Terraform Examples](https://github.com/ContainerSolutions/terraform-examples)
+- [AWS](https://github.com/smashse/iac-public/tree/master/IAC/AWS)
+- [AZURE](https://github.com/smashse/iac-public/tree/master/IAC/AZURE)
+- [GCP](https://github.com/smashse/iac-public/tree/master/IAC/GCP)
+
+## Ansible
+
+- [Ansible Examples](https://github.com/ansible/ansible-examples)
+- [XLAB Steampunk: Enterprise Ansible Collections](https://steampunk.si/build-ansible-collections/)
+
+## Pulumi
+
+- [Pulumi Examples](https://github.com/pulumi/examples)
+- [EKS Blueprints for Pulumi](https://github.com/pulumi/eks-blueprint)
+- [Pythoh: AWS/AZURE/GCP](https://github.com/smashse/iac-public/tree/master/IAC/PULUMI/python)
+
+## Kubernetes
+
+- [Kubernetes Examples](https://github.com/ContainerSolutions/kubernetes-examples)
+
 # DOCUMENTÁRIOS
 
 - Kubernetes: The Documentary [PART 1](https://www.youtube.com/watch?v=BE77h7dmoQU) + [PART 2](https://www.youtube.com/watch?v=318elIq37PE)
