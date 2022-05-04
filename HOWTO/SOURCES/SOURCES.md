@@ -133,6 +133,10 @@
 
 - [Running Containers in Production For Dummies](https://sysdig.com/resources/whitepapers/containers-in-prod-for-dummies/)
 
+## Tigera
+
+- [Kubernetes Security and Observability](https://www.tigera.io/lp/kubernetes-security-and-observability-ebook/)
+
 ## Udemy
 
 - [DevOps Essentials](https://www.udemy.com/course/linux-academy-devops-essentials/?ranMID=39197&ranEAID=JVFxdTr9V80&ranSiteID=JVFxdTr9V80-LoX32c8tN8A0tYyisnshBA&LSNPUBID=JVFxdTr9V80&utm_source=aff-campaign&utm_medium=udemyads)
