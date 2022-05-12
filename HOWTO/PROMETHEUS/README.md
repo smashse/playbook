@@ -90,7 +90,7 @@ kubectl get pods -n prometheus
 
 #### Prometheus Operator
 
-##### Create a Slack App for Webhook
+##### Create a Slack App for Incoming Webhook that points to the "prometheus-notifications" channel
 
 <https://api.slack.com/apps?new_app=1>
 
@@ -268,7 +268,7 @@ URL's to access Grafana, Prometheus and Alertmanager:
 
 ## BotKube (Optional)
 
-### Install BotKube to the Slack workspace using the following instructions
+### Install BotKube to the Slack workspace using the following instructions to the channel "devops-notifications"
 
 <https://www.botkube.io/installation/slack/#install-botkube-to-the-slack-workspace>
 
