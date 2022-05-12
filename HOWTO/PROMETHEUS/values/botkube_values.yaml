@@ -1,3 +1,4 @@
+---
 communications:
   slack:
     enabled: true
