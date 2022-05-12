@@ -1,5 +1,11 @@
 # Grafana + Prometheus + Alertmanager + Slack
 
+This POC aims to present the process of integrating Slack with a webhook to receive alerts from Alertmanager.
+
+It has been implemented with Multipass, Microk8s, Kubernetes, Helm and Kube-Prometheus-Stack.
+
+**Note:** Instructions on how to install Multipass for [Linux](https://github.com/smashse/playbook/blob/master/HOWTO/ENV/LINUXENV.md#install-multipass) and [Mac](https://github.com/smashse/playbook/blob/master/HOWTO/ENV/MACENV.md#install-multipass).
+
 ## Microk8s
 
 ```bash
@@ -92,6 +98,8 @@ Graphic guide on how to do this, [click here](./images/prometheus/README.md).
 
 ##### Slack Values
 
+Prometheus Values:
+
 ```bash
 nano -c prometheus_values.yaml
 ```
@@ -111,6 +119,14 @@ kubeEtcd:
 kubeProxy:
   enabled: false
 ```
+
+Or download as below:
+
+```bash
+wget -c https://raw.githubusercontent.com/smashse/playbook/master/HOWTO/PROMETHEUS/values/prometheus_values.yaml
+```
+
+Alertmanager Values:
 
 ```bash
 nano -c alertmanager_values.yaml
@@ -158,6 +174,14 @@ alertmanager:
       - /etc/alertmanager/config/*.tmpl
 ```
 
+Or download as below:
+
+```bash
+wget -c https://raw.githubusercontent.com/smashse/playbook/master/HOWTO/PROMETHEUS/values/alertmanager_values.yaml
+```
+
+Alertmanager Rules:
+
 ```bash
 nano -c alertmanager_rules.yaml
 ```
@@ -189,6 +213,12 @@ additionalPrometheusRulesMap:
               description: “[{{ $labels.instance }}] of job [{{ $labels.job }}] has been down for more than 1 minute.”
 ```
 
+Or download as below:
+
+```bash
+wget -c https://raw.githubusercontent.com/smashse/playbook/master/HOWTO/PROMETHEUS/values/alertmanager_rules.yaml
+```
+
 ```bash
 helm install prometheus-operator prometheus-community/kube-prometheus-stack \
 --set alertmanager.persistentVolume.storageClass="default",server.persistentVolume.storageClass="default" \
@@ -218,7 +248,9 @@ multipass info microk8s | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:] | sed 's
 multipass info microk8s | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:] | sed 's/$/     alertmanager.multipass/' | sudo tee -a /etc/hosts
 ```
 
-**Grafana:** The default User is "admin" and Password is "prom-operator".
+**Note:** The default User is "admin" and Password is "prom-operator", change after first access.
+
+URL's to access Grafana, Prometheus and Alertmanager:
 
 **Grafana:** <http://grafana.multipass>
 
@@ -260,7 +292,10 @@ image:
 ```bash
 helm repo add infracloudio https://infracloudio.github.io/charts
 helm repo update
-helm install botkube infracloudio/botkube --namespace botkube --create-namespace --values ./botkube_values.yaml
+helm install botkube infracloudio/botkube \
+--namespace botkube \
+--create-namespace \
+--values ./botkube_values.yaml
 ```
 
 ## Slack
