@@ -30,7 +30,7 @@ alertmanager:
       - name: "null"
       - name: "MySlackChannel"
         slack_configs:
-          - api_url: "https://hooks.slack.com/services/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"
+          - api_url: "webhook_url"
             channel: "#prometheus-notifications"
             send_resolved: true
     templates:
