@@ -219,6 +219,8 @@ Or download as below:
 wget -c https://raw.githubusercontent.com/smashse/playbook/master/HOWTO/PROMETHEUS/values/alertmanager_rules.yaml
 ```
 
+##### Install Kube-Prometheus-Stack
+
 ```bash
 helm install prometheus-operator prometheus-community/kube-prometheus-stack \
 --set alertmanager.persistentVolume.storageClass="default",server.persistentVolume.storageClass="default" \
@@ -233,6 +235,8 @@ helm install prometheus-operator prometheus-community/kube-prometheus-stack \
 kubectl get pods -n prometheus
 ```
 
+##### Create Ingress for access to Grafana, Prometheus and Alertmanager
+
 ```bash
 kubectl wait deploy/prometheus-operator-grafana --namespace=prometheus --for condition=Available=True --timeout=90s
 kubectl create ingress grafana --namespace=prometheus --rule="grafana.multipass/*=prometheus-operator-grafana:80" --class=public
@@ -240,6 +244,8 @@ kubectl wait deploy/prometheus-operator-kube-p-operator --namespace=prometheus -
 kubectl create ingress prometheus --namespace=prometheus --rule="prometheus.multipass/*=prometheus-operator-kube-p-prometheus:9090" --class=public
 kubectl create ingress alertmanager --namespace=prometheus --rule="alertmanager.multipass/*=prometheus-operator-kube-p-alertmanager:9093" --class=public
 ```
+
+##### Add an IP alias for Grafana, Prometheus and Alertmanager
 
 ```bash
 multipass info microk8s | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:] | sed 's/$/     microk8s.multipass/' | sudo tee -a /etc/hosts
