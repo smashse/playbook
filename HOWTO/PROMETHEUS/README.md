@@ -94,6 +94,8 @@ kubectl get pods -n prometheus
 
 <https://api.slack.com/apps?new_app=1>
 
+<https://api.slack.com/messaging/webhooks>
+
 Graphic guide on how to do this, [click here](./images/prometheus/README.md).
 
 ##### Slack Values
