@@ -10,6 +10,8 @@ Este repositório é um guia simples para aprendizado de alguns conceitos e tecn
 
 [EKSCTL](./HOWTO/EKSCTL/README.md)
 
+[Prometheus](./HOWTO/PROMETHEUS/README.md)
+
 [Grafana](./HOWTO/GRAFANA/README.md)
 
 [Kibana](./HOWTO/ELASTIC/README.md)
