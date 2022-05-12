@@ -266,7 +266,7 @@ URL's to access Grafana, Prometheus and Alertmanager:
 
 ## BotKube (Optional)
 
-### Install BotKube to the Slack workspace using using the following instructions
+### Install BotKube to the Slack workspace using the following instructions
 
 <https://www.botkube.io/installation/slack/#install-botkube-to-the-slack-workspace>
 
