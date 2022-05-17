@@ -185,7 +185,7 @@ done
 for i in `cat users.txt` ; do kubectl apply -f microk8s-rbac-admin-$i.yaml ; done
 ```
 
-In this example, users have full access in their ClusterRole, if we wanted a rule for the "deployments" resource
+In this example, users have full access in their ClusterRole, if we wanted a rule for the "deployments" resource.
 
 ```bash
 kubectl api-resources -o wide | grep "^deployments"
