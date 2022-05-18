@@ -35,3 +35,5 @@ alertmanager:
             send_resolved: true
     templates:
       - /etc/alertmanager/config/*.tmpl
+  alertmanagerSpec:
+    externalUrl: http://alertmanager.multipass

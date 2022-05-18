@@ -11,3 +11,6 @@ kubeEtcd:
   enabled: false
 kubeProxy:
   enabled: false
+prometheus:
+  prometheusSpec:
+    externalUrl: http://prometheus.multipass
