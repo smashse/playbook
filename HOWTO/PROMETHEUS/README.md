@@ -120,6 +120,9 @@ kubeEtcd:
   enabled: false
 kubeProxy:
   enabled: false
+prometheus:
+  prometheusSpec:
+    externalUrl: http://prometheus.multipass
 ```
 
 Or download as below:
@@ -174,6 +177,8 @@ alertmanager:
             send_resolved: true
     templates:
       - /etc/alertmanager/config/*.tmpl
+  alertmanagerSpec:
+    externalUrl: http://alertmanager.multipass
 ```
 
 Or download as below:
