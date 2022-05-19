@@ -100,7 +100,7 @@ sicrano.user
 beltrano.user' > users.txt &&
 for i in `cat users.txt` ; do kubectl create sa $i ; done &&
 # Get access tokens for created service accounts.
-sleep 10s ;for i in `cat users.txt` ; do kubectl get sa/$i -o jsonpath="{.secrets[0].name}" | { tr -d '\n'; echo; } >> tokens.txt ; done &&
+sleep 10s ; for i in `cat users.txt` ; do kubectl get sa/$i -o jsonpath="{.secrets[0].name}" | { tr -d '\n'; echo; } >> tokens.txt ; done &&
 # Use tokens to obtain access credentials and create individual cluster configuration files.
 for i in `cat tokens.txt` ;
 do export TOKEN_NAME=$i &&
