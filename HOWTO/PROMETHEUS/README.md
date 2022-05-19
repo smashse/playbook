@@ -333,3 +333,5 @@ helm install botkube infracloudio/botkube \
 <https://github.com/prometheus-community/helm-charts>
 
 <https://www.botkube.io/>
+
+<https://github.com/samber/awesome-prometheus-alerts>
