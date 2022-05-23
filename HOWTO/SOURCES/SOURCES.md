@@ -30,6 +30,10 @@
 
 - [I Heart Logs](https://www.confluent.io/ebook/i-heart-logs-event-data-stream-processing-and-data-integration/)
 
+## Control Plane
+
+- [Hacking Kubernetes](https://control-plane.io/hackingkubernetes/)
+
 ## Digital Innovation One
 
 - [Git](https://web.digitalinnovation.one/browse?filter=Git)
