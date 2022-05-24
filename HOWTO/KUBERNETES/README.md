@@ -2,7 +2,7 @@
 
 **SO BASE:** UBUNTU
 
-## Criar lista de extensões para VSCODE/Codium
+## Criar lista de extensões para VSCode/Codium
 
 ```bash
 echo "AmazonWebServices.aws-toolkit-vscode
