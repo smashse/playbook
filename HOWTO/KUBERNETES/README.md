@@ -9,6 +9,7 @@ echo "AmazonWebServices.aws-toolkit-vscode
 GitHub.github-vscode-theme
 GoogleCloudTools.cloudcode
 HashiCorp.terraform
+HashiCorp.HCL
 MS-CEINTL.vscode-language-pack-pt-BR
 Pivotal.vscode-boot-dev-pack
 Pivotal.vscode-spring-boot
