@@ -26,6 +26,10 @@
 
 - [O que é o DevOps?](https://aws.amazon.com/pt/devops/what-is-devops/)
 
+## Codefresh
+
+- [Implement GitOps at Scale with Argo CD](https://codefresh.io/ebooks/implement-gitops-scale-today/?utm_source=linkedin&utm_medium=social&utm_content=manning_ebook&utm_campaign=ebooks)
+
 ## Confluent
 
 - [I Heart Logs](https://www.confluent.io/ebook/i-heart-logs-event-data-stream-processing-and-data-integration/)
