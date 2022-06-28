@@ -111,6 +111,8 @@
 
 ## NGINX
 
+- [Microservices Up & Running](https://www.nginx.com/resources/library/microservices-up-and-running/)
+
 - [Cloud Native DevOps With Kubernetes](https://www.nginx.com/resources/library/cloud-native-devops-with-kubernetes/)
 
 - [Infrastructure as Code (PREVIEW EDITION)](https://www.nginx.com/resources/library/infrastructure-as-code/)
