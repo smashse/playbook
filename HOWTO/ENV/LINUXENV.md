@@ -102,7 +102,7 @@ Krew is the plugin manager for kubectl command-line tool.
 ```bash
 echo "
 #KREW
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH" | tee -a ~/.bashrc
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"" | tee -a ~/.bashrc
 ```
 
 ```bash
