@@ -267,6 +267,16 @@ podman machine start
 podman info
 ```
 
+```bash
+echo "
+#DOCKER
+alias docker='podman'" | tee -a ~/.bashrc
+```
+
+```bash
+source ~/.bashrc
+```
+
 ## Install Rancher Desktop
 
 Kubernetes and Container Management on the Desktop.
@@ -284,16 +294,6 @@ cd /tmp
 hdiutil attach rancher_desktop.dmg -mountpoint /Volumes/Rancher
 cp -a /Volumes/Rancher/Rancher*.app /Volumes/Rancher/Applications/
 umount /Volumes/Rancher
-```
-
-```bash
-echo "
-#DOCKER
-alias docker='podman'" | tee -a ~/.bashrc
-```
-
-```bash
-source ~/.bashrc
 ```
 
 ## Install ITerm2
