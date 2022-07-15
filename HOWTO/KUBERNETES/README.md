@@ -18,6 +18,7 @@ eamodio.gitlens
 emroussel.atomize-atom-one-dark-theme
 esbenp.prettier-vscode
 formulahendry.docker-extension-pack
+julialang.language-julia
 kde.breeze
 ms-azuretools.vscode-azureterraform
 ms-azuretools.vscode-docker
