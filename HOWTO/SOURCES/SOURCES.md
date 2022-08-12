@@ -109,6 +109,8 @@
 
 - [Azure DevOps Explained](https://azure.microsoft.com/en-us/resources/azure-devops-explained/)
 
+- [FastHack - Linux Fundamentals](https://github.com/ricmmartins/fasthack-linux)
+
 ## NGINX
 
 - [Microservices Up & Running](https://www.nginx.com/resources/library/microservices-up-and-running/)
