@@ -40,12 +40,12 @@
 
 ## Digital Innovation One
 
-- [Git](https://web.digitalinnovation.one/browse?filter=Git)
-- [Linux](https://web.digitalinnovation.one/browse?filter=Linux)
-- [Docker](https://web.digitalinnovation.one/browse?filter=Docker)
-- [AWS](https://web.digitalinnovation.one/browse?filter=AWS)
-- [Azure](https://web.digitalinnovation.one/browse?filter=Azure)
-- [Cursos interessantes para quem está começando](https://digitalinnovation.one/)
+- [Git](https://web.dio.me/play?search=Git&tab=cursos)
+- [Linux](https://web.dio.me/play?search=Linux&tab=cursos)
+- [Docker](https://web.dio.me/play?search=Docker&tab=cursos)
+- [AWS](https://web.dio.me/play?search=AWS&tab=cursos)
+- [Azure](https://web.dio.me/play?search=Azure&tab=cursos)
+- [Cursos interessantes para quem está começando](https://web.dio.me/home)
 
 ## EKS Workshop
 
