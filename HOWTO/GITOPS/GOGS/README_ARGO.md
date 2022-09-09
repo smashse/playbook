@@ -239,7 +239,7 @@ multipass info gogs | grep IPv4 | cut -f 2 -d ":" | tr -d [:blank:] | sed 's/$/ 
 
 ### URL for gogs.local
 
-<http://gogs.local>
+<http://gogs.local:3000>
 
 ![Finish installing Gogs](./img/gogs_000.png "Finish installing Gogs")
 
