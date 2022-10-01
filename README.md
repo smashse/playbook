@@ -28,3 +28,8 @@ Este repositório é um guia simples para aprendizado de alguns conceitos e tecn
 
 - [LINUX](./HOWTO/ENV/LINUXENV.md)
 - [MAC](./HOWTO/ENV/MACENV.md)
+
+
+### Windows
+
+- [WSL](./HOWTO/WINDOWS/WSL/README.md)
