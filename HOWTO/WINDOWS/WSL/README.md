@@ -17,7 +17,7 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 ## Update Windows Subsystem Linux
 
 ```pwsh
-powwershell Invoke-WebRequest -Uri https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi -OutFile WSLUpdate.msi -UseBasicParsing
+powershell Invoke-WebRequest -Uri https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi -OutFile WSLUpdate.msi -UseBasicParsing
 ```
 
 OR
@@ -88,7 +88,7 @@ mkdir Ubuntu\Focal\Ubuntu-20.04
 - **Download ROOTFS Image For WSL**
 
 ```pwsh
-powwershell Invoke-WebRequest -Uri https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64-wsl.rootfs.tar.gz -OutFile Ubuntu\Focal\Ubuntu-20.04.tar.gz -UseBasicParsing
+powershell Invoke-WebRequest -Uri https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64-wsl.rootfs.tar.gz -OutFile Ubuntu\Focal\Ubuntu-20.04.tar.gz -UseBasicParsing
 ```
 
 OR
@@ -148,7 +148,7 @@ mkdir Ubuntu\Focal\ubuntu_focal
 - **Download Image For WSL**
 
 ```pwsh
-powwershell Invoke-WebRequest -Uri https://aka.ms/wslubuntu2004 -OutFile Ubuntu\Focal\ubuntu_focal\ubuntu-2004.appx -UseBasicParsing
+powershell Invoke-WebRequest -Uri https://aka.ms/wslubuntu2004 -OutFile Ubuntu\Focal\ubuntu_focal\ubuntu-2004.appx -UseBasicParsing
 ```
 
 OR
@@ -223,7 +223,7 @@ mkdir Ubuntu\Jammy\Ubuntu-22.04
 - **Download ROOTFS Image For WSL**
 
 ```pwsh
-powwershell Invoke-WebRequest -Uri https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64-wsl.rootfs.tar.gz -OutFile Ubuntu\Jammy\Ubuntu-22.04.tar.gz -UseBasicParsing
+powershell Invoke-WebRequest -Uri https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64-wsl.rootfs.tar.gz -OutFile Ubuntu\Jammy\Ubuntu-22.04.tar.gz -UseBasicParsing
 ```
 
 OR
@@ -283,7 +283,7 @@ mkdir Ubuntu\Jammy\ubuntu_jammy
 - **Download Image For WSL**
 
 ```pwsh
-powwershell Invoke-WebRequest -Uri https://aka.ms/wslubuntu2204 -OutFile Ubuntu\Jammy\ubuntu_jammy\ubuntu-2204.appx -UseBasicParsing
+powershell Invoke-WebRequest -Uri https://aka.ms/wslubuntu2204 -OutFile Ubuntu\Jammy\ubuntu_jammy\ubuntu-2204.appx -UseBasicParsing
 ```
 
 OR
