@@ -431,6 +431,9 @@ Run the commands below in the CMD to easily install on Windows:
 
 ```pwsh
 curl.exe -L -o Downloads\Hack.exe https://github.com/source-foundry/Hack-windows-installer/releases/download/v1.6.0/HackFontsWindowsInstaller.exe
+```
+
+```pwsh
 Downloads\Hack.exe /SILENT
 ```
 
