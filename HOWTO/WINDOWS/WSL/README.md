@@ -437,6 +437,48 @@ curl.exe -L -o Downloads\Hack.exe https://github.com/source-foundry/Hack-windows
 Downloads\Hack.exe /SILENT
 ```
 
+### Homebrew (Optional)
+
+<https://docs.brew.sh/Homebrew-on-Linux#install>
+
+```bash
+sudo apt -y install build-essential procps curl file git
+```
+
+```bash
+git config --global http.sslVerify false
+```
+
+```bash
+echo "insecure" | sudo tee $HOME/.curlrc
+echo "insecure" | sudo tee /root/.curlrc
+```
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+
+```bash
+clear ; echo '
+# Set PATH, MANPATH, etc., for Homebrew.
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' | sudo tee -a /etc/profile
+```
+
+```bash
+clear ; echo "
+#HOMEBREW
+export HOMEBREW_CURLRC=1
+export HOMEBREW_FORCE_BREWED_CURL=1
+alias brew='HOMEBREW_FORCE_BREWED_CURL=1 ; brew'" | sudo tee -a /etc/bash.bashrc
+```
+
+```bash
+brew install kubectl
+brew install helm
+brew install terraform
+brew install awscli
+```
+
 **Sources:**
 
 <https://learn.microsoft.com/en-us/windows/wsl>
