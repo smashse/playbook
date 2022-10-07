@@ -16,6 +16,8 @@ Este repositório é um guia simples para aprendizado de alguns conceitos e tecn
 
 [Grafana](./HOWTO/GRAFANA/README.md)
 
+[Botkube](./HOWTO/BOTKUBE/README.md)
+
 [Kibana](./HOWTO/ELASTIC/README.md)
 
 [Vault](./HOWTO/VAULT/README.md)
