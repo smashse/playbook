@@ -5,37 +5,46 @@
 ## Criar lista de extensões para VSCode/Codium
 
 ```bash
-echo "AmazonWebServices.aws-toolkit-vscode
+echo "amazonwebservices.aws-toolkit-vscode
+betajob.modulestf
+DavidAnson.vscode-markdownlint
+eamodio.gitlens
+esbenp.prettier-vscode
 GitHub.github-vscode-theme
 GoogleCloudTools.cloudcode
-HashiCorp.terraform
-HashiCorp.HCL
-MS-CEINTL.vscode-language-pack-pt-BR
-Pivotal.vscode-boot-dev-pack
-Pivotal.vscode-spring-boot
-betajob.modulestf
-eamodio.gitlens
-emroussel.atomize-atom-one-dark-theme
-esbenp.prettier-vscode
-formulahendry.docker-extension-pack
+hashicorp.hcl
+hashicorp.sentinel
+hashicorp.terraform
+hashicorp.terraform-preview
 julialang.language-julia
-kde.breeze
 ms-azuretools.vscode-azureterraform
 ms-azuretools.vscode-docker
 ms-kubernetes-tools.vscode-aks-tools
 ms-kubernetes-tools.vscode-kubernetes-tools
 ms-python.python
+ms-python.vscode-pylance
+ms-toolsai.jupyter
+ms-toolsai.jupyter-keymap
+ms-toolsai.jupyter-renderers
+ms-toolsai.vscode-jupyter-cell-tags
+ms-toolsai.vscode-jupyter-slideshow
+ms-vscode.azure-account
 ms-vscode-remote.vscode-remote-extensionpack
-ms-vscode.Theme-PredawnKit
-ms-vscode.node-debug2
 ms-vscode.vscode-typescript-next
 ms-vscode.vscode-typescript-tslint-plugin
+Pivotal.vscode-boot-dev-pack
+Pivotal.vscode-spring-boot
+pulumi.pulumi-lsp-client
+redhat.ansible
 redhat.fabric8-analytics
 redhat.java
 redhat.vscode-knative
+redhat.vscode-xml
 redhat.vscode-yaml
-vscoss.vscode-ansible
-zhuangtongfa.Material-theme" > vscode.list
+vscjava.vscode-java-debug
+vscjava.vscode-spring-boot-dashboard
+vscjava.vscode-spring-initializr
+vscodevim.vim" > vscode.list
 ```
 
 ## Instalar o VSCode
