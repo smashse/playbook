@@ -2,7 +2,7 @@
 
 ## 4Linux
 
-- [Cursos de TI gratuitos oferecidos pela 4Linux](https://4linux.com.br/cursos/cursos-gratuitos/)
+- [Cursos de TI para iniciantes oferecidos pela 4Linux](https://4linux.com.br/cursos/cursos-starter/)
 
 ## Academia
 
