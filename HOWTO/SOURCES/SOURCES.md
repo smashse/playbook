@@ -26,6 +26,10 @@
 
 - [O que é o DevOps?](https://aws.amazon.com/pt/devops/what-is-devops/)
 
+##CNCF
+
+- [The Illustrated Children’s Guide to Kubernetes](https://www.cncf.io/phippy/the-childrens-illustrated-guide-to-kubernetes/)
+
 ## Codefresh
 
 - [Implement GitOps at Scale with Argo CD](https://codefresh.io/ebooks/implement-gitops-scale-today/?utm_source=linkedin&utm_medium=social&utm_content=manning_ebook&utm_campaign=ebooks)
