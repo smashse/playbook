@@ -26,7 +26,7 @@
 
 - [O que é o DevOps?](https://aws.amazon.com/pt/devops/what-is-devops/)
 
-##CNCF
+## CNCF
 
 - [The Illustrated Children’s Guide to Kubernetes](https://www.cncf.io/phippy/the-childrens-illustrated-guide-to-kubernetes/)
 
