@@ -48,19 +48,19 @@ spec:
         app: teste-deployment
     spec:
       containers:
-      - image: nginx:stable
-        name: teste-pod
-        ports:
-        - containerPort: 8080
-          protocol: TCP
-        resources: {}
-        volumeMounts:
-          - name: teste-config
-            mountPath: /etc/nginx/conf.d
+        - image: nginx:stable
+          name: teste-pod
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: teste-config
+              mountPath: /etc/nginx/conf.d
       volumes:
         - name: teste-config
           configMap:
-            name: teste-config         
+            name: teste-config
       dnsPolicy: ClusterFirst
 ---
 apiVersion: v1
@@ -72,9 +72,9 @@ metadata:
   namespace: teste
 spec:
   ports:
-  - port: 8080
-    protocol: TCP
-    targetPort: 8080
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
   selector:
     app: teste-deployment
   type: NodePort
@@ -88,13 +88,13 @@ metadata:
   namespace: teste
 spec:
   rules:
-  - host: teste.info
-    http:
-      paths:
-      - backend:
-          service:
-            name: teste-service
-            port:
-              number: 8080
-        path: /
-        pathType: Prefix
+    - host: teste.info
+      http:
+        paths:
+          - backend:
+              service:
+                name: teste-service
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix

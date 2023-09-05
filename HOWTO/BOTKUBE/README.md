@@ -12,7 +12,7 @@ runcmd:
  - snap install microk8s --classic
  - microk8s status --wait-ready
  - microk8s enable dns ingress metrics-server prometheus' > cloud-config-microk8s.yaml
- ```
+```
 
 ```bash
 multipass launch jammy -n microk8s -c 2 -m 4G -d 10G --cloud-init cloud-config-microk8s.yaml

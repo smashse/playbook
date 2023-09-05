@@ -16,16 +16,16 @@ spec:
         app: teste-deployment
     spec:
       containers:
-      - image: nginx:stable
-        name: nginx
-        ports:
-        - containerPort: 8080
-        resources: {}
-        volumeMounts:
-        - mountPath: /etc/nginx/conf.d
-          name: teste-config
+        - image: nginx:stable
+          name: nginx
+          ports:
+            - containerPort: 8080
+          resources: {}
+          volumeMounts:
+            - mountPath: /etc/nginx/conf.d
+              name: teste-config
       dnsPolicy: ClusterFirst
       volumes:
-      - configMap:
+        - configMap:
+            name: teste-config
           name: teste-config
-        name: teste-config

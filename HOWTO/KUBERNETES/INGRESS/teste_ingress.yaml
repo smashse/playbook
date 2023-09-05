@@ -5,13 +5,13 @@ metadata:
   namespace: teste
 spec:
   rules:
-  - host: teste.info
-    http:
-      paths:
-      - backend:
-          service:
-            name: teste-service
-            port:
-              number: 8080
-        path: /
-        pathType: Prefix
+    - host: teste.info
+      http:
+        paths:
+          - backend:
+              service:
+                name: teste-service
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix

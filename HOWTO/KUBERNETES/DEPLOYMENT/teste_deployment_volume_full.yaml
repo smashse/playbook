@@ -24,24 +24,24 @@ spec:
         app: teste-deployment
     spec:
       containers:
-      - image: nginx:stable
-        imagePullPolicy: IfNotPresent
-        name: nginx
-        ports:
-        - containerPort: 8080
-          protocol: TCP
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /etc/nginx/conf.d
-          name: teste-config
+        - image: nginx:stable
+          imagePullPolicy: IfNotPresent
+          name: nginx
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /etc/nginx/conf.d
+              name: teste-config
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       volumes:
-      - configMap:
-          defaultMode: 420
+        - configMap:
+            defaultMode: 420
+            name: teste-config
           name: teste-config
-        name: teste-config

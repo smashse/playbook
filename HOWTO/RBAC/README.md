@@ -10,7 +10,7 @@ runcmd:
  - snap install microk8s --classic
  - microk8s status --wait-ready
  - microk8s enable dns ingress' > cloud-config-microk8s.yaml
- ```
+```
 
 ```bash
 multipass launch focal -n microk8s -c 2 -m 4G -d 10G --cloud-init cloud-config-microk8s.yaml
@@ -38,7 +38,7 @@ kubectl config get-contexts
 
 ```text
 CURRENT   NAME       CLUSTER            AUTHINFO   NAMESPACE
-*         microk8s   microk8s-cluster   admin 
+*         microk8s   microk8s-cluster   admin
 ```
 
 ```bash
@@ -48,22 +48,22 @@ kubectl config view
 ```yaml
 apiVersion: v1
 clusters:
-- cluster:
-    certificate-authority-data: DATA+OMITTED
-    server: https://<YOUR_IP>:16443
-  name: microk8s-cluster
+  - cluster:
+      certificate-authority-data: DATA+OMITTED
+      server: https://<YOUR_IP>:16443
+    name: microk8s-cluster
 contexts:
-- context:
-    cluster: microk8s-cluster
-    user: admin
-  name: microk8s
+  - context:
+      cluster: microk8s-cluster
+      user: admin
+    name: microk8s
 current-context: microk8s
 kind: Config
 preferences: {}
 users:
-- name: admin
-  user:
-    token: REDACTED
+  - name: admin
+    user:
+      token: REDACTED
 ```
 
 ```bash
@@ -73,22 +73,22 @@ kubectl config view | sed "s/DATA+OMITTED/\${CA}/" | sed "s/admin/user-\${USER_N
 ```yaml
 apiVersion: v1
 clusters:
-- cluster:
-    certificate-authority-data: ${CA}
-    server: https://<YOUR_IP>:16443
-  name: microk8s-cluster
+  - cluster:
+      certificate-authority-data: ${CA}
+      server: https://<YOUR_IP>:16443
+    name: microk8s-cluster
 contexts:
-- context:
-    cluster: microk8s-cluster
-    user: user-${USER_NAME}
-  name: microk8s
+  - context:
+      cluster: microk8s-cluster
+      user: user-${USER_NAME}
+    name: microk8s
 current-context: microk8s
 kind: Config
 preferences: {}
 users:
-- name: user-${USER_NAME}
-  user:
-    token: ${TOKEN}
+  - name: user-${USER_NAME}
+    user:
+      token: ${TOKEN}
 ```
 
 ## Create individual Kubeconfig's
@@ -199,15 +199,15 @@ deployments           deploy       apps/v1      true         Deployment         
 The rule would be like this.
 
 ```yaml
-  - apiVersion: rbac.authorization.k8s.io/v1
-    kind: ClusterRole
-    metadata:
-      name: ${USER_NAME}
-      namespace: default
-    rules:
-      - apiGroups: ['apps']
-        resources: ['deployments']
-        verbs: ['create', 'delete', 'get', 'list']
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRole
+  metadata:
+    name: ${USER_NAME}
+    namespace: default
+  rules:
+    - apiGroups: ["apps"]
+      resources: ["deployments"]
+      verbs: ["create", "delete", "get", "list"]
 ```
 
 **Sources:**

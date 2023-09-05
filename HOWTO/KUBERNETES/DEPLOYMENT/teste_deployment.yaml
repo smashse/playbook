@@ -16,10 +16,10 @@ spec:
         app: teste-deployment
     spec:
       containers:
-      - image: nginx:stable
-        name: nginx
-        ports:
-        - containerPort: 8080
-          protocol: TCP
-        resources: {}
+        - image: nginx:stable
+          name: nginx
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
       dnsPolicy: ClusterFirst
