@@ -4,39 +4,44 @@
 
 **SO:** UBUNTU
 
-## Instalar o VSCode
+## Criar lista de extensões para VSCode/Codium
 
-```shell
+```bash
+echo "GitHub.github-vscode-theme
+HashiCorp.terraform
+HashiCorp.HCL
+MS-CEINTL.vscode-language-pack-pt-BR
+eamodio.gitlens
+esbenp.prettier-vscode
+ms-vscode.Theme-PredawnKit
+ms-vscode.node-debug2
+ms-vscode.vscode-typescript-next
+ms-vscode.vscode-typescript-tslint-plugin
+redhat.vscode-yaml" > vscode.list
+```
+
+```bash
+for i in `cat vscode.list` ; do code --install-extension $i --force ; done
+```
+
+**VSCode**
+
+```bash
 sudo snap install code --classic
 ```
 
-```shell
-code --install-extension AmazonWebServices.aws-toolkit-vscode
-code --install-extension GitHub.github-vscode-theme
-code --install-extension GoogleCloudTools.cloudcode
-code --install-extension HashiCorp.terraform
-code --install-extension MS-CEINTL.vscode-language-pack-pt-BR
-code --install-extension Pivotal.vscode-boot-dev-pack
-code --install-extension Pivotal.vscode-spring-boot
-code --install-extension eamodio.gitlens
-code --install-extension esbenp.prettier-vscode
-code --install-extension formulahendry.docker-extension-pack
-code --install-extension kde.breeze
-code --install-extension ms-azuretools.vscode-azureterraform
-code --install-extension ms-azuretools.vscode-docker
-code --install-extension ms-kubernetes-tools.vscode-aks-tools
-code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
-code --install-extension ms-python.python
-code --install-extension ms-vscode-remote.vscode-remote-extensionpack
-code --install-extension ms-vscode.Theme-PredawnKit
-code --install-extension ms-vscode.node-debug2
-code --install-extension ms-vscode.vscode-typescript-next
-code --install-extension ms-vscode.vscode-typescript-tslint-plugin
-code --install-extension redhat.fabric8-analytics
-code --install-extension redhat.java
-code --install-extension redhat.vscode-knative
-code --install-extension redhat.vscode-yaml
-code --install-extension vscoss.vscode-ansible
+```bash
+for i in `cat vscode.list` ; do code --install-extension $i --force ; done
+```
+
+**Codium**
+
+```bash
+sudo snap install codium --classic
+```
+
+```bash
+for i in `cat vscode.list` ; do codium --install-extension $i --force ; done
 ```
 
 ### Instalar o Kubectl
