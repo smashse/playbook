@@ -33,7 +33,7 @@ runcmd:
 Launch a MicroK8s instance using Multipass:
 
 ```bash
-multipass launch noble -n microk8s -c 3 -m 6G -d 10G --cloud-init cloud-config-microk8s.yaml
+multipass launch noble -n microk8s -c 2 -m 4G -d 10G --cloud-init cloud-config-microk8s.yaml
 ```
 
 ### 2.3 Export MicroK8s Configuration for Kubectl
