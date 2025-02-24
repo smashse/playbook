@@ -110,7 +110,7 @@ In Datadog, **US1**, **US3**, and **US5** refer to different **regions (endpoint
 
 ### **US1 (US Region - Default)**
 
-- **Endpoint**: `https://app.datadoghq.com`
+- **Endpoint**: `https://datadoghq.com`
 - **Description**: The primary and default Datadog region for customers in the United States.
 - **Data Residency**: Data is stored and processed in the United States.
 - **Use Case**: Ideal for customers who do not have specific data residency requirements outside the US.
