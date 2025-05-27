@@ -1,3 +1,5 @@
+*Read this in other languages: [en-US](MACENV.md), [pt-BR](MACENV.pt-BR.md)*
+
 # Install Homebrew
 
 Homebrew is a free and open-source package management system for Mac OS X.

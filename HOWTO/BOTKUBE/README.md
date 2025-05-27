@@ -1,3 +1,5 @@
+*Read this in other languages: [en-US](README.md), [pt-BR](README.pt-BR.md)*
+
 # Botkube + Grafana, Prometheus and Alertmanager
 
 This POC aims to demonstrate an environment where Kubernetes alerts, separated by namespaces, will be forwarded to multiple channels using Botkube.

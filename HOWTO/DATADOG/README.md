@@ -1,3 +1,5 @@
+*Read this in other languages: [en-US](README.md), [pt-BR](README.pt-BR.md)*
+
 # Proof of Concept (POC) Requirements
 
 In this POC, we will use **Multipass** to create instances for installing **DataDog** and **MicroK8s**. The goal is to establish DataDog as an observability tool for the Kubernetes cluster provisioned with MicroK8s.

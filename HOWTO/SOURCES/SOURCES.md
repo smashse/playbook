@@ -1,8 +1,10 @@
-# Ebooks, Cursos e Bootcamps
+*Read this in other languages: [en-US](SOURCES.md), [pt-BR](SOURCES.pt-BR.md)*
+
+# Ebooks, Courses and Bootcamps
 
 ## 4Linux
 
-- [Cursos de TI para iniciantes oferecidos pela 4Linux](https://4linux.com.br/cursos/cursos-starter/)
+- [IT courses for beginners offered by 4Linux](https://4linux.com.br/cursos/cursos-starter/)
 
 ## Academia
 
@@ -24,7 +26,7 @@
 
 ## AWS
 
-- [O que é o DevOps?](https://aws.amazon.com/pt/devops/what-is-devops/)
+- [What is DevOps?](https://aws.amazon.com/devops/what-is-devops/)
 
 ## CNCF
 
@@ -49,20 +51,20 @@
 - [Docker](https://web.dio.me/play?search=Docker&tab=cursos)
 - [AWS](https://web.dio.me/play?search=AWS&tab=cursos)
 - [Azure](https://web.dio.me/play?search=Azure&tab=cursos)
-- [Cursos interessantes para quem está começando](https://web.dio.me/home)
+- [Interesting courses for beginners](https://web.dio.me/home)
 
 ## EKS Workshop
 
-[Trilhas interessantes quanto a EKS, Grafana, Kubernetes e etc.](https://www.eksworkshop.com/)
+[Interesting tracks regarding EKS, Grafana, Kubernetes, etc.](https://www.eksworkshop.com/)
 
 ## Eric Evans
 
 - [Domain-Driven Design: Tackling Complexity in the Heart of Software](https://www.dddcommunity.org/book/evans_2003/)
-- [Tradução de Ricardo Pereira Dias](https://www.ricardopedias.com.br/assets/docs/ddd-referencia.pdf)
+- [Translation by Ricardo Pereira Dias](https://www.ricardopedias.com.br/assets/docs/ddd-referencia.pdf)
 
 ## FIAP + Movimento Brasil Digital
 
-- [20 Nano Courses gratuitos](https://on.fiap.com.br/local/movimentobrasildigital/)
+- [20 Free Nano Courses](https://on.fiap.com.br/local/movimentobrasildigital/)
 
 ## Full Cycle Development
 
@@ -93,7 +95,7 @@
 
 - [Ansible for Kubernetes](https://www.ansibleforkubernetes.com/)
 
-- [Docker para desenvolvedores](https://leanpub.com/dockerparadesenvolvedores)
+- [Docker for Developers](https://leanpub.com/dockerparadesenvolvedores)
 
 ## LinkedIn
 
@@ -105,11 +107,11 @@
 
 - [Designing Distributed Systems](https://azure.microsoft.com/en-us/resources/designing-distributed-systems/)
 
-- [O que é o DevOps?](https://azure.microsoft.com/pt-br/overview/what-is-devops/)
+- [What is DevOps?](https://azure.microsoft.com/overview/what-is-devops/)
 
-- [Perguntas frequentes: Qual é a relação entre SRE e DevOps?](https://docs.microsoft.com/pt-br/azure/site-reliability-engineering/articles/devops)
+- [Frequently asked questions: What is the relationship between SRE and DevOps?](https://docs.microsoft.com/azure/site-reliability-engineering/articles/devops)
 
-- [Introdução à SRE (Engenharia de Confiabilidade do Site)](https://docs.microsoft.com/pt-br/learn/modules/intro-to-site-reliability-engineering/)
+- [Introduction to Site Reliability Engineering (SRE)](https://docs.microsoft.com/learn/modules/intro-to-site-reliability-engineering/)
 
 - [Azure DevOps Explained](https://azure.microsoft.com/en-us/resources/azure-devops-explained/)
 
@@ -131,15 +133,15 @@
 
 - [Red Hat Developer cheat sheets](https://developers.redhat.com/cheatsheets)
 
-- [Virtualização](https://www.redhat.com/pt-br/topics/virtualization)
+- [Virtualization](https://www.redhat.com/topics/virtualization)
 
-- [Cloud Computing](https://www.redhat.com/pt-br/topics/cloud)
+- [Cloud Computing](https://www.redhat.com/topics/cloud)
 
-- [Introdução ao DevOps](https://www.redhat.com/pt-br/topics/devops)
+- [Introduction to DevOps](https://www.redhat.com/topics/devops)
 
-- [SRE (Site Reliability Engineering) | Engenharia de Confiabilidade de Sites](https://www.redhat.com/pt-br/topics/devops/what-is-sre)
+- [SRE (Site Reliability Engineering)](https://www.redhat.com/topics/devops/what-is-sre)
 
-- [Como ensinar um elefante a dançar](https://www.redhat.com/pt-br/engage/teaching-an-elephant-to-dance)
+- [How to teach an elephant to dance](https://www.redhat.com/pt-br/engage/teaching-an-elephant-to-dance)
 
 ## SUSE
 
@@ -167,7 +169,7 @@
 
 - [Books authored by VMware Tanzu advocates on cloud-native technology](https://tanzu.vmware.com/content/ebooks)
 
-# Outros
+# Others
 
 ## Kubetools
 
@@ -229,6 +231,6 @@
 
 - [Kubernetes Examples](https://github.com/ContainerSolutions/kubernetes-examples)
 
-# DOCUMENTÁRIOS
+# DOCUMENTARIES
 
 - Kubernetes: The Documentary [PART 1](https://www.youtube.com/watch?v=BE77h7dmoQU) + [PART 2](https://www.youtube.com/watch?v=318elIq37PE)

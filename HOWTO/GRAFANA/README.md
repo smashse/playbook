@@ -1,3 +1,5 @@
+*Read this in other languages: [en-US](README.md), [pt-BR](README.pt-BR.md)*
+
 # Requirements for this POC
 
 This POC will use Multipass to create instances to install Grafana, Prometheus and Microk8s, we will install Metrics Server, Kube-State-Metrics and Istio + Basic Prometheus and then we will make metrics used by our main instance with Prometheus.

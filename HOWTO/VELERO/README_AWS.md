@@ -1,3 +1,5 @@
+*Read this in other languages: [en-US](README_AWS.md), [pt-BR](README_AWS.pt-BR.md)*
+
 This POC (Proof of Concept) will use [EKSCTL](https://eksctl.io/), the official CLI for Amazon EKS to create a Kubernetes cluster, [MinIO Client](https://minio.github.io/mc/) to access Amazon S3 and [Velero](https://velero.io/) to backup the resources present in a [Kubernetes](https://kubernetes.io/) namespace to a bucket.
 
 ```bash

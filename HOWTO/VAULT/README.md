@@ -1,3 +1,5 @@
+*Read this in other languages: [en-US](README.md), [pt-BR](README.pt-BR.md)*
+
 # Requirements for this POC
 
 In this POC we will use Multipass to create instances to install the Vault and Microk8s, then establishing the Vault server as a credential manager for the Kubernetes cluster provisioned with Microk8s.

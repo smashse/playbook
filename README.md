@@ -1,6 +1,8 @@
+*Read this in other languages: [en-US](README.md), [pt-BR](README.pt-BR.md)*
+
 # PLAYBOOK
 
-Este repositório é um guia simples para aprendizado de alguns conceitos e tecnologias usadas com Containers, Orquestração e Observabilidade.
+This repository is a simple guide for learning some concepts and technologies used with Containers, Orchestration, and Observability.
 
 [Docker](./HOWTO/DOCKER/README.md)
 
@@ -26,9 +28,9 @@ Este repositório é um guia simples para aprendizado de alguns conceitos e tecn
 
 [GitOps](./HOWTO/GITOPS/README.md)
 
-[Ebooks, Cursos e Bootcamps](./HOWTO/SOURCES/SOURCES.md)
+[Ebooks, Courses, and Bootcamps](./HOWTO/SOURCES/SOURCES.md)
 
-### AMBIENTE DE TRABALHO
+### WORK ENVIRONMENT
 
 - [LINUX](./HOWTO/ENV/LINUXENV.md)
 - [MAC](./HOWTO/ENV/MACENV.md)

@@ -1,8 +1,10 @@
-# Recursos adicionais
+*Read this in other languages: [en-US](RESOURCES.md), [pt-BR](RESOURCES.pt-BR.md)*
 
-## Instalar Krew
+# Additional Resources
 
-**Krew é o gerenciador de plug-ins para a kubectl.**
+## Install Krew
+
+**Krew is the plugin manager for kubectl.**
 
 <https://github.com/kubernetes-sigs/krew>
 
@@ -20,9 +22,9 @@
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 ```
 
-## Instalar o Neat
+## Install Neat
 
-**Neat torna os manifestos do Kubernetes muito mais legíveis ao remover a desordem.**
+**Neat makes Kubernetes manifests much more readable by removing clutter.**
 
 <https://github.com/itaysk/kubectl-neat>
 
@@ -30,50 +32,50 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 kubectl krew install neat
 ```
 
-## Criar namespace
+## Create namespace
 
 ```bash
-kubectl create namespace teste
+kubectl create namespace test
 ```
 
 ```bash
-kubectl create ns teste
+kubectl create ns test
 ```
 
-OU
+OR
 
 ```bash
 echo 'apiVersion: v1
 kind: Namespace
 metadata:
-  name: teste' > teste_namespace.yaml
+  name: test' > test_namespace.yaml
 ```
 
 ```bash
-kubectl apply -f teste_namespace.yaml
+kubectl apply -f test_namespace.yaml
 ```
 
-### Exibir o yaml do namespace
+### Display namespace yaml
 
 ```bash
-kubectl get namespace teste -o yaml
+kubectl get namespace test -o yaml
 ```
 
-### Exportar o yaml do namespace
+### Export namespace yaml
 
-**_BRUTO_**
+**_RAW_**
 
 ```bash
-kubectl get namespace teste -o yaml > teste_namespace.yaml
+kubectl get namespace test -o yaml > test_namespace.yaml
 ```
 
-**_LIMPO_**
+**_CLEAN_**
 
 ```bash
-kubectl get namespace teste -o yaml | kubectl neat > teste_namespace.yaml
+kubectl get namespace test -o yaml | kubectl neat > test_namespace.yaml
 ```
 
-## Criar configmap
+## Create configmap
 
 ```bash
 echo 'server {
@@ -94,10 +96,10 @@ echo 'server {
 ```
 
 ```bash
-kubectl create configmap teste-config --from-file=default.conf --namespace=teste
+kubectl create configmap test-config --from-file=default.conf --namespace=test
 ```
 
-OU
+OR
 
 ```bash
 echo 'apiVersion: v1
@@ -120,59 +122,59 @@ data:
     }
 kind: ConfigMap
 metadata:
-  name: teste-config
-  namespace: teste' > teste_configmap.yaml
+  name: test-config
+  namespace: test' > test_configmap.yaml
 ```
 
 ```bash
-kubectl apply -f teste_configmap.yaml
+kubectl apply -f test_configmap.yaml
 ```
 
-### Exibir o yaml do configmap
+### Display configmap yaml
 
 ```bash
-kubectl get configmap teste-config --namespace=teste -o yaml
+kubectl get configmap test-config --namespace=test -o yaml
 ```
 
-### Exportar o yaml do configmap
+### Export configmap yaml
 
-**_BRUTO_**
+**_RAW_**
 
 ```bash
-kubectl get configmap teste-config --namespace=teste -o yaml > teste_configmap.yaml
+kubectl get configmap test-config --namespace=test -o yaml > test_configmap.yaml
 ```
 
-**_LIMPO_**
+**_CLEAN_**
 
 ```bash
-kubectl get configmap teste-config --namespace=teste -o yaml | kubectl neat > teste_configmap.yaml
+kubectl get configmap test-config --namespace=test -o yaml | kubectl neat > test_configmap.yaml
 ```
 
-## Criar deployment
+## Create deployment
 
 ```bash
-kubectl create deployment teste-deployment --image=nginx:stable --port=8080 --replicas=1 --namespace=teste
+kubectl create deployment test-deployment --image=nginx:stable --port=8080 --replicas=1 --namespace=test
 ```
 
-OU
+OR
 
 ```bash
 echo 'apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: teste-deployment
-  name: teste-deployment
-  namespace: teste
+    app: test-deployment
+  name: test-deployment
+  namespace: test
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: teste-deployment
+      app: test-deployment
   template:
     metadata:
       labels:
-        app: teste-deployment
+        app: test-deployment
     spec:
       containers:
       - image: nginx:stable
@@ -180,141 +182,141 @@ spec:
         ports:
         - containerPort: 8080
         volumeMounts:
-          - name: teste-config
+          - name: test-config
             mountPath: /etc/nginx/conf.d
       volumes:
-        - name: teste-config
+        - name: test-config
           configMap:
-            name: teste-config
-      dnsPolicy: ClusterFirst' > teste_deployment_volume.yaml
+            name: test-config
+      dnsPolicy: ClusterFirst' > test_deployment_volume.yaml
 ```
 
 ```bash
-kubectl apply -f teste_deployment_volume.yaml
+kubectl apply -f test_deployment_volume.yaml
 ```
 
-### Exibir o yaml do deployment
+### Display deployment yaml
 
 ```bash
-kubectl get deployment teste-deployment --namespace=teste -o yaml
+kubectl get deployment test-deployment --namespace=test -o yaml
 ```
 
-### Exportar o yaml do deployment
+### Export deployment yaml
 
-**_BRUTO_**
+**_RAW_**
 
 ```bash
-kubectl get deployment teste-deployment --namespace=teste -o yaml > teste_deployment_volume.yaml
+kubectl get deployment test-deployment --namespace=test -o yaml > test_deployment_volume.yaml
 ```
 
-**_LIMPO_**
+**_CLEAN_**
 
 ```bash
-kubectl get deployment teste-deployment --namespace=teste -o yaml | kubectl neat > teste_deployment_volume.yaml
+kubectl get deployment test-deployment --namespace=test -o yaml | kubectl neat > test_deployment_volume.yaml
 ```
 
-## Criar service
+## Create service
 
 ```bash
-kubectl expose deployment teste-deployment --name=teste-service --type=NodePort --port=8080 --namespace=teste
+kubectl expose deployment test-deployment --name=test-service --type=NodePort --port=8080 --namespace=test
 ```
 
-OU
+OR
 
 ```bash
 echo 'apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: teste-deployment
-  name: teste-service
-  namespace: teste
+    app: test-deployment
+  name: test-service
+  namespace: test
 spec:
   ports:
   - port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
-    app: teste-deployment
+    app: test-deployment
   type: NodePort
 status:
-  loadBalancer: {}' > teste_service.yaml
+  loadBalancer: {}' > test_service.yaml
 ```
 
 ```bash
-kubectl apply -f teste_service.yaml
+kubectl apply -f test_service.yaml
 ```
 
-### Exibir yaml do service
+### Display service yaml
 
 ```bash
-kubectl get service teste-service --namespace=teste -o yaml
+kubectl get service test-service --namespace=test -o yaml
 ```
 
-### Exportar yaml do service
+### Export service yaml
 
-**_BRUTO_**
+**_RAW_**
 
 ```bash
-kubectl get service teste-service --namespace=teste -o yaml > teste_service.yaml
+kubectl get service test-service --namespace=test -o yaml > test_service.yaml
 ```
 
-**_LIMPO_**
+**_CLEAN_**
 
 ```bash
-kubectl get service teste-service --namespace=teste -o yaml | kubectl neat > teste_service.yaml
+kubectl get service test-service --namespace=test -o yaml | kubectl neat > test_service.yaml
 ```
 
-## Criar ingress
+## Create ingress
 
 ```bash
-kubectl create ingress teste-ingress --namespace teste --rule="teste.info/*=teste-service:8080"
+kubectl create ingress test-ingress --namespace test --rule="test.info/*=test-service:8080"
 ```
 
-OU
+OR
 
 ```bash
 echo 'apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: teste-ingress
-  namespace: teste
+  name: test-ingress
+  namespace: test
 spec:
   rules:
-  - host: teste.info
+  - host: test.info
     http:
       paths:
       - backend:
           service:
-            name: teste-service
+            name: test-service
             port:
               number: 8080
         path: /
-        pathType: Prefix' > teste_ingress.yaml
+        pathType: Prefix' > test_ingress.yaml
 ```
 
 ```bash
-kubectl apply -f teste_ingress.yaml --namespace=teste
+kubectl apply -f test_ingress.yaml --namespace=test
 ```
 
-### Exibir yaml do ingress
+### Display ingress yaml
 
 ```bash
-kubectl get ingress teste-ingress --namespace=teste -o yaml
+kubectl get ingress test-ingress --namespace=test -o yaml
 ```
 
-### Exportar yaml do ingress
+### Export ingress yaml
 
-**_BRUTO_**
+**_RAW_**
 
 ```bash
-kubectl get ingress teste-ingress --namespace=teste -o yaml > teste_ingress.yaml
+kubectl get ingress test-ingress --namespace=test -o yaml > test_ingress.yaml
 ```
 
-**_LIMPO_**
+**_CLEAN_**
 
 ```bash
-kubectl get ingress teste-ingress --namespace=teste -o yaml | kubectl neat > teste_ingress.yaml
+kubectl get ingress test-ingress --namespace=test -o yaml | kubectl neat > test_ingress.yaml
 ```
 
 # COMBO
@@ -325,7 +327,7 @@ items:
 - apiVersion: v1
   kind: Namespace
   metadata:
-    name: teste
+    name: test
 - apiVersion: v1
   data:
     default.conf: |
@@ -344,20 +346,20 @@ items:
       }
   kind: ConfigMap
   metadata:
-    name: teste-config
-    namespace: teste
+    name: test-config
+    namespace: test
 - apiVersion: apps/v1
   kind: Deployment
   metadata:
     labels:
-      app: teste-deployment
-    name: teste-deployment
-    namespace: teste
+      app: test-deployment
+    name: test-deployment
+    namespace: test
   spec:
     replicas: 1
     selector:
       matchLabels:
-        app: teste-deployment
+        app: test-deployment
     strategy:
       rollingUpdate:
         maxSurge: 25%
@@ -366,56 +368,56 @@ items:
     template:
       metadata:
         labels:
-          app: teste-deployment
+          app: test-deployment
       spec:
         containers:
         - image: nginx:stable
-          name: teste-pod
+          name: test-pod
           ports:
           - containerPort: 8080
             protocol: TCP
           volumeMounts:
           - mountPath: /etc/nginx/conf.d
-            name: teste-config
+            name: test-config
         dnsPolicy: ClusterFirst
         volumes:
         - configMap:
-            name: teste-config
-          name: teste-config
+            name: test-config
+          name: test-config
 - apiVersion: v1
   kind: Service
   metadata:
     labels:
-      app: teste-deployment
-    name: teste-service
-    namespace: teste
+      app: test-deployment
+    name: test-service
+    namespace: test
   spec:
     ports:
     - port: 8080
     selector:
-      app: teste-deployment
+      app: test-deployment
     type: NodePort
 - apiVersion: networking.k8s.io/v1
   kind: Ingress
   metadata:
-    name: teste-ingress
-    namespace: teste
+    name: test-ingress
+    namespace: test
   spec:
     rules:
-    - host: teste.info
+    - host: test.info
       http:
         paths:
         - backend:
             service:
-              name: teste-service
+              name: test-service
               port:
                 number: 8080
           path: /
           pathType: Prefix
 kind: List
-metadata: {}' > teste_combo.yaml
+metadata: {}' > test_combo.yaml
 ```
 
 ```bash
-kubectl apply -f teste_combo.yaml
+kubectl apply -f test_combo.yaml
 ```
