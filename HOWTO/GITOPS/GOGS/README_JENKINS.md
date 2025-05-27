@@ -1,3 +1,5 @@
+*Read this in other languages: [en-US](README_JENKINS.md), [pt-BR](README_JENKINS.pt-BR.md)*
+
 # Requirements for this POC
 
 In this POC we will use Multipass to create instances to install the Gogs, Microk8s and Jenkins, then establishing the Git server as a GitOps for the Kubernetes cluster provisioned with Microk8s.

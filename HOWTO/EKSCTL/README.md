@@ -1,3 +1,5 @@
+*Read this in other languages: [en-US](README.md), [pt-BR](README.pt-BR.md)*
+
 # EKS
 
 Create a **EKS** cluster with **EKSCTL** using Cluster Autoscaling and other cool stuff...

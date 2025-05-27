@@ -1,3 +1,5 @@
+*Read this in other languages: [en-US](README.md), [pt-BR](README.pt-BR.md)*
+
 # Grafana + Prometheus + Alertmanager + Slack
 
 This POC aims to present the process of integrating Slack with a webhook to receive alerts from Alertmanager.

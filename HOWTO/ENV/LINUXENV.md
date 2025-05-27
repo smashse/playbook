@@ -1,3 +1,5 @@
+*Read this in other languages: [en-US](LINUXENV.md), [pt-BR](LINUXENV.pt-BR.md)*
+
 # Installing snapd
 
 Snaps can be used on all major Linux distributions, including Ubuntu, Linux Mint, Debian and Fedora.

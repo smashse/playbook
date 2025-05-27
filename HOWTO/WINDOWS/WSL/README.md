@@ -1,3 +1,5 @@
+*Read this in other languages: [en-US](README.md), [pt-BR](README.pt-BR.md)*
+
 # WSL + Ubuntu
 
 ## The **simple** way and the **fun** way

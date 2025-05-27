@@ -1,8 +1,10 @@
-# Instalar o DOCKER
+*Read this in other languages: [en-US](README.md), [pt-BR](README.pt-BR.md)*
 
-**SO BASE:** UBUNTU
+# Install DOCKER
 
-## Criar lista de extensões para VSCode/Codium
+**BASE OS:** UBUNTU
+
+## Create extensions list for VSCode/Codium
 
 ```bash
 echo "GitHub.github-vscode-theme
@@ -18,7 +20,7 @@ ms-vscode.vscode-typescript-tslint-plugin
 redhat.vscode-yaml" > vscode.list
 ```
 
-## Instalar o VSCode
+## Install VSCode
 
 ```bash
 sudo snap install code --classic
@@ -28,9 +30,9 @@ sudo snap install code --classic
 for i in `cat vscode.list` ; do code --install-extension $i --force ; done
 ```
 
-OU
+OR
 
-## Instalar o Codium
+## Install Codium
 
 ```bash
 sudo snap install codium --classic
@@ -40,15 +42,15 @@ sudo snap install codium --classic
 for i in `cat vscode.list` ; do codium --install-extension $i --force ; done
 ```
 
-## Instalar o Cockpit e Docker
+## Install Cockpit and Docker
 
-### Instalar Docker
+### Install Docker
 
 ```bash
 sudo snap install docker --classic
 ```
 
-OU
+OR
 
 ```bash
 sudo apt update
@@ -60,7 +62,7 @@ sudo apt update
 sudo apt -y install docker-ce docker-ce-cli containerd.io
 ```
 
-### Dar permissão de execução do Docker para o usuário atual
+### Give Docker execution permission to the current user
 
 ```bash
 sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
@@ -70,39 +72,39 @@ newgrp docker
 docker run hello-world
 ```
 
-### Instalar Cockpit
+### Install Cockpit
 
 ```bash
 sudo apt -y install cockpit
 ```
 
-## Procurar imagens Docker
+## Search Docker images
 
 ```bash
 docker search ubuntu
 ```
 
-## Adicionar imagem Docker
+## Add Docker image
 
 ```bash
 docker image pull ubuntu:latest
 ```
 
-## Listar imagens Docker
+## List Docker images
 
 ```bash
 docker image ls
 ```
 
-## Remover imagem Docker
+## Remove Docker image
 
 ```bash
 docker image rm ubuntu
 ```
 
-## Criar container de imagem Docker
+## Create Docker image container
 
-### Forma convencional
+### Conventional way
 
 ```bash
 docker container create -t -i --name=ubuntu ubuntu
@@ -111,30 +113,30 @@ docker container attach ubuntu
 docker container rm ubuntu
 ```
 
-OU
+OR
 
-### Forma simples
+### Simple way
 
 ```bash
 docker container create -t -i --name=ubuntu ubuntu
 docker container start -a -i ubuntu
 ```
 
-OU
+OR
 
-### Forma extremamente simples acessando o bash
+### Extremely simple way accessing bash
 
 ```bash
 docker container run -i --name=ubuntu -t ubuntu /bin/bash
 ```
 
-## Conectar ao container Docker
+## Connect to Docker container
 
 ```bash
 docker container attach ubuntu
 ```
 
-## Instalar o Nginx dentro do container
+## Install Nginx inside the container
 
 ```bash
 apt update && apt -y install nginx && apt -y autoremove && apt -y clean
@@ -156,37 +158,37 @@ chmod 777 /etc/rc.local
 
 **CTR**+**Q**
 
-## Inicializar o Nginx
+## Initialize Nginx
 
 ```bash
 docker container exec ubuntu sh /etc/rc.local
 ```
 
-## Verificar os containers
+## Check containers
 
 ```bash
 docker container ps -a
 ```
 
-## Criar imagem para o Ubuntu com Nginx
+## Create image for Ubuntu with Nginx
 
 ```bash
 docker container commit ubuntu ubuntu-nginx
 ```
 
-## Criar container utilizando a imagem ubuntu-nginx
+## Create container using ubuntu-nginx image
 
 ```bash
 docker container run -d --restart unless-stopped -p 8080:80 --name=ubuntu-web000 -t ubuntu-nginx
 ```
 
-## Remover container de imagem Docker
+## Remove Docker image container
 
 ```bash
 docker container rm ubuntu -f
 ```
 
-## Utilizar Dockerfiles
+## Using Dockerfiles
 
 ```bash
 mkdir -p /opt/projects/ubuntu/nginx
@@ -224,43 +226,43 @@ docker image build -t ubuntu-nginx:latest .
 docker container run -d --restart unless-stopped -p 8081:80 --name=ubuntu-web001 -t ubuntu-nginx:latest
 ```
 
-## Efetuar login no Registry
+## Login to Registry
 
 ```bash
 docker login
 ```
 
-## Efetuar logout no Registry
+## Logout from Registry
 
 ```bash
 docker logout
 ```
 
-## Listar informações do DOCKER
+## List DOCKER information
 
 ```bash
 docker info
 ```
 
-## Criar uma TAG da imagem local para o Registry
+## Create a TAG of the local image for the Registry
 
 ```bash
 docker image tag ubuntu-nginx:latest ubuntu-nginx:latest
 ```
 
-## Efetuar o Push da imagem para o Registry
+## Push the image to the Registry
 
 ```bash
-docker image push seuusuario/ubuntu-nginx:latest
+docker image push youruser/ubuntu-nginx:latest
 ```
 
-## Remover imagens, containers, volumes e redes não utilizadas
+## Remove unused images, containers, volumes, and networks
 
 ```bash
 docker system prune -a
 ```
 
-## Remover todos os containers
+## Remove all containers
 
 ```bash
 docker container ps -a
@@ -268,16 +270,16 @@ docker container stop $(docker container ps -a -q)
 docker container rm $(docker container ps -a -q)
 ```
 
-## Remover todas as imagens
+## Remove all images
 
 ```bash
 docker image ls -a
 docker image rm $(docker image ls -a -q)
 ```
 
-## Trabalhando com Nginx
+## Working with Nginx
 
-### Forma convencional
+### Conventional way
 
 ```bash
 docker container run -d --restart unless-stopped -p 10000:80 -i --name=nginx -t ubuntu:latest /bin/bash
@@ -321,17 +323,17 @@ echo "daemon off;" >> /etc/nginx/nginx.conf
 service nginx restart
 ```
 
-### Forma simples
+### Simple way
 
 ```bash
-docker network create --subnet=172.18.0.0/16 network_teste
+docker network create --subnet=172.18.0.0/16 network_test
 ```
 
 ```bash
-docker container run -d --restart unless-stopped --net network_teste --ip 172.18.0.90 -p 10000:80 -i --name=nginx -t ubuntu:latest /bin/bash
-docker container run -d --restart unless-stopped --net network_teste --ip 172.18.0.91 -p 9091:8000 --name whoami01 -t jwilder/whoami:latest
-docker container run -d --restart unless-stopped --net network_teste --ip 172.18.0.92 -p 9092:8000 --name whoami02 -t jwilder/whoami:latest
-docker container run -d --restart unless-stopped --net network_teste --ip 172.18.0.93 -p 9093:8000 --name whoami03 -t jwilder/whoami:latest
+docker container run -d --restart unless-stopped --net network_test --ip 172.18.0.90 -p 10000:80 -i --name=nginx -t ubuntu:latest /bin/bash
+docker container run -d --restart unless-stopped --net network_test --ip 172.18.0.91 -p 9091:8000 --name whoami01 -t jwilder/whoami:latest
+docker container run -d --restart unless-stopped --net network_test --ip 172.18.0.92 -p 9092:8000 --name whoami02 -t jwilder/whoami:latest
+docker container run -d --restart unless-stopped --net network_test --ip 172.18.0.93 -p 9093:8000 --name whoami03 -t jwilder/whoami:latest
 ```
 
 ```bash
@@ -366,7 +368,7 @@ echo "daemon off;" >> /etc/nginx/nginx.conf
 service nginx restart
 ```
 
-### Forma Compose
+### Compose way
 
 ```bash
 mkdir -p nginx
@@ -466,59 +468,59 @@ services:
         ipv4_address: 172.18.0.93
 ```
 
-### Crie e execute seu aplicativo com o Compose
+### Create and run your application with Compose
 
 ```bash
 sudo apt -y install docker-compose
 ```
 
-#### Criar e iniciar contêineres
+#### Create and start containers
 
 ```bash
 docker-compose up -d
 ```
 
-#### Analisar logs do Compose
+#### Analyze Compose logs
 
 ```bash
 docker-compose logs -f
 ```
 
-#### Pare e remova contêineres, redes, imagens e volumes
+#### Stop and remove containers, networks, images, and volumes
 
 ```bash
 docker-compose down
 ```
 
-### Trabalhando com secrets
+### Working with secrets
 
-#### Iniciando o Docker Swarm
+#### Starting Docker Swarm
 
 ```bash
 docker swarm leave -f
 docker swarm init
 ```
 
-#### Criando secrets
+#### Creating secrets
 
 ```bash
 openssl rand -base64 20 | docker secret create mysql_root_password - > secret.txt
 openssl rand -base64 20 | docker secret create mysql_password - >> secret.txt
 ```
 
-#### Listar secrets
+#### List secrets
 
 ```bash
 docker secret ls
 ```
 
-#### Criar rede privada
+#### Create private network
 
 ```bash
 docker network create -d overlay mysql_private
 ```
 
-#### Criar serviço MySQL
+#### Create MySQL service
 
 ```bash
 docker service create \
@@ -535,7 +537,7 @@ docker service create \
      mysql:latest
 ```
 
-#### Criar serviço Wordpress
+#### Create Wordpress service
 
 ```bash
 docker service create \
@@ -552,7 +554,7 @@ docker service create \
      wordpress:latest
 ```
 
-#### Verificar se os containers estão ativos
+#### Check if containers are active
 
 ```bash
 docker service ls
