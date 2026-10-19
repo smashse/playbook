@@ -1,4 +1,4 @@
-*Read this in other languages: [en-US](README.md), [pt-BR](README.pt-BR.md)*
+_Read this in other languages: [en-US](README.md), [pt-BR](README.pt-BR.md)_
 
 # PLAYBOOK
 
@@ -27,6 +27,8 @@ Este repositório é um guia simples para aprendizado de alguns conceitos e tecn
 [Vault](./HOWTO/VAULT/README.md)
 
 [GitOps](./HOWTO/GITOPS/README.md)
+
+[Kustomize](./HOWTO/KUSTOMIZE/KAPP/README.md)
 
 [Ebooks, Cursos e Bootcamps](./HOWTO/SOURCES/SOURCES.md)
 
